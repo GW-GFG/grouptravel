@@ -1,0 +1,35 @@
+/* RESET CSS */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+/* END RESET CSS */
+
+/* Colors used as variables */
+
+:root {
+  --primary-blue-color: #64b9bd;
+  --primary-green-color: #7dd087;
+  --primary-red-color: #ef8b7a;
+  --primary-orange-color: #f3ad68;
+}
+
+/* Styling layout */
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -1,0 +1,24 @@
+.header {
+    background-color: blue;
+    width: 100%;
+    min-height: 3rem;
+}
+
+/* MENU */
+
+.link {
+    color: var(--primary-red-color)
+}
+
+/* Styling current link */
+.active {
+    color: #C3C3C3;
+    font-weight: bold;
+    font-size: 2rem;
+    color: var(--primary-blue-color);
+}
+
+.header-icon {
+    width: 1rem;
+
+}
