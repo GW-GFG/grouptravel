@@ -13,6 +13,9 @@ export default function Accomodation() {
         setSampleCounter(sampleCounter+1);
     }
 
+    // sample fetch like useEffect
+    axios.get('http://localhost:5500/users/').then(response => console.log(" 'useEffect' data is :", response.data));
+
     const handleFetch = async () => {
         try {
             // backend url is set on port 5500
