@@ -1,5 +1,5 @@
-export default function Planing() {
+export default function Planning() {
     return <div>
-        Planing
+        Planning
     </div>
 }
