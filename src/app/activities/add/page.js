@@ -1,5 +1,8 @@
-export default function AddActivity() {
-    return <div>
-        Add a new activity here
-    </div>
+import AddActivity from "@/components/AddActivity"
+
+
+export default function AddActivities() {
+    return (
+        <AddActivity />
+    )
 }

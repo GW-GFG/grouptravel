@@ -22,12 +22,15 @@ video {
   --primary-green-color: #7dd087;
   --primary-red-color: #ef8b7a;
   --primary-orange-color: #f3ad68;
+  /*
+  --primary-headings-font: '';
+  --primary-text-font: '';*/
 }
 
 /* Styling layout */
 
 body {
-  min-height: 100vh;
+  /*min-height: 100vh;*/
   display: flex;
   flex-direction: column;
   justify-content: space-between;
