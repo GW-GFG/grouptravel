@@ -4,6 +4,13 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+
+const store = configureStore({
+ reducer: { user },
+});
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -13,12 +20,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-      <Header />
-      {children}
-      <Footer />
-    </body>
-    </html>
+    <Provider store={store}>
+      <html lang="en">
+        <body className={inter.className}>
+        <Header />
+        {children}
+        <Footer />
+      </body>
+      </html>
+    </Provider>
   );
 }
