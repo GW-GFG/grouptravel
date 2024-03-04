@@ -4,8 +4,7 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-import { Providers } from '../redux/provider';
-//import { store } from "@/redux/store";
+import StoreProvider from "./StoreProvider";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,14 +16,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <Providers>
       <html lang="en">
           <body className={inter.className}>
+          <StoreProvider>
             <Header />
             {children}
             <Footer />
+            </StoreProvider>
           </body>
       </html>
-      </Providers>
   );
 }

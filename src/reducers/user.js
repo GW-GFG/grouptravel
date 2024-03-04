@@ -1,19 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
- value: [],
+	value: { name: null }, // Valeur initiale du reducer
 };
 
-export const friendsSlice = createSlice({
- name: 'users',
-
-  initialState,
- reducers: {
-   addUserToStore: (state, action) => {
-     state.value.push(action.payload);
-   },
- },
+export const userSlice = createSlice({
+	name: "user", // Nom du reducer à exporter
+	initialState,
+	// Fonctions à importer dans les composants pour agir sur le reducer
+	reducers: {
+		addUserToStore: (state, action) => {
+			state.value.name = action.payload;
+		},
+	},
 });
 
-export const { addUserToStore } = friendsSlice.actions;
-export default friendsSlice.reducer;
+export const { addUserToStore } = userSlice.actions;
+export default userSlice.reducer;

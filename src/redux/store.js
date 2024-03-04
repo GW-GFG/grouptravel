@@ -1,30 +1,21 @@
-import { configureStore } from '@reduxjs/toolkit';
-import {
-  TypedUseSelectorHook,
-  useDispatch as useAppDispatch,
-  useSelector as useAppSelector,
-} from 'react-redux';
-import rootReducer from './rootReducer';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-// ----------------------------------------------------------------------
+/* ---------------------------------------------------------------- */
+/*                      Reducers' configuration                     */
+/* ---------------------------------------------------------------- */
 
+import user from "../reducers/user";
 
-const store = configureStore({
-  reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-      immutableCheck: false,
-    }),
-});
+const reducers = combineReducers({ user });
 
-// Extract the dispatch function from the store for convenience
-const { dispatch } = store;
+/* ---------------------------------------------------------------- */
+/*                        Store configuration                       */
+/* ---------------------------------------------------------------- */
 
-const useSelector = useAppSelector;
-
-// Create a custom useDispatch hook with typed dispatch
-const useDispatch = () => useAppDispatch();
-
-// Export the Redux store, dispatch, useSelector, and useDispatch for use in components
-export { store, dispatch, useSelector, useDispatch };
+export const makeStore = () => {
+	const store = configureStore({
+		reducer: reducers,
+		middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
+	});
+	return { store };
+};
