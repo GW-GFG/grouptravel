@@ -2,7 +2,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './creatTrip.module.css'
+import styles from './creatTrip.module.css';
+import {updateMyTrips} from '../reducers/user';
 
 export default function CreateTrip() {
     const user = useSelector((state) => state.user.value);
@@ -16,7 +17,7 @@ export default function CreateTrip() {
     const [errorMsg, setErrorMsg] = useState('')
 
     // const token = user.token
-    const token = '5O6w1fh0P0QUEXPxHa7ruV_NigpCzbs_'
+    const token = '7Az44VwjhOvapTcIHhyQH_IwYk04BDQG'
     
 
     const handleSubmit = () => {

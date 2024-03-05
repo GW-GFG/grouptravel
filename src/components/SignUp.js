@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './signup.module.css';
 import { addUserToStore } from '../reducers/user';
+import { lexend } from '../app/fonts';
 
 export default function SignUp() {
     const dispatch = useDispatch();
@@ -53,7 +54,7 @@ export default function SignUp() {
 
     return (
         <div className={styles.container}>
-            <h3 className={styles.title}>On se rencontre ? Inscris-toi !</h3>
+            <h3 className={`${styles.title} ${lexend.className}`}>On se rencontre ? Inscris-toi !</h3>
             <input type="text" className={styles.input} onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Entre ton email ici !" />
             <input type="text" className={styles.input} onChange={(e) => setUsername(e.target.value)} value={username} placeholder="Choisi ton nom !" />
             <input type="password" className={styles.input} onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Ecris ton mot de passe ... " />

@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './signin.module.css';
 import { addUserToStore } from '../reducers/user';
+import { lexend } from '../app/fonts';
 
 export default function SignIn() {
     const dispatch = useDispatch();
@@ -44,7 +45,7 @@ export default function SignIn() {
 
     return (
         <div className={styles.container}>
-            <h3 className={styles.title}>On se connait déjà ? Connecte-toi !</h3>
+            <h3 className={`${styles.title} ${lexend.className}`}>On se connait déjà ? Connecte-toi !</h3>
             <input type="text" className={styles.input} onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Entre ton email ici !" />
             <input type="password" className={styles.input} onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Et ton mot de passe ici !" />
             {emtyfield && <p style={styles.error}>Entre ton email et ton mot de passe !</p>}
