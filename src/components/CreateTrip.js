@@ -2,8 +2,11 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './creatTrip.module.css'
+
+import styles from './creatTrip.module.css';
 import {updateMyTrips} from '../reducers/user';
+// import fonts to use them for menu items
+import { lexend } from '../app/fonts';
 
 export default function CreateTrip() {
     const user = useSelector((state) => state.user.value);
@@ -44,27 +47,42 @@ export default function CreateTrip() {
 
     return (
         <div className={styles.container}>
-            <h3 className={styles.title}>Planification de votre voyage entre amis !</h3>
-            <input type="text" className={styles.input} onChange={(e) => setgroupName(e.target.value)} value={groupName} placeholder="Entre le nom de ton Group !" />
-            <input type="text" className={styles.input} onChange={(e) => setLocation(e.target.value)} value={location} placeholder="Et votre destination !" />
-            <div className={styles.inputContainers}>    
-                <input
-                    type="date"
-                    id="departureDate"
-                    value={departureDate}
-                    onChange={(e) => setDepartureDate(e.target.value)}
-                />
-                <input
-                    type="date"
-                    id="returnDate"
-                    value={returnDate}
-                    onChange={(e) => setReturnDate(e.target.value)}
-                />
+            <h3 className={`${styles.title} ${lexend.className}`}>Planification de votre voyage entre amis !</h3>
+                <div className={styles.inputTextContainer}>
+                    <h5>Défini le nom de ton groupe :</h5>
+                    <input type="text" className={styles.input} onChange={(e) => setgroupName(e.target.value)} value={groupName} placeholder="Entre le nom de ton Group !" />
+                </div>
+                <div className={styles.inputTextContainer}>
+                    <h5>Précise la destination :</h5>
+                    <input type="text" className={styles.input} onChange={(e) => setLocation(e.target.value)} value={location} placeholder="Et votre destination !" />
+                </div>
+            
+            <div className={styles.dateContainers}>
+                <h5 className={styles.inputTextContainer}>Vous partez quand ?</h5>    
+                <div className={styles.inputDateContainer}>
+                    <h5 className={styles.textDate}>Date de départ :</h5>
+                    <input className={styles.inputDate}
+                        type="date"
+                        id="departureDate"
+                        value={departureDate}
+                        onChange={(e) => setDepartureDate(e.target.value)}
+                    />
+                </div>
+                <div className={styles.inputDateContainer}>
+                    <h5 className={styles.textDate}>Date de retour :</h5>
+                    <input className={styles.inputDate}
+                        type="date"
+                        id="returnDate"
+                        value={returnDate}
+                        onChange={(e) => setReturnDate(e.target.value)}
+                    />
+                </div>
             </div>
             
-                {errorMsg != '' && <h2>{errorMsg}</h2>}
-
+                {errorMsg != '' && <h2 className={styles.error}>{errorMsg}</h2>}
+            
             <button className={styles.button} onClick={() => handleSubmit()}>Go!</button>
+            
         </div>
     )
 }

@@ -2,6 +2,125 @@
     background-color: var(--primary-orange-color);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 85vh;
+    width: 50vw;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding-top: 2%;
+    padding-bottom: 5%;
+}
+.inputContainer {
     justify-content: center;
     align-items: center;
+}
+
+.title {
+    color: #ffff;
+    font-size:x-large;
+    font-weight: 32;
+}
+
+.dateContainers {
+    height: 30vh;
+    width: 30vw;
+    border: 2px solid #ffff;
+    color: #ffff;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding-bottom: 2%;
+
+}
+.inputTextContainer {
+    color: #ffff;
+    margin-bottom: 2%;
+}
+
+
+.inputDateContainer {
+    /* border: 2px solid #460808; */
+    width: 30%;
+    color: #ffff;
+    justify-content: center;
+    align-content: center;
+    padding-bottom: 5%;
+    margin-bottom: 2%;
+    border-color: #ffff;
+    font-size: 18;
+}
+
+.error {
+    
+    color: red;
+    font-size: smaller;
+}
+.buttonContainer{
+    flex-direction: column;
+    /* align-items: center; */
+}
+
+.button{
+    
+    align-items: center;
+    justify-content: center;
+    width: 15vw;
+    height: 5vh;
+    background-color: transparent;
+    border: 2px solid #ffff;
+    color: #ffff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+.button:hover {
+    background-color: #ffff;
+    color: var(--primary-orange-color);
+    border: none;	
+}
+
+.input {
+    background-color: transparent;
+    border: 2px solid #ffff;
+    height: 60%;
+    width: 30vw;
+    color: #ffff;
+    border-radius: 10px;
+    font-size:10;
+    font-weight: 6;
+    padding-left:2% ;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+.input:hover {
+    background-color: #ffff;
+    color: var(--primary-orange-color);
+    border: none;	
+}
+
+.inputDate{
+    background-color: transparent;
+    border: 2px solid #ffff;	
+    color: #ffff;
+    border-radius: 10px;
+    font-size:small;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+.inputDate:hover {
+    background-color: #ffff;
+    color: var(--primary-orange-color);
+    border: none;	
+}
+
+.textDate {
+    width: 7vw;
+    border-bottom: 1px solid #ffff;
+    color: #ffff;
+    font-size:x-small
 }
