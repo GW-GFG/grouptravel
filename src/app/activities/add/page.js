@@ -1,7 +1,7 @@
 import AddActivity from "@/components/AddActivity"
 
 
-export default function AddActivities() {
+export default function AddActivitiesPage() {
     return (
         <AddActivity />
     )
