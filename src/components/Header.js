@@ -25,15 +25,12 @@ export default function Header() {
     const iconHouse = {
         name: faHouse,
     };
-    
     const iconLaptop = {
         name: faLaptop,
     };
-
     const iconBed = {
         name: faBed,
     }
-
     const iconTableTennisPaddleBall = {
         name: faTableTennisPaddleBall,
     };
@@ -46,11 +43,9 @@ export default function Header() {
     const iconPlane = {
         name: faPlane,
     };
-    
     const iconUser = {
         name: faUser,
     };
-
     const iconArrow = {
         name: faArrowRightFromBracket
     };
@@ -86,17 +81,21 @@ export default function Header() {
         </div>
         <div className={styles.headerRight}>
             <FontAwesomeIcon icon={iconPlane.name} className={styles.headerIcon} />
-            <div>
-                Voyage 1
-                </div>
+            <div className={styles.tripsContainer}>
+            <div className={styles.currentTrip}>Voyage 1</div>
+            <ul className={styles.tripsList}>
+                <li className={styles.trip}>Voyage 2</li>
+                <li className={styles.trip}>Voyage 3</li>
+            </ul>
+            </div>
             <FontAwesomeIcon icon={iconUser.name} className={styles.headerIcon} />
             <div>
-                <button onClick={() => displayModal('login')}> Login </button>
+                <button onClick={() => displayModal('login')} className={`${styles.link} ${styles.buttonHeader}`}> Login </button>
             </div>
             
             <FontAwesomeIcon icon={iconArrow.name} className={styles.headerIcon} />
             <div>
-                <button onClick={() => displayModal('signup')}> Signup </button>
+                <button onClick={() => displayModal('signup')} className={`${styles.link} ${styles.buttonHeader}`}> Signup </button>
             </div>
         </div>
         <Modal title='Basic Modal' open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>

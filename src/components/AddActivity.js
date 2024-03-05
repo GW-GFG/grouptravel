@@ -7,8 +7,8 @@ const AddActivity = () => {
   const [activityPicture, setActivityPicture] = useState('')
   const [activityURL, setActivityURL] = useState('')
   const [activityDate, setActivityDate] = useState('')
-  const [activityBudget, setActivityBudget] = useState(null)
-  const [activityBudgetPerPerson, setActivityBudgetPerPerson] = useState(null)
+  const [activityBudget, setActivityBudget] = useState('')
+  const [activityBudgetPerPerson, setActivityBudgetPerPerson] = useState('')
   const [activityLocation, setActivityLocation] = useState('')
   const [activityDescription, setActivityDescription] = useState('')
 

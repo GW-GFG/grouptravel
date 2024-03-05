@@ -1,5 +1,5 @@
-export default function AddLogement() {
-    return <div>
-        Page to add a logement
-    </div>
+import AddAccomodation from "@/components/AddAccomodation"
+
+export default function AddAccomodations() {
+    return <AddAccomodation />
 }

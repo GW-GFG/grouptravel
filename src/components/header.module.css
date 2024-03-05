@@ -28,17 +28,98 @@
     /*color: var(--primary-red-color);*/
     color: black;
     text-decoration: none;
+
+    /* test link animation */
+    display: block;
+    padding: 5px 0;
+    font-size: 1.3rem;
+    line-height: 1;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* last property of background-image sets the text color */
+    background-image: linear-gradient(to right,
+            var(--primary-blue-color),
+            var(--primary-blue-color) 50%,
+            #000000 50%);
+    background-size: 200% 100%;
+    background-position: -100%;
+    transition: all 0.3s ease-in-out;
+}
+
+.link:before {
+    display: block;
+    content: '';
+    width: 0;
+    height: 3px;
+    bottom: 5px;
+    left: 0;
+    bottom: -3px;
+    z-index: 0;
+    position: absolute;
+    background: var(--primary-blue-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.link:hover,
+.link:focus {
+    background-position: 0%;
+}
+
+.link:hover:before,
+.link:focus:before {
+    width: 100%;
+}
+
+/* / test link animation */
+
+/*
+.link:hover,
+.link:focus {
+    font-size: 1.2rem;
+}
+*/
+
+.buttonHeader {
+    border: none;
+    font-size: 1.2rem;
+    /*font-weight: normal;*/
 }
 
 /* Styling current link for left menu */
 .active {
     font-weight: bold;
-    background-color: #c3c3c3;
-    font-size: 2rem;
     text-decoration: none;
-    color: black;
+    color: var(--primary-blue-color);
+    font-size: 1.5rem;
 }
 
 .headerIcon {
     width: 1rem;
+}
+
+/* Styling trips list */
+
+.tripsContainer ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.tripsContainer:hover .tripsList {
+    max-height: inherit;
+    opacity: 1;
+}
+
+.tripsList {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    max-height: 0px;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity 300ms ease;
+    position: absolute;
 }

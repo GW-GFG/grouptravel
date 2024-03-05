@@ -1,4 +1,4 @@
-// import lexend and poppins fonts from fonts.js to use them in our app (poppins by default)
+// import poppins fonts from fonts.js to use them in our app (poppins by default)
 import { poppins } from './fonts';
 import "./globals.css";
 
