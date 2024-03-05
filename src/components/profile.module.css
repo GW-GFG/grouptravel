@@ -1,0 +1,9 @@
+.container {
+    width: 95%;
+    margin: 1rem auto;
+    padding: 1rem;
+    background: var(--primary-blue-color);
+    color: white;
+    display: flex;
+    flex-direction: column;
+  }

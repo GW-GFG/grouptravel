@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	value: { token: null, username: '', userPicture: '', email: '', myTrips: '' }, // Valeur initiale du reducer
+	value: { token: null, username: '', userPicture: '', email: '', myTrips: [] }, // Valeur initiale du reducer
 };
 
 export const userSlice = createSlice({
@@ -12,6 +12,9 @@ export const userSlice = createSlice({
 		addUserToStore: (state, action) => {
 			state.value = action.payload;
 		},
+		updateMyTrips: (state, action) => {
+			state.value.myTrips = state.value.myTrips.push(action.payload)
+		}
 	},
 });
 
