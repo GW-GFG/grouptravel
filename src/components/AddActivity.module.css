@@ -43,3 +43,8 @@
   .input {
     margin-bottom: 1rem;
   }
+
+  .buttonContainer {
+    display: flex;
+    justify-content: flex-end; 
+  }
