@@ -18,5 +18,5 @@ export const userSlice = createSlice({
 	},
 });
 
-export const { addUserToStore } = userSlice.actions;
+export const { addUserToStore, updateMyTrips } = userSlice.actions;
 export default userSlice.reducer;

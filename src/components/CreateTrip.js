@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './creatTrip.module.css'
+import { updateMyTrips } from '../reducers/user'
 
 export default function CreateTrip() {
     const user = useSelector((state) => state.user.value);
