@@ -2,14 +2,17 @@
     background-color: var(--primary-orange-color);
     padding: 2.5rem 0;
     width: 80%;
+    color: #ffffff;
 }
 
-.newAccomodation h2 {
+.newAccomodation h1 {
     text-align: center;
     padding-bottom: 2.5rem;
     color: #ffffff;
     font-weight: bold;
 }
+
+/* LAYOUT */
 
 .layout {
     display: flex;
@@ -28,11 +31,83 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    min-height: 15rem;
+    min-height: 10rem;
 }
 
 .bottom {
     display: flex;
     justify-content: space-between;
     min-height: 15rem;
+}
+
+.rightSide {
+    width: min(90%, 40rem);
+}
+
+/* INPUTS */
+
+/* special rule for budget inputs to be in the same row */
+.inputsBudgetContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inputsBudget label {
+    margin-right: 1rem;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    /*width: 70%;*/
+}
+
+.inputs label {
+    margin: 1rem 0 .7rem;
+}
+
+.inputs input,
+.inputsBudget input {
+    background-color: transparent;
+    border: 2px solid #ffffff;
+}
+
+.inputs input::placeholder {
+    color: #ffffff;
+}
+
+.inputs input[type="text"] {
+    padding: .7rem;
+}
+
+.inputs input:focus {
+    /* TODO change color to something beautiful */
+    outline: 2px solid #C3C3C3;
+}
+
+.input {
+    margin-bottom: 1rem;
+}
+
+/* TEXTAREA */
+.textarea {
+    width: 100%;
+    min-height: 10rem;
+    background-color: transparent;
+    border: 2px solid #ffffff;
+    padding: .7rem;
+}
+
+.textarea::placeholder {
+    color: #ffffff;
+}
+
+.textarea:focus {
+    /* TODO change color to something beautiful */
+    outline: 2px solid #C3C3C3;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
 }

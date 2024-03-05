@@ -1,6 +1,6 @@
 import CreateTrip from "@/components/CreateTrip";
 
-export default function AddTrip() {
+export default function AddTripPage() {
     return <div>
         <CreateTrip/>
     </div>

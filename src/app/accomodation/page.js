@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
-export default function Accomodation() {
+export default function AccomodationPage() {
 
     const [sampleCounter, setSampleCounter] = useState(0);
 

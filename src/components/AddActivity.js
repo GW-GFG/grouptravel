@@ -3,6 +3,9 @@ import styles from './AddActivity.module.css'
 import { useState, useEffect } from 'react'
 import Script from 'next/script'
 
+// import fonts to use them for menu items 
+import { lexend } from '../app/fonts';
+
 const AddActivity = () => {
   const [activityName, setActivityName] = useState('')
   const [activityPicture, setActivityPicture] = useState('')
@@ -50,7 +53,7 @@ const AddActivity = () => {
     <div className={styles.container}>
 
       <div className={styles.title}>
-        <h1>Une idée d'activité ?</h1>
+        <h1 className={lexend.className}>Une idée d'activité ?</h1>
       </div>
 
       <form onSubmit={handleSubmit} className={styles.form}>

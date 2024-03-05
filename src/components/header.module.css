@@ -25,8 +25,7 @@
 }
 
 .link {
-    /*color: var(--primary-red-color);*/
-    color: black;
+    color: var(--primary-black-color);
     text-decoration: none;
 
     /* test link animation */
@@ -44,7 +43,7 @@
     background-image: linear-gradient(to right,
             var(--primary-blue-color),
             var(--primary-blue-color) 50%,
-            #000000 50%);
+            var(--primary-black-color) 50%);
     background-size: 200% 100%;
     background-position: -100%;
     transition: all 0.3s ease-in-out;
@@ -98,6 +97,7 @@
 
 .headerIcon {
     width: 1rem;
+    color: var(--primary-black-color);
 }
 
 /* Styling trips list */
