@@ -26,7 +26,6 @@ export default function SignIn() {
 //check if there is an email and password
         if (email !== '' && password !== ''){
             setEmptyField(false)
-            console.log('front email data', email, password)
             fetch('http://localhost:5500/users/signin', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -34,7 +33,6 @@ export default function SignIn() {
                 body: JSON.stringify({ email, password }),
             }).then(response => response.json())
             .then(data => {
-                console.log('Front data : '+ JSON.stringify(data))
                 const {token, username, myTrips, userPicture } = data; 
                 data.result && dispatch(addUserToStore({ token, username, userPicture, email: data.email, myTrips }));
                 !data.result && setSigninError(true)

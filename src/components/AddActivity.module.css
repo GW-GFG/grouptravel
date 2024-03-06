@@ -1,66 +1,18 @@
-/* .container {
-  width: 95%;
-  margin: 1rem auto;
-  padding: 1rem;
-  background: var(--primary-blue-color);
-  color: white;
-  display: flex;
-  flex-direction: column;
-}
-
-.title {
-  width: 100%;
-  text-align: center;
-  margin: 2rem;
-}
-
-.columns {
-  display: flex;
-}
-
-.leftColumn,
-.rightColumn {
-  display: flex;
-  flex-direction: column;
-}
-
-.leftColumn {
-  flex-basis: 30%;
-  align-items: center;
-}
-
-.rightColumn {
-  flex-basis: 70%;
-}
-
-
-.inputs {
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-}
-
-.input {
-  margin-bottom: 1rem;
-}
-
-.buttonContainer {
-  display: flex;
-  justify-content: flex-end;
-} */
-
 .newActivity {
-    background-color: var(--primary-orange-color);
+    background-color: var(--primary-blue-color);
     padding: 2.5rem 0;
     width: 80%;
-    color: #ffffff;
     border-radius: .625rem;
+}
+
+.newActivity *,
+.newActivity *::placeholder {
+    color: #ffffff;
 }
 
 .newActivity h1 {
     text-align: center;
     padding-bottom: 2.5rem;
-    color: #ffffff;
     font-weight: bold;
 }
 
@@ -98,13 +50,33 @@
 
 /* INPUTS */
 
+.input {
+    margin-bottom: 1rem;
+}
+
 /* special rule for budget inputs to be in the same row */
 .inputsBudgetContainer {
     display: flex;
     justify-content: space-between;
 }
 
-.inputsBudget label {
+/* Hiding arrows in "number" inputs */
+/* Chrome, Safari, Edge, Opera */
+.newActivity input::-webkit-outer-spin-button,
+.newActivity input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.newActivity input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+/* Inputs stylings */
+.inputsBudget label,
+.inputDate label {
     margin-right: 1rem;
 }
 
@@ -119,31 +91,24 @@
 }
 
 .inputs input,
-.inputsBudget input {
+.inputsBudget input,
+.inputDate input {
     background-color: transparent;
     border: 2px solid #ffffff;
     border-radius: .625rem;
 }
 
-.inputsBudget input {
-    text-align: right;
-}
-
-.inputs input::placeholder {
-    color: #ffffff;
-}
-
-.inputs input[type="text"] {
+.inputs input[type="text"],
+.inputsBudget input[type="number"],
+.inputDate input[type="date"] {
     padding: .7rem;
 }
 
-.inputs input:focus {
+.inputs input:focus,
+.inputsBudget input:focus,
+.inputDate input:focus {
     /* TODO change color to something beautiful */
     outline: 2px solid #C3C3C3;
-}
-
-.input {
-    margin-bottom: 1rem;
 }
 
 /* TEXTAREA */
@@ -154,10 +119,6 @@
     border: 2px solid #ffffff;
     padding: .7rem;
     border-radius: .625rem;
-}
-
-.textarea::placeholder {
-    color: #ffffff;
 }
 
 .textarea:focus {

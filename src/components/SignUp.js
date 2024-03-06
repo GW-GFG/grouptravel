@@ -40,7 +40,6 @@ export default function SignUp() {
                     body: JSON.stringify({ email, username, password }),
                 }).then(response => response.json())
                 .then(data => {
-                    console.log('Front data : '+ JSON.stringify(data))
                     const {token, myTrips, userPicture } = data; 
                     data.result && dispatch(addUserToStore({ token, username: data.username, userPicture, email: data.email, myTrips })) && setSubmitError(false);
                     !data.result && setSubmitError(true);
@@ -60,7 +59,7 @@ export default function SignUp() {
             <InputLabel type="text" onChange={(e) => setUsername(e.target.value)} value={username} label="Nom d'utilisateur(trice)" placeholder="Choisi ton nom !" />
             <InputLabel type="password" onChange={(e) => setPassword(e.target.value)} value={password} label="Mot de passe" placeholder="Ecris ton mot de passe ... " />
             <InputLabel type="password" onChange={(e) => setPassword2(e.target.value)} value={password2} label="Confirmation" placeholder="Confirme ton mot de passe ! " />
-            {passwordNotMatch && <p style={styles.error}>Les mots de passes sont différents</p>}
+            {passwordNotMatch && <p style={styles.error}>Les mots de passe sont différents</p>}
             {emailError && <p style={styles.error}>Entre une adresse email valide !</p>}
             {submitError && <p style={styles.error}>Il semble y avoir une erreur, vérifie les champs saisis !</p>}
             <button className={styles.button} onClick={() => handleSubmit()}>C'est parti !</button>

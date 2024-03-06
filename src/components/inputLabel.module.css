@@ -18,7 +18,7 @@
     font-size: 10px;
 }
 
-.input {
+.inputLabel {
     padding: 10px;
     border: 1px solid var(--primary-red-color);
     border-radius: 0.625rem;
@@ -27,11 +27,11 @@
     outline: none;
 }
 
-.input:focus {
+.inputLabel:focus {
     border-color: var(--primary-blue-color);
 }
 
-.input:hover {
+.inputLabel:hover {
     cursor: pointer;
     border-color: var(--primary-blue-color);
 }
