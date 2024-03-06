@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './signin.module.css';
 import { addUserToStore } from '../reducers/user';
 import { lexend } from '../app/fonts';
+import InputLabel from './InputLabel';
 
 export default function SignIn() {
     const dispatch = useDispatch();
@@ -46,8 +47,8 @@ export default function SignIn() {
     return (
         <div className={styles.container}>
             <h3 className={`${styles.title} ${lexend.className}`}>On se connait déjà ? Connecte-toi !</h3>
-            <input type="text" className={styles.input} onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Entre ton email ici !" />
-            <input type="password" className={styles.input} onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Et ton mot de passe ici !" />
+            <InputLabel type="text" onChange={(e) => setEmail(e.target.value)} value={email} label="Email" placeholder="Entre ton email ici !" />
+            <InputLabel type="password" onChange={(e) => setPassword(e.target.value)} value={password} label="Mot de passe" placeholder="Et ton mot de passe ici !" />
             {emtyfield && <p style={styles.error}>Entre ton email et ton mot de passe !</p>}
             {signinError && <p style={styles.error}>Il semble y avoir une erreur, vérifie ton email et ton mot de passe !</p>}
             <button className={styles.button} onClick={() => handleSubmit()}>C'est parti !</button>

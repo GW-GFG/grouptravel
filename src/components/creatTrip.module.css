@@ -10,6 +10,8 @@
     margin-bottom: 5%;
     padding-top: 2%;
     padding-bottom: 5%;
+    padding-left: 5%;
+    border-radius: 1rem;
 }
 .inputContainer {
     justify-content: center;
@@ -20,40 +22,32 @@
     color: #ffff;
     font-size:x-large;
     font-weight: 32;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    /* color: var(--primary-black-color) */
 }
 
-.dateContainers {
-    height: 30vh;
-    width: 30vw;
-    border: 2px solid #ffff;
-    color: #ffff;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    padding-bottom: 2%;
-
+.logo {
+    width: 35%;
+    color: var(--primary-black-color);
+    font-weight: bold;
+    font-family: fantasy;
+    font-size: larger;
 }
+
+.h4 {
+    margin-bottom: 0.5rem;
+    margin-top: 2rem;
+}
+
 .inputTextContainer {
     color: #ffff;
-    margin-bottom: 2%;
+    margin-bottom: 1rem;
+    width: 100%;
 }
 
-
-.inputDateContainer {
-    /* border: 2px solid #460808; */
-    width: 30%;
-    color: #ffff;
-    justify-content: center;
-    align-content: center;
-    padding-bottom: 5%;
-    margin-bottom: 2%;
-    border-color: #ffff;
-    font-size: 18;
-}
-
-.error {
-    
-    color: red;
+.error {    
+    color: white;
     font-size: smaller;
 }
 .buttonContainer{
@@ -70,7 +64,7 @@
     background-color: transparent;
     border: 2px solid #ffff;
     color: #ffff;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     cursor: pointer;
     transition-duration: 0.5s;
 }
@@ -80,19 +74,6 @@
     border: none;	
 }
 
-.input {
-    background-color: transparent;
-    border: 2px solid #ffff;
-    height: 60%;
-    width: 30vw;
-    color: #ffff;
-    border-radius: 10px;
-    font-size:10;
-    font-weight: 6;
-    padding-left:2% ;
-    cursor: pointer;
-    transition-duration: 0.5s;
-}
 
 .input:hover {
     background-color: #ffff;
@@ -100,27 +81,57 @@
     border: none;	
 }
 
-.inputDate{
-    background-color: transparent;
-    border: 2px solid #ffff;	
+/*Date input style */
+
+.dateContainers {
+    height: 30vh;
+    width: 30vw;
+
     color: #ffff;
-    border-radius: 10px;
-    font-size:small;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding-bottom: 2%;
+}
+
+.dateRow {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.inputDate {
+    background-color: var(--primary-blue-color);
+    width: 100%;
+    color: #ffff;
+    border-radius: 0.625rem;
+    border: none;
     cursor: pointer;
-    transition-duration: 0.5s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 2rem 2rem 2rem 1rem;
+    display: flex;
+    align-content: center;
+    text-align: left;
+    position: relative;
 }
 
 .inputDate:hover {
-    background-color: #ffff;
-    color: var(--primary-orange-color);
+    background-color: var(--primary-green-color);
+    color: white;
     border: none;	
+}
+
+.inputDate:focus {
+    background-color: var(--primary-green-color);
 }
 
 .textDate {
     width: 7vw;
-    border-bottom: 1px solid #ffff;
+    padding: 0.4rem;
     color: #ffff;
-    font-size:x-small
+    font-size:x-small;
+    position: absolute;
+    z-index: 1;    
 }
+

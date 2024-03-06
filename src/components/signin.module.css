@@ -4,5 +4,27 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     color: white;
+    border-radius: 1rem;
+    padding: 2%;
+    width: 100%;
 }
+
+.title {
+    margin: 5%;
+}
+
+.button {
+    background-color: var(--primary-orange-color);
+    border-radius: 1rem;
+    color: white;
+    border: 1px solid transparent;
+    padding: 1%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.button:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+
