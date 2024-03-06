@@ -19,8 +19,8 @@ export default function CreateTrip() {
     const [returnDate, setReturnDate] = useState('');
     const [errorMsg, setErrorMsg] = useState('')
 
-    // const token = user.token
-    const token = '7Az44VwjhOvapTcIHhyQH_IwYk04BDQG'
+    const token = user.token
+    // const token = '7Az44VwjhOvapTcIHhyQH_IwYk04BDQG'
     
 
     const handleSubmit = () => {
