@@ -4,13 +4,11 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./profile.module.css";
 import { lexend } from "../app/fonts";
-import SignUp from "./SignUp";
-import SignIn from "./SignIn";
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.value);
   const router = useRouter();
+  const user = useSelector((state) => state.user.value);
   console.log("avant" + JSON.stringify(user));
   const allUserTrip = [
     {
@@ -25,11 +23,9 @@ export default function Profile() {
     console.log("apr" + JSON.stringify(user));
     return (
       <div className={styles.row}>
-        <div>
           <span className={styles.tripName}>{props.name}</span>
-          {isAdmin && <p className={styles.adminBadge}>ADMIN</p>}
-        </div>
-        <button className={styles.goButton}>Go</button>
+          {isAdmin && <span className={styles.adminBadge}>ADMIN</span>}
+          <button className={styles.goButton}>Go</button>
       </div>
     );
   }
@@ -37,6 +33,10 @@ export default function Profile() {
   const trips = allUserTrip.map((data, i) => {
     return <TripRow key={i} {...data} />;
   });
+
+  const handleClickAddTrip = () => {
+    router.push('/addTrip');
+  }
 
   if (!user.token) {
     console.log(user);
@@ -50,7 +50,9 @@ export default function Profile() {
       <div className={styles.container}>
 
         <div className={styles.leftContainer}>
-
+          <div className={styles.profilPictureContainer}>IMG</div>
+          <div className={styles.userInfoContainer}>INFO</div>
+          <div className={styles.backPicture}>BACKPIC</div>
         </div>
 
         <div className={styles.rightContainer}>
@@ -58,11 +60,13 @@ export default function Profile() {
           <div className={styles.tripsContainer}>
             <h2 className={`${styles.tripTitle} ${lexend.className}`}>Mes voyages :</h2>
             {trips}
-            <button className={styles.addTravel}>
+            <div className={styles.addContainer}>
+            <button className={styles.addTravel} onClick={handleClickAddTrip}>
               <span className={styles.plus}>+</span>
               <br />
               Organise un nouveau Travel entre amis
             </button>
+            </div>
           </div>
         </div>
       </div>

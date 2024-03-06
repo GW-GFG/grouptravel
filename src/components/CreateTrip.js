@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 
+import InputLabel from './InputLabel';
 import styles from './creatTrip.module.css';
 import {updateMyTrips} from '../reducers/user';
 // import fonts to use them for menu items
@@ -47,18 +48,20 @@ export default function CreateTrip() {
 
     return (
         <div className={styles.container}>
+            <div className={styles.logo}>LOGO GROUPTRAVEL</div>
             <h3 className={`${styles.title} ${lexend.className}`}>Planification de votre voyage entre amis !</h3>
                 <div className={styles.inputTextContainer}>
-                    <h5>Défini le nom de ton groupe :</h5>
-                    <input type="text" className={styles.input} onChange={(e) => setgroupName(e.target.value)} value={groupName} placeholder="Entre le nom de ton Group !" />
+                    <h4 className={styles.h4}>Défini le nom de ton groupe :</h4>
+                    <InputLabel style={{width: "60%"}} type="text" onChange={(e) => setgroupName(e.target.value)} value={groupName} label="Nom du groupe" placeholder="Entre le nom de ton Groupe !" />
                 </div>
                 <div className={styles.inputTextContainer}>
-                    <h5>Précise la destination :</h5>
-                    <input type="text" className={styles.input} onChange={(e) => setLocation(e.target.value)} value={location} placeholder="Et votre destination !" />
+                    <h4 className={styles.h4}>Précise la destination :</h4>
+                    <InputLabel type="text" onChange={(e) => setLocation(e.target.value)} value={location} label="Destination" placeholder="Et votre destination !" />
                 </div>
+                <h4 className={styles.inputTextContainer}>Vous partez quand ?</h4>
             
             <div className={styles.dateContainers}>
-                <h5 className={styles.inputTextContainer}>Vous partez quand ?</h5>    
+                <div className={styles.dateRow}>  
                 <div className={styles.inputDateContainer}>
                     <h5 className={styles.textDate}>Date de départ :</h5>
                     <input className={styles.inputDate}
@@ -77,6 +80,8 @@ export default function CreateTrip() {
                         onChange={(e) => setReturnDate(e.target.value)}
                     />
                 </div>
+                </div>  
+                
             </div>
             
                 {errorMsg != '' && <h2 className={styles.error}>{errorMsg}</h2>}
