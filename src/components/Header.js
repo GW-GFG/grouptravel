@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import { useState } from 'react';
 
-import { Modal } from 'antd';
+import { Modal, Popover } from 'antd';
 // import fonts to use them for menu items 
 import { lexend } from '../app/fonts';
 
@@ -58,6 +58,26 @@ export default function Header() {
         name: faArrowRightFromBracket
     };
 
+    // Popover 
+    const changeCurrentTrip = () => {
+        console.log('click')
+    }
+    
+    const voyageNamePopover = user.myTrips.map((data, i) => {
+        return (
+            <div key={i} className={styles.voyageNameContainer}>
+            <span className="voyageName" onClick={() => changeCurrentTrip()}>{data.name}</span>
+            </div>
+        );
+        });
+    const popoverContent = (
+        <div className={styles.popoverContent}>
+            {voyageNamePopover}
+        </div>
+        );
+    
+   
+
     /* modal logic */
 
       const displayModal = () => {
@@ -101,11 +121,14 @@ export default function Header() {
         <div className={styles.headerRight}>
             <FontAwesomeIcon icon={iconPlane.name} className={styles.headerIcon} />
             <div className={styles.tripsContainer}>
-            <div className={styles.currentTrip}>Voyage 1</div>
+            <Popover title="Mes voyages" content={popoverContent} className={styles.popover} trigger="hover">
+                Mes Voyages   
+            </Popover>
+            {/* <div className={styles.currentTrip}>Voyage 1</div>
             <ul className={styles.tripsList}>
                 <li className={styles.trip}>Voyage 2</li>
                 <li className={styles.trip}>Voyage 3</li>
-            </ul>
+            </ul> */}
             </div>
             <FontAwesomeIcon icon={iconUser.name} className={styles.headerIcon} />
             <div>
