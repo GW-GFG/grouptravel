@@ -69,7 +69,7 @@
 }
 
 /* Firefox */
-.newAccomodation input[type=number] {
+.newAccomodation input[type="number"] {
     appearance: textfield;
     -moz-appearance: textfield;
 }

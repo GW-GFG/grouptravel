@@ -1,6 +1,7 @@
 'use client'
 import styles from './addAccomodation.module.css';
 import { useState, useEffect } from 'react';
+import InputLabel from './InputLabel';
 
 // import fonts to use them for menu items 
 import { lexend } from '../app/fonts';
@@ -10,7 +11,8 @@ export default function AddAccomodation() {
     const [accomodationName, setAccomodationName] = useState('');
     const [accomodationPicture, setAccomodationPicture] = useState('');
     const [accomodationURL, setAccomodationURL] = useState('');
-    const [accomodationDate, setAccomodationDate] = useState('');
+    const [departureDate, setDepartureDate] = useState('');
+    const [returnDate, setReturnDate] = useState('');
     const [accomodationBudget, setAccomodationBudget] = useState(0);
     const [accomodationBudgetPerPerson, setAccomodationBudgetPerPerson] = useState(0);
     const [accomodationLocation, setAccomodationLocation] = useState('');
@@ -20,6 +22,18 @@ export default function AddAccomodation() {
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // check if url is valid 
+        try {
+            new URL(accomodationURL);   
+        } catch (err) {
+            setFormHasError(true);
+            setErrorMessage("L'url saisie n'est pas valide");
+            return false;
+        }
+
+
         // new accomodationData object to be added
         // TODO : REMOVE sampleId and replace with real ID
         const sampleId = '65e853f30bff25fe16a3aafb';
@@ -27,14 +41,13 @@ export default function AddAccomodation() {
             name: accomodationName,
             picture: accomodationPicture,
             url: accomodationURL,
-            date: accomodationDate,
+            departureDate: departureDate,
+            returnDate: returnDate,
             budget: accomodationBudget,
             location: accomodationLocation,
             description: accomodationDescription,
             tripId: sampleId
         }
-        e.preventDefault();
-        console.log('submit clicked');
 
         fetch(`http://localhost:5500/accomodations/new`, {
         method: 'POST',
@@ -52,11 +65,13 @@ export default function AddAccomodation() {
                     setAccomodationPicture('');
                     setAccomodationURL('');
                     setAccomodationBudget(0);
-                    setAccomodationDate('');
+                    setDepartureDate('');
+                    setReturnDate('');
                     setAccomodationLocation('');
                     setAccomodationDescription('');
                     setFormHasError(false);
                     setErrorMessage('');
+                    console.log(data.data);
                 } else {
                     setFormHasError(true);
                     setErrorMessage(data.error);
@@ -81,7 +96,7 @@ export default function AddAccomodation() {
                     </div>
                     <div className={styles.rightSide}>
                         <div className={styles.inputs}>
-                            <label htmlFor="accomodation-name" className={styles.label}>Nom du logement</label>
+                            <label htmlFor="accomodation-name" className={styles.label}>Nom du logement *</label>
                             <input
                                 type="text"
                                 id="accomodation-name"
@@ -106,16 +121,29 @@ export default function AddAccomodation() {
                     </div>
                 </div>
                 <div className={styles.middle}>
-                    <div className={styles.inputDate}>
-                        <label htmlFor="accomodation-date" className={styles.label}>Sélectionnez la date:</label>
-                        <input
-                            type="date"
-                            id="accomodation-date"
-                            className={styles.input}
-                            value={accomodationDate}
-                            onChange={(e) => setAccomodationDate(e.target.value)}
-                            required
-                        />
+                    <div className={`${styles.inputsBudgetContainer} ${styles.rightSide}`}>
+                        <div className={styles.inputDate}>
+                            <label htmlFor="accomodation-departure-date" className={styles.label}>Date de début *</label>
+                            <input
+                                type="date"
+                                id="accomodation-departure-date"
+                                className={styles.input}
+                                value={departureDate}
+                                onChange={(e) => setDepartureDate(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className={styles.inputDate}>
+                            <label htmlFor="accomodation-return-date" className={styles.label}>Date de fin *</label>
+                            <input
+                                type="date"
+                                id="accomodation-return-date"
+                                className={styles.input}
+                                value={returnDate}
+                                onChange={(e) => setReturnDate(e.target.value)}
+                                required
+                            />
+                        </div>
                     </div>
                     <div className={`${styles.inputsBudgetContainer} ${styles.rightSide}`}>
                         <div className={styles.inputsBudget}>
