@@ -19,7 +19,9 @@ export const userSlice = createSlice({
 		updateCurrentTrip : (state, action) => { 
 			state.value.currentTrip = action.payload
 		},
-
+		removeUserToStore: (state, action) => {
+			state.value = initialState;
+		},
 	},
 });
 
