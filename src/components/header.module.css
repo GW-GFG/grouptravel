@@ -73,18 +73,9 @@
     width: 100%;
 }
 
-/* / test link animation */
-/*
-.link:hover,
-.link:focus {
-    font-size: 1.2rem;
-}
-*/
-
 .buttonHeader {
     border: none;
     font-size: 1.2rem;
-    /*font-weight: normal;*/
 }
 
 /* Styling current link for left menu */

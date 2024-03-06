@@ -2,13 +2,17 @@
     background-color: var(--primary-orange-color);
     padding: 2.5rem 0;
     width: 80%;
+    /*border-radius: 1rem;*/
+}
+
+.newAccomodation *,
+.newAccomodation *::placeholder {
     color: #ffffff;
 }
 
 .newAccomodation h1 {
     text-align: center;
     padding-bottom: 2.5rem;
-    color: #ffffff;
     font-weight: bold;
 }
 
@@ -46,13 +50,33 @@
 
 /* INPUTS */
 
+.input {
+    margin-bottom: 1rem;
+}
+
 /* special rule for budget inputs to be in the same row */
 .inputsBudgetContainer {
     display: flex;
     justify-content: space-between;
 }
 
-.inputsBudget label {
+/* Hiding arrows in "number" inputs */
+/* Chrome, Safari, Edge, Opera */
+.newAccomodation input::-webkit-outer-spin-button,
+.newAccomodation input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.newAccomodation input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+/* Inputs stylings */
+.inputsBudget label,
+.inputDate label {
     margin-right: 1rem;
 }
 
@@ -67,26 +91,23 @@
 }
 
 .inputs input,
-.inputsBudget input {
+.inputsBudget input,
+.inputDate input {
     background-color: transparent;
     border: 2px solid #ffffff;
 }
 
-.inputs input::placeholder {
-    color: #ffffff;
-}
-
-.inputs input[type="text"] {
+.inputs input[type="text"],
+.inputsBudget input[type="number"],
+.inputDate input[type="date"] {
     padding: .7rem;
 }
 
-.inputs input:focus {
+.inputs input:focus,
+.inputsBudget input:focus,
+.inputDate input:focus {
     /* TODO change color to something beautiful */
     outline: 2px solid #C3C3C3;
-}
-
-.input {
-    margin-bottom: 1rem;
 }
 
 /* TEXTAREA */
@@ -96,10 +117,6 @@
     background-color: transparent;
     border: 2px solid #ffffff;
     padding: .7rem;
-}
-
-.textarea::placeholder {
-    color: #ffffff;
 }
 
 .textarea:focus {

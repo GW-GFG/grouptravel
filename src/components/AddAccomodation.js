@@ -7,17 +7,22 @@ import { lexend } from '../app/fonts';
 
 export default function AddAccomodation() {
 
-    const [accomodationName, setAccomodationName] = useState('')
-    const [accomodationPicture, setAccomodationPicture] = useState('')
-    const [accomodationURL, setAccomodationURL] = useState('')
-    const [accomodationDate, setAccomodationDate] = useState('')
-    const [accomodationBudget, setAccomodationBudget] = useState('')
-    const [accomodationBudgetPerPerson, setAccomodationBudgetPerPerson] = useState('')
-    const [accomodationLocation, setAccomodationLocation] = useState('')
-    const [accomodationDescription, setAccomodationDescription] = useState('')
+    const [accomodationName, setAccomodationName] = useState('');
+    const [accomodationPicture, setAccomodationPicture] = useState('');
+    const [accomodationURL, setAccomodationURL] = useState('');
+    const [accomodationDate, setAccomodationDate] = useState('');
+    const [accomodationBudget, setAccomodationBudget] = useState(0);
+    const [accomodationBudgetPerPerson, setAccomodationBudgetPerPerson] = useState(0);
+    const [accomodationLocation, setAccomodationLocation] = useState('');
+    const [accomodationDescription, setAccomodationDescription] = useState('');
 
-    const handleSubmit = () => {
+    const [formHasError, setFormHasError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleSubmit = (e) => {
         // new accomodationData object to be added
+        // TODO : REMOVE sampleId and replace with real ID
+        const sampleId = '65e71a80a9a4730b5fe8da4e';
         const accomodationData = {
             name: accomodationName,
             picture: accomodationPicture,
@@ -26,12 +31,12 @@ export default function AddAccomodation() {
             budget: accomodationBudget,
             location: accomodationLocation,
             description: accomodationDescription,
+            tripId: sampleId
         }
+        e.preventDefault();
+        console.log('submit clicked');
 
-        // TODO : REMOVE sampleId and replace with real ID
-        const sampleId = '65e71a80a9a4730b5fe8da4e';
-
-        fetch(`http://localhost:5500/accomodations/${sampleId}/new`, {
+        fetch(`http://localhost:5500/accomodations/new`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(accomodationData)
@@ -39,23 +44,30 @@ export default function AddAccomodation() {
         .then(response => response.json())
         .then(data => {
             if (!data) {
-            console.log('Erreur');
-            return
+                console.log('Erreur');
+                return
+            } else {
+                if (data.result === true) {
+                    setAccomodationName('');
+                    setAccomodationPicture('');
+                    setAccomodationURL('');
+                    setAccomodationBudget(0);
+                    setAccomodationDate('');
+                    setAccomodationLocation('');
+                    setAccomodationDescription('');
+                    setFormHasError(false);
+                    setErrorMessage('');
+                } else {
+                    setFormHasError(true);
+                    setErrorMessage(data.error);
+                }
             }
-            console.log('New accomodation added')
-            setAccomodationName('');
-            setAccomodationPicture('');
-            setAccomodationURL('');
-            setAccomodationBudget(null);
-            setAccomodationDate('');
-            setAccomodationLocation('');
-            setAccomodationDescription('');
-        })                                    
+        });
     }
 
     return <div className={styles.newAccomodation}>
         <h1 className={lexend.className}>Un logement à proposer ? </h1>
-        <form onSubmit={() => handleSubmit()} className={styles.form}>
+        <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
             <div className={styles.layout}>
                 <div className={styles.top}>
                     <div>
@@ -77,6 +89,7 @@ export default function AddAccomodation() {
                                 value={accomodationName}
                                 onChange={(e) => setAccomodationName(e.target.value)}
                                 placeholder='Un petit nom pour le logement ?'
+                                required
                             />
                         </div>
                         <div className={styles.inputs}>
@@ -93,7 +106,7 @@ export default function AddAccomodation() {
                     </div>
                 </div>
                 <div className={styles.middle}>
-                    <div className={styles.input}>
+                    <div className={styles.inputDate}>
                         <label htmlFor="accomodation-date" className={styles.label}>Sélectionnez la date:</label>
                         <input
                             type="date"
@@ -101,6 +114,7 @@ export default function AddAccomodation() {
                             className={styles.input}
                             value={accomodationDate}
                             onChange={(e) => setAccomodationDate(e.target.value)}
+                            required
                         />
                     </div>
                     <div className={`${styles.inputsBudgetContainer} ${styles.rightSide}`}>
@@ -112,6 +126,7 @@ export default function AddAccomodation() {
                                 className={styles.input}
                                 value={accomodationBudget}
                                 onChange={(e) => setAccomodationBudget(e.target.value)}
+                                min="0"
                             />
                         </div>
                         <div className={styles.inputsBudget}>
@@ -122,6 +137,7 @@ export default function AddAccomodation() {
                                 className={styles.input}
                                 value={accomodationBudgetPerPerson}
                                 onChange={(e) => setAccomodationBudgetPerPerson(e.target.value)}
+                                min="0"
                             />
                         </div>
                     </div>
@@ -151,6 +167,7 @@ export default function AddAccomodation() {
                     </div>
                 </div>
                 <div className={styles.buttonContainer}>
+                    {formHasError && errorMessage}
                     <button type="submit" className={styles.button}>Soumettre</button>
                 </div>
             </div>
