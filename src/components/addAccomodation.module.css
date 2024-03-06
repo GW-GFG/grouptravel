@@ -2,7 +2,7 @@
     background-color: var(--primary-orange-color);
     padding: 2.5rem 0;
     width: 80%;
-    /*border-radius: 1rem;*/
+    border-radius: .625rem;
 }
 
 .newAccomodation *,
@@ -95,6 +95,7 @@
 .inputDate input {
     background-color: transparent;
     border: 2px solid #ffffff;
+    border-radius: .625rem;
 }
 
 .inputs input[type="text"],
@@ -117,6 +118,7 @@
     background-color: transparent;
     border: 2px solid #ffffff;
     padding: .7rem;
+    border-radius: .625rem;
 }
 
 .textarea:focus {

@@ -1,158 +1,158 @@
 .container {
-    width: 90%;
-    justify-content: center;
-    padding: 2.5rem 0;
-    background: var(--primary-green-color);
-    color: white;
-    display: flex;
-    border-radius: 1rem;
-    max-height: max-content;
-  }
+  width: 80%;
+  padding: 2.5rem;
+  background: var(--primary-green-color);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  border-radius: 1rem;
+  max-height: max-content;
+}
 
-  /*Right style */
+/*Right style */
 
-  .rightContainer {
-    width: 80%;
-    margin-left: 26%;
-    margin-right: 10%;
-    display: flex;
-    flex-direction: column;
-  }
+.rightContainer {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
 
-   /* Page title*/
-   .title {
-    color: white;
-    background-color: var(--primary-red-color);
-    border-radius: 1rem;
-    height: 40%;
-    width: 100%;
-    padding: 1rem;
-    height: fit-content;
-    display: flex;
-    align-items: center; /* Centrage vertical */
-    justify-content: center;
-    margin-bottom: 2rem;
-  }
+/* Page title*/
+.title {
+  color: white;
+  background-color: var(--primary-red-color);
+  border-radius: 1rem;
+  height: 40%;
+  width: 100%;
+  padding: 1rem;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  /* Centrage vertical */
+  justify-content: center;
+  margin-bottom: 2rem;
+}
 
-  .tripsContainer {
-    background-color: var(--primary-blue-color);
-    border-radius: 1rem;
-    width: 100%;
-    padding: 1rem;
-  }
+.tripsContainer {
+  background-color: var(--primary-blue-color);
+  border-radius: 1rem;
+  width: 100%;
+  padding: 1rem;
+}
 
-  .tripTitle {
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-  }
+.tripTitle {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
 
-  /*Style for one row */ 
-  .row {
-    background-color: white;
-    border-radius: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
+/*Style for one row */
+.row {
+  background-color: white;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
 
-  .tripName {
-    color: var(--primary-black-color);
-    margin-right: 1rem;
-  }
+.tripName {
+  color: var(--primary-black-color);
+  margin-right: 1rem;
+}
 
-  .adminBadge {
-    color: white;
-    background-color: var(--primary-red-color);
-    border-radius: 0.625rem;
-    padding: 0.2rem;
-    margin-left: 1rem;
-  }
+.adminBadge {
+  color: white;
+  background-color: var(--primary-red-color);
+  border-radius: 0.625rem;
+  padding: 0.2rem;
+  margin-left: 1rem;
+}
 
-  .goButton {
-      background-color: var(--primary-orange-color);
-      border-radius: 1rem;
-      width: 3rem;
-      color: white;
-      border: 1px solid transparent;
-      padding: 1%;
-      margin: 0.2rem;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  .goButton:hover {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-    }
-  
-    .addContainer {
-      display: flex;
-      justify-content: center;
-    }
+.goButton {
+  background-color: var(--primary-orange-color);
+  border-radius: 1rem;
+  width: 3rem;
+  color: white;
+  border: 1px solid transparent;
+  padding: 1%;
+  margin: 0.2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-  .addTravel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
-    background-color: var(--primary-orange-color);
-    color: white;
-    border-radius: 1rem;
-    border: 1px solid transparent;
-    padding: 1%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
+.goButton:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
 
-  .addTravel:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-  }
-  
+.addContainer {
+  display: flex;
+  justify-content: center;
+}
 
-  /* User part - left */
-  .leftContainer {
-    width: 10%;
-    height: 100%;
-    position: relative;
-  }
+.addTravel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: var(--primary-orange-color);
+  color: white;
+  border-radius: 1rem;
+  border: 1px solid transparent;
+  padding: 1%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-  .profilPictureContainer {
-    width: 12rem;
-    height: 12rem;
-    margin-left: 2rem;
-    margin-top: 1rem;
-    margin-bottom: 30%;
-    border-radius: 6rem;
-    overflow: hidden; /*keep the picture inside*/
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: purple;
-    z-index: 1;
-    position: relative;
-  }
+.addTravel:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
 
-  .userInfoContainer {
-    width: 12rem;
-    height: 12rem;
-    margin-left: 12%;
-    overflow: visible;
-    background-color: orangered;
-    z-index: 1;
-    position: relative
-  }
 
-  .backPicture {
-    width: 15rem;
-    height: 20rem;
-    left: 8%;
-    overflow: hidden;
-    border-radius: 1rem;
-    position: absolute;
-    bottom: 0.1rem;
-    z-index: 0;
-    background-color: pink;
-  }
+/* User part - left */
+.leftContainer {
+  width: 10%;
+  height: 100%;
+  position: relative;
+}
 
+.profilPictureContainer {
+  width: 12rem;
+  height: 12rem;
+  margin-left: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 30%;
+  border-radius: 6rem;
+  overflow: hidden;
+  /*keep the picture inside*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: purple;
+  z-index: 1;
+  position: relative;
+}
+
+.userInfoContainer {
+  width: 12rem;
+  height: 12rem;
+  margin-left: 12%;
+  overflow: visible;
+  background-color: orangered;
+  z-index: 1;
+  position: relative
+}
+
+.backPicture {
+  width: 15rem;
+  height: 20rem;
+  left: 8%;
+  overflow: hidden;
+  border-radius: 1rem;
+  position: absolute;
+  bottom: 0.1rem;
+  z-index: 0;
+  background-color: pink;
+}

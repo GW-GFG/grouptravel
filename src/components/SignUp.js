@@ -32,7 +32,7 @@ export default function SignUp() {
             setEmailError(false);
 //step to verify that passwords are the same
             if (password === password2) {
-                // setPasswordNotMatch(false);
+                setPasswordNotMatch(false);
                 fetch('http://localhost:5500/users/signup', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },

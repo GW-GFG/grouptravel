@@ -22,7 +22,7 @@ export default function AddAccomodation() {
     const handleSubmit = (e) => {
         // new accomodationData object to be added
         // TODO : REMOVE sampleId and replace with real ID
-        const sampleId = '65e71a80a9a4730b5fe8da4e';
+        const sampleId = '65e853f30bff25fe16a3aafb';
         const accomodationData = {
             name: accomodationName,
             picture: accomodationPicture,

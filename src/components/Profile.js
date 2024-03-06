@@ -9,18 +9,6 @@ export default function Profile() {
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector((state) => state.user.value);
-  const router = useRouter();
-
-  // console.log("avant" + user);
-  // const allUserTrip = [
-  //   {
-  //     name: "Barcelonne en Avril",
-  //     admin: "65e6f61f574900bbbb8ed360",
-  //     members: [{ _id: "65e6f61f574900bbbb8ed360" }],
-  //   },
-  // ];
-
-
 
   function TripRow(props) {
     const isAdmin = true;
