@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./profile.module.css";
@@ -9,14 +9,18 @@ export default function Profile() {
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector((state) => state.user.value);
-  console.log("avant" + JSON.stringify(user));
-  const allUserTrip = [
-    {
-      name: "Barcelonne en Avril",
-      admin: "65e6f61f574900bbbb8ed360",
-      members: [{ _id: "65e6f61f574900bbbb8ed360" }],
-    },
-  ];
+  const router = useRouter();
+
+  // console.log("avant" + user);
+  // const allUserTrip = [
+  //   {
+  //     name: "Barcelonne en Avril",
+  //     admin: "65e6f61f574900bbbb8ed360",
+  //     members: [{ _id: "65e6f61f574900bbbb8ed360" }],
+  //   },
+  // ];
+
+
 
   function TripRow(props) {
     const isAdmin = true;
@@ -30,7 +34,7 @@ export default function Profile() {
     );
   }
 
-  const trips = allUserTrip.map((data, i) => {
+  const trips = user.myTrips.map((data, i) => {
     return <TripRow key={i} {...data} />;
   });
 
