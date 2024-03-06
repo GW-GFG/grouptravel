@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './signup.module.css';
 import { addUserToStore } from '../reducers/user';
 import { lexend } from '../app/fonts';
+import InputLabel from './InputLabel';
 
 export default function SignUp() {
     const dispatch = useDispatch();
@@ -55,10 +56,10 @@ export default function SignUp() {
     return (
         <div className={styles.container}>
             <h3 className={`${styles.title} ${lexend.className}`}>On se rencontre ? Inscris-toi !</h3>
-            <input type="text" className={styles.input} onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Entre ton email ici !" />
-            <input type="text" className={styles.input} onChange={(e) => setUsername(e.target.value)} value={username} placeholder="Choisi ton nom !" />
-            <input type="password" className={styles.input} onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Ecris ton mot de passe ... " />
-            <input type="password" className={styles.input} onChange={(e) => setPassword2(e.target.value)} value={password2} placeholder="Confirme ton mot de passe ! " />
+            <InputLabel type="text" onChange={(e) => setEmail(e.target.value)} value={email} label="Email" placeholder="Entre ton email ici !" />
+            <InputLabel type="text" onChange={(e) => setUsername(e.target.value)} value={username} label="Nom d'utilisateur(trice)" placeholder="Choisi ton nom !" />
+            <InputLabel type="password" onChange={(e) => setPassword(e.target.value)} value={password} label="Mot de passe" placeholder="Ecris ton mot de passe ... " />
+            <InputLabel type="password" onChange={(e) => setPassword2(e.target.value)} value={password2} label="Confirmation" placeholder="Confirme ton mot de passe ! " />
             {passwordNotMatch && <p style={styles.error}>Les mots de passes sont différents</p>}
             {emailError && <p style={styles.error}>Entre une adresse email valide !</p>}
             {submitError && <p style={styles.error}>Il semble y avoir une erreur, vérifie les champs saisis !</p>}

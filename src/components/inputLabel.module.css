@@ -1,0 +1,33 @@
+.inputContainer {
+    position: relative;
+    margin-bottom: 20px; /* space between inputs and labels */
+    }
+    
+    .label {
+    color: var(--primary-red-color);
+    position: absolute;
+    top: -9px; /* To display label on the border */
+    left: 9px; /* To display label on the left */
+    background-color: white;
+    padding: 0 5px;
+    margin-top: 5px;
+    border-radius: 0.625rem;
+    font-size: 10px;
+    }
+    
+    .input {
+    padding: 10px;
+    border: 1px solid var(--primary-red-color);
+    border-radius: 0.625rem;
+    background-color: white;
+    color: var(--primary-black-color);
+    outline: none;
+    }
+    
+    .input:focus {
+        border-color: var(--primary-blue-color);
+    }
+    .input:hover {
+        cursor: pointer;
+        border-color: var(--primary-blue-color);
+    }
