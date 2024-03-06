@@ -12,7 +12,6 @@ export default function Profile() {
 
   function TripRow(props) {
     const isAdmin = true;
-    console.log("apr" + JSON.stringify(user));
     return (
       <div className={styles.row}>
           <span className={styles.tripName}>{props.name}</span>
@@ -22,7 +21,7 @@ export default function Profile() {
     );
   }
 
-  const trips = user.myTrips.map((data, i) => {
+  const trips = user.myTrips && user.myTrips.map((data, i) => {
     return <TripRow key={i} {...data} />;
   });
 

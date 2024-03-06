@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse, faLaptop, faBed, faTableTennisPaddleBall, faCalendar, faMessage, faPlane, faUser, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import { useState } from 'react';
 
@@ -12,8 +12,16 @@ import { Modal } from 'antd';
 import { lexend } from '../app/fonts';
 
 import styles from './header.module.css';
+import SignIn from '@/components/SignIn';
+import SignUp from "./SignUp";
+
+import { useDispatch, useSelector } from 'react-redux';
+import { removeUserToStore } from "@/reducers/user";
 
 export default function Header() {
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.user.value);
+    const router = useRouter();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -64,20 +72,31 @@ export default function Header() {
         setIsModalOpen(false);
       };
 
+      //Logout
+      const handleLogout = () => {
+        dispatch(removeUserToStore())
+        router.push('/');
+      };
+
+      const handleProfile = () => {
+        router.push('/profile');
+      }
+
+
     return <header className={`${styles.header} ${lexend.className}`}>
         <div className={styles.headerLeft}>
             <FontAwesomeIcon icon={iconHouse.name} className={styles.headerIcon} />
-            <Link className={styles[`${pathname === '/' ? 'active' : 'link'}`]} href="/"> Home </Link>
+            <Link className={styles[`${pathname === '/' ? 'active' : 'link'}`]} href="/"> Accueil </Link>
             <FontAwesomeIcon icon={iconLaptop.name} className={styles.headerIcon} />
             <Link className={styles[`${pathname === '/dashboard' ? 'active' : 'link'}`]} href="/dashboard"> Dashboard </Link>
             <FontAwesomeIcon icon={iconBed.name} className={styles.headerIcon} />
-            <Link className={styles[`${(pathname === '/accomodation' || pathname === '/accomodation/add') ? 'active' : 'link'}`]} href="/accomodation"> Accomodation </Link>
+            <Link className={styles[`${(pathname === '/accomodation' || pathname === '/accomodation/add') ? 'active' : 'link'}`]} href="/accomodation"> Hébergement </Link>
             <FontAwesomeIcon icon={iconTableTennisPaddleBall.name} className={styles.headerIcon} />
-            <Link className={styles[`${pathname === '/activities' ? 'active' : 'link'}`]} href="/activities"> Activities </Link>
+            <Link className={styles[`${pathname === '/activities' ? 'active' : 'link'}`]} href="/activities"> Activités </Link>
             <FontAwesomeIcon icon={iconCalendar.name} className={styles.headerIcon} />
             <Link className={styles[`${pathname === '/planning' ? 'active' : 'link'}`]} href="/planning"> Planning </Link>
             <FontAwesomeIcon icon={iconMessage.name} className={styles.headerIcon} />
-            <Link className={styles[`${pathname === '/chat' ? 'active' : 'link'}`]} href="/chat"> Chat </Link>
+            <Link className={styles[`${pathname === '/chat' ? 'active' : 'link'}`]} href="/chat"> Messages </Link>
         </div>
         <div className={styles.headerRight}>
             <FontAwesomeIcon icon={iconPlane.name} className={styles.headerIcon} />
@@ -90,16 +109,21 @@ export default function Header() {
             </div>
             <FontAwesomeIcon icon={iconUser.name} className={styles.headerIcon} />
             <div>
-                <button onClick={() => displayModal('login')} className={`${styles.link} ${styles.buttonHeader}`}> Login </button>
+                {!user.token && <button onClick={() => displayModal('login')} className={`${styles.link} ${styles.buttonHeader}`}> Connexion </button>}
+                {user.token && <button onClick={handleProfile} className={`${styles.link} ${styles.buttonHeader}`}> Profil </button>}
             </div>
-            
-            <FontAwesomeIcon icon={iconArrow.name} className={styles.headerIcon} />
+
+            {user.token && (<>
+            <FontAwesomeIcon icon={iconArrow.name} className={styles.headerIcon} onClick={handleLogout} />
             <div>
-                <button onClick={() => displayModal('signup')} className={`${styles.link} ${styles.buttonHeader}`}> Signup </button>
+                <button onClick={handleLogout} className={`${styles.link} ${styles.buttonHeader}`}> Déconnexion </button>                
             </div>
-        </div>
-        <Modal title='Basic Modal' open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <p> Modal inputs, voir pour passer une props pour le type de modal et afficher signup ou login en fonction </p>
+            </>)}        
+            {!user.token && <button onClick={() => displayModal('signup')} className={`${styles.link} ${styles.buttonHeader}`}> Inscription </button>}
+        </div>   
+        <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} bodyStyle={{ padding: 0 }}>
+        <SignIn />
+        <SignUp />
       </Modal>
     </header>
 }

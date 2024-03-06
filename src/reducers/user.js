@@ -14,9 +14,12 @@ export const userSlice = createSlice({
 		},
 		updateMyTrips: (state, action) => {
 			state.value.myTrips = state.value.myTrips.push(action.payload)
-		}
+		},
+		removeUserToStore: (state, action) => {
+			state.value = initialState;
+		},
 	},
 });
 
-export const { addUserToStore, updateMyTrips } = userSlice.actions;
+export const { addUserToStore, updateMyTrips, removeUserToStore } = userSlice.actions;
 export default userSlice.reducer;

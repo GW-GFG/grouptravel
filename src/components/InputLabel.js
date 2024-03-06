@@ -10,7 +10,7 @@ export default function InputLabel({ label, ...rest }) {
     <div className={styles.inputContainer}>
       <label className={styles.label}>{label}</label>
       <input
-        className={styles.input}
+        className={styles.inputLabel}
         {...rest}
       />
     </div>

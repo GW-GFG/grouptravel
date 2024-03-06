@@ -1,27 +1,25 @@
 'use client'
 import { useState } from "react";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import user from "@/reducers/user";
+import Accommodation from "@/components/Accommodation";
 
-export default function AccomodationPage() {
-
-    const [sampleCounter, setSampleCounter] = useState(0);
-
-    const handleCounterClick = () => {
-        setSampleCounter(sampleCounter+1);
-    }
-
-    return <div>Accomodation page
-        <div>
-            Here is a sample counter to show how to use hooks with next 14 : {sampleCounter}
-            <button onClick={() => handleCounterClick()}> Click me </button>
-        </div>
-        <div>
-            Here is a link to add an accomodation : 
-            <Link href='/accomodation/add'>Add logement</Link>
-        </div>
-        <div>
-            Here is a button to fetch users in DB (see in console.log) : 
-            <button>Fetch with axios</button>
-        </div>
-    </div>
+export default function AccommodationPage() {
+    return <div>Accommodations</div>
 }
+
+//     const currentTrip = useSelector(state.user.value.currentTrip)
+    
+//     const accomodations = currentTrip && currentTrip.map((data, i) => {
+//         return (
+//             <Accommodation />
+//         )
+//     })
+//     return (
+//         <div>
+//             {accomodations}
+//         </div>
+//     )
+        
+// }
