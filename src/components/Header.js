@@ -63,7 +63,7 @@ export default function Header() {
         console.log('click')
     }
     
-    const voyageNamePopover = user.myTrips.map((data, i) => {
+    const voyageNamePopover = user.myTrips && user.myTrips.map((data, i) => {
         return (
             <div key={i} className={styles.voyageNameContainer}>
             <span className="voyageName" onClick={() => changeCurrentTrip()}>{data.name}</span>

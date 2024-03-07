@@ -14,12 +14,12 @@ export default function Profile() {
 
   function TripRow(props) {
     const isAdmin = true;
-    // console.log("apr" + JSON.stringify(user));
+
 
     const handleGoToDash = () => {
-      console.log(props);
+      console.log('props depuis profil 20' +props);
       dispatch(updateCurrentTrip(props));
-      console.log(user);
+      console.log('user depuis profil 22' + user);
       router.push('/dashboard')
     }
 
@@ -41,7 +41,6 @@ export default function Profile() {
   }
 
   if (!user.token) {
-    console.log(user);
     return (
       <div className={`${styles.container} ${lexend.className}`}>
         <p>Oups ! Apparemment tu n'es pas encore connecté(e)...</p>

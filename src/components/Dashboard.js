@@ -7,10 +7,10 @@ export default function Dashboard() {
 
     const user = useSelector((state) => state.user.value);
     const currentTrip = useSelector((state) => state.user.value.currentTrip);
-    console.log(currentTrip)
+
 
     if (!user.token) {
-        console.log(user);
+        console.log('dashboard user 13 :' + JSON.stringify(user));
         return (
           <div className={`${styles.container} ${lexend.className}`}>
             <p>Oups ! Apparemment tu n'es pas encore connecté(e)...</p>
