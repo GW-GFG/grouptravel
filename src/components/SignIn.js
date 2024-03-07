@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './signin.module.css';
@@ -13,9 +13,14 @@ export default function SignIn() {
     const user = useSelector((state) => state.user.value);
     const router = useRouter();
 //if is connected rout => Profil
-    if (user.token) {
-        router.push('/profile');
-    }
+    // if (user.token) {
+    //     router.push('/profile');
+    // }
+    useEffect(() => { // Utilisation d'un useEffect pour gérer la redirection
+        if (user.token) {
+            router.push('/profile');
+        }
+    }, [user.token, router])
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
