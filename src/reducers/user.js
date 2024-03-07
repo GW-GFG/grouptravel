@@ -13,7 +13,7 @@ export const userSlice = createSlice({
 			state.value = action.payload;
 		},
 		updateMyTrips: (state, action) => {
-			state.value.myTrips = state.value.myTrips.push(action.payload)
+			state.value.myTrips.push(action.payload);
 		},
 		// Creation 
 		updateCurrentTrip : (state, action) => { 

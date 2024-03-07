@@ -16,7 +16,7 @@ import SignIn from '@/components/SignIn';
 import SignUp from "./SignUp";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { removeUserToStore } from "@/reducers/user";
+import { removeUserToStore, updateCurrentTrip } from "@/reducers/user";
 
 export default function Header() {
     const dispatch = useDispatch();
@@ -58,23 +58,32 @@ export default function Header() {
         name: faArrowRightFromBracket
     };
 
-    // Popover 
-    const changeCurrentTrip = () => {
-        console.log('click')
-    }
-    
-    const voyageNamePopover = user.myTrips.map((data, i) => {
+        // Popover 
+        // action to change currentTrips from popover
+        const handleCurrentTrip = (data) => {
+            // console.log(data)
+            dispatch(updateCurrentTrip(data)); // Dispatch in Redux
+            router.push('/dashboard') // refresh or routing to Dashboard
+        }
+        
+        //map on all myTrip to put name in popover
+        
+            
+        const voyageNamePopover = user.myTrips && user.myTrips.length > 0 && user.myTrips.filter(e => e !== user.currentTrip).map((data, i) => {
         return (
             <div key={i} className={styles.voyageNameContainer}>
-            <span className="voyageName" onClick={() => changeCurrentTrip()}>{data.name}</span>
+            <span className="voyageName" onClick={() => handleCurrentTrip(data)}>{data.name}</span>
             </div>
         );
         });
-    const popoverContent = (
+      
+       const popoverContent = (
         <div className={styles.popoverContent}>
             {voyageNamePopover}
         </div>
         );
+        
+    
     
    
 
@@ -121,14 +130,10 @@ export default function Header() {
         <div className={styles.headerRight}>
             <FontAwesomeIcon icon={iconPlane.name} className={styles.headerIcon} />
             <div className={styles.tripsContainer}>
-            <Popover title="Mes voyages" content={popoverContent} className={styles.popover} trigger="hover">
-                Mes Voyages   
+            <Popover title="Mes autres voyages" content={popoverContent} className={styles.popover} trigger="hover">
+                {!user.currentTrip && <p>Mes voyages</p>}
+                {user.currentTrip && <p> {user.currentTrip.name}</p>}
             </Popover>
-            {/* <div className={styles.currentTrip}>Voyage 1</div>
-            <ul className={styles.tripsList}>
-                <li className={styles.trip}>Voyage 2</li>
-                <li className={styles.trip}>Voyage 3</li>
-            </ul> */}
             </div>
             <FontAwesomeIcon icon={iconUser.name} className={styles.headerIcon} />
             <div>
@@ -144,7 +149,7 @@ export default function Header() {
             </>)}        
             {!user.token && <button onClick={() => displayModal('signup')} className={`${styles.link} ${styles.buttonHeader}`}> Inscription </button>}
         </div>   
-        <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} bodyStyle={{ padding: 0 }}>
+        <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} style={{ padding: 0 }}>
         <SignIn />
         <SignUp />
       </Modal>

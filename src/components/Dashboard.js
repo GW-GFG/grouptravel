@@ -2,12 +2,22 @@
 import { useSelector } from "react-redux";
 import styles from "./dashboard.module.css";
 import { lexend } from "../app/fonts";
+import { useState, useEffect } from 'react';
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
 
+    const router = useRouter();
     const user = useSelector((state) => state.user.value);
     const currentTrip = useSelector((state) => state.user.value.currentTrip);
     console.log(currentTrip)
+
+    useEffect(() => { // Utilisation d'un useEffect pour gérer la redirection
+        if (!user.currentTrip) {
+            alert('Selectionne ou créer un voyage avant de pouvoir accéder à cette page')
+            router.push('/profile');
+        }
+    }, [])
 
     if (!user.token) {
         console.log(user);
