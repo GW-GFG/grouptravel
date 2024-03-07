@@ -1,0 +1,25 @@
+.container {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-around;
+    margin: 0 auto;
+}
+
+.title {
+    text-align: center;
+    width: 100%;
+}
+
+.card {
+    min-width: 40%;
+    border-radius: 0.625rem;
+    background-color: var(--primary-blue-color);
+    padding: 2.5rem 0;
+    color: white;
+}
+
+.cardTitle {
+    margin-top: 0;
+}

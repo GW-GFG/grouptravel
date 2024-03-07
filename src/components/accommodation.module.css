@@ -1,4 +1,59 @@
 .container {
     width: 80%;
     background-color: var(--primary-red-color);
+    border-radius: 1rem;
+    padding: 1rem;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.cardTitle {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.cardBody {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.leftContainer {
+    display: flex;
+}
+
+.leftColumn {
+    padding: 1rem;
+}
+
+.imgContainer {
+    background-color: var(--primary-black-color);
+    min-height: 40%;
+    width: 300;
+    height: 200;
+    max-width: max-content;
+}
+
+.middleColumn {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    
+}
+
+.miniTitles {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.rightContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.voteIcons {
+    display: flex;
+    justify-content: space-evenly;
 }

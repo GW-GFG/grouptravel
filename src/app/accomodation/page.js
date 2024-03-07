@@ -1,34 +1,37 @@
 'use client'
-import { useState } from "react";
 import Link from "next/link";
+import styles from "./page.module.css";
+import { lexend } from "../fonts";
 import { useSelector } from "react-redux";
-import user from "@/reducers/user";
 import Accommodation from "@/components/Accommodation";
 
 export default function AccommodationPage() {
-    const currentTrip = useSelector((state) => state.user.value.currentTrip)
+  const currentTrip = useSelector((state) => state.user.value.currentTrip)
     //currentTrip contains all data of the selected trip
 
-    fetch('http://localhost:5500/accomodations', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: currentTrip
-    }).then(data => {
-        console.log('pageaccommodation 18 data fetch data' + data)
-    })
-/*
-    return <div>Accommodations</div>
-}*/
-    
-    const accomodations = currentTrip.accomodations && currentTrip.accomodations.map((data, i) => {
-        return (
-            <Accommodation />
-        )
-    })
-    return (
-        <div>
-            AccommodationPage
+  const accommodations = currentTrip && currentTrip.accomodations && currentTrip.accomodations.map((data, i) => {
+    return <Accommodation key={i} {...data}/>
+  })
+
+
+   if (currentTrip && currentTrip.accomodations) { 
+      return (
+        <>
+        <h1 className={`${styles.title} ${lexend.className}`}>Logements</h1>
+        <div className={styles.accommodationsContainer}>
+          {accommodations}
         </div>
-    )
-        
+        </>
+      )
+    } else {
+      return (
+        <>
+        <h1 className={`${styles.title} ${lexend.className}`}>Logements</h1>
+        <div className={styles.accommodationsContainer}>
+          <p>Il semblerait qu'il n'y a pas encore de logement proposé pour ce voyage !</p>
+        </div>
+        </>
+          
+      )
+    }     
 }

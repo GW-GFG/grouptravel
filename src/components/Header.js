@@ -63,7 +63,7 @@ export default function Header() {
         const handleCurrentTrip = (data) => {
             // console.log(data)
             dispatch(updateCurrentTrip(data)); // Dispatch in Redux
-            router.push('/dashboard') // refresh or routing to Dashboard
+            // router.push('/dashboard') // refresh or routing to Dashboard
         }
         
         //map on all myTrip to put name in popover
