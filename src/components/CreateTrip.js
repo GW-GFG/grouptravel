@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import InputLabel from './InputLabel';
 import styles from './creatTrip.module.css';
-import {updateCurrentTrip, updateMyTrips, addUserToStore} from '../reducers/user';
+import {updateCurrentTrip, updateMyTrips} from '../reducers/user';
 // import fonts to use them for menu items
 import { lexend } from '../app/fonts';
 

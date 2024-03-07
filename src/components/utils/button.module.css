@@ -1,0 +1,24 @@
+.button {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.button:hover,
+.button:focus {
+    box-shadow: 0 0.5rem 0.5rem -0.4rem var(--primary-black-color);
+    transform: translateY(-0.2rem);
+}
+
+.primary {
+    background-color: transparent;
+    border-radius: .625rem;
+    border: 2px solid #ffffff;
+    padding: .8rem 1.4rem;
+}
+
+.secondary {
+    display: block;
+    border-radius: 50%;
+    padding: .8rem;
+    border: none;
+}

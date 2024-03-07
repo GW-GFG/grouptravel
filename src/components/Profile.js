@@ -8,32 +8,12 @@ import {updateCurrentTrip} from "@/reducers/user"
 import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+import TripRow from "./TripRow";
 
 export default function Profile() {
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector((state) => state.user.value);
-
-  useEffect(() => { // Utilisation d'un useEffect pour gérer la redirection
-   console.log('log Profile', user)
-  }, [])
-  
-     // One tripRow model
-     function TripRow(props) {
-      const isAdmin = true;
-      // Routing user to Dashboard && updateCurrentTrip in Redux
-      const handleGoToDash = () => {
-        dispatch(updateCurrentTrip(props));
-        router.push('/dashboard');
-      }
-      return (
-        <div className={styles.row}>
-            <span className={styles.tripName}>{props.name}</span>
-            {isAdmin && <span className={styles.adminBadge}>ADMIN</span>}         
-            <button className={styles.goButton} onClick={() => handleGoToDash()}>Go</button>                   
-        </div>
-      );
-    }
 
    //Map on user.myTrips Only if != null
    const trips = user.myTrips.length > 0 && user.myTrips.map((data, i) => {
@@ -48,7 +28,6 @@ export default function Profile() {
 
 
   if (!user.token) {
-    console.log(user);
     return (
       <div className={`${styles.container} ${lexend.className}`}>
         <p>Oups ! Apparemment tu n'es pas encore connecté(e)...</p>
