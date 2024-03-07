@@ -1,13 +1,18 @@
+'use client'
 import styles from './triprow.module.css';
+import { useDispatch } from 'react-redux';
+import { updateCurrentTrip } from '@/reducers/user';
+import { useRouter } from 'next/navigation';
 
 export default function TripRow(props) {
+    const dispatch = useDispatch();
+    const router = useRouter();
     const isAdmin = true;
-    // console.log("apr" + JSON.stringify(user));
+
 
     const handleGoToDash = () => {
-      console.log(props);
       dispatch(updateCurrentTrip(props));
-      console.log(user);
+
       router.push('/dashboard')
     }
 

@@ -37,7 +37,7 @@ export default function AddAccomodation() {
 
         // new accomodationData object to be added
         // TODO : REMOVE sampleId and replace with real ID
-        const sampleId = '65e853f30bff25fe16a3aafb';
+        const sampleId = '65e97d36e72bdff0af47ae42';
         const accomodationData = {
             name: accomodationName,
             picture: accomodationPicture,
