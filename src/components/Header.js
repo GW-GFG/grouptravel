@@ -144,7 +144,7 @@ export default function Header() {
             </>)}        
             {!user.token && <button onClick={() => displayModal('signup')} className={`${styles.link} ${styles.buttonHeader}`}> Inscription </button>}
         </div>   
-        <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} bodyStyle={{ padding: 0 }}>
+        <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} style={{ padding: 0 }}>
         <SignIn />
         <SignUp />
       </Modal>

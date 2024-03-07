@@ -6,31 +6,12 @@ import styles from "./profile.module.css";
 import { lexend } from "../app/fonts";
 import {updateCurrentTrip} from "@/reducers/user"
 import Link from "next/link";
+import TripRow from "./TripRow";
 
 export default function Profile() {
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector((state) => state.user.value);
-
-  function TripRow(props) {
-    const isAdmin = true;
-    // console.log("apr" + JSON.stringify(user));
-
-    const handleGoToDash = () => {
-      console.log(props);
-      dispatch(updateCurrentTrip(props));
-      console.log(user);
-      router.push('/dashboard')
-    }
-
-    return (
-      <div className={styles.row}>
-          <span className={styles.tripName}>{props.name}</span>
-          {isAdmin && <span className={styles.adminBadge}>ADMIN</span>}         
-          <button className={styles.goButton} onClick={handleGoToDash}>Go</button>                   
-      </div>
-    );
-  }
 
   const trips = user.myTrips && user.myTrips.map((data, i) => {
     return <TripRow key={i} {...data} />;
@@ -41,7 +22,6 @@ export default function Profile() {
   }
 
   if (!user.token) {
-    console.log(user);
     return (
       <div className={`${styles.container} ${lexend.className}`}>
         <p>Oups ! Apparemment tu n'es pas encore connecté(e)...</p>

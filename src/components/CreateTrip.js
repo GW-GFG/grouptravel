@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import InputLabel from './InputLabel';
 import styles from './creatTrip.module.css';
-import {updateMyTrips} from '../reducers/user';
+import {updateCurrentTrip, updateMyTrips} from '../reducers/user';
 // import fonts to use them for menu items
 import { lexend } from '../app/fonts';
 
@@ -31,15 +31,14 @@ export default function CreateTrip() {
             body: JSON.stringify({ name: groupName, location, departureDate, returnDate, token: token }),
         }).then(response => response.json())
             .then(data => {
-            console.log('data : '+ JSON.stringify(data))
             // If data.error > error.msg
             if(data.error) {
-               console.log(data.error)
                 setErrorMsg(data.error)
             }
             else {
-            dispatch(updateMyTrips(data.newTrip.id))
-            router.push('/dashboard')
+            dispatch(updateMyTrips(data.newTrip));
+            dispatch(updateCurrentTrip(data.newTrip));
+            router.push('/dashboard');
             }
             // 
         });

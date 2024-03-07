@@ -46,46 +46,6 @@
   margin-bottom: 2rem;
 }
 
-/*Style for one row */
-.row {
-  background-color: white;
-  border-radius: 1rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.tripName {
-  color: var(--primary-black-color);
-  margin-right: 1rem;
-}
-
-.adminBadge {
-  color: white;
-  background-color: var(--primary-red-color);
-  border-radius: 0.625rem;
-  padding: 0.2rem;
-  margin-left: 1rem;
-}
-
-.goButton {
-  background-color: var(--primary-orange-color);
-  border-radius: 1rem;
-  width: 3rem;
-  color: white;
-  border: 1px solid transparent;
-  padding: 1%;
-  margin: 0.2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.goButton:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
-
 .addContainer {
   display: flex;
   justify-content: center;
