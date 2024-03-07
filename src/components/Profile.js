@@ -16,7 +16,7 @@ export default function Profile() {
   const user = useSelector((state) => state.user.value);
 
    //Map on user.myTrips Only if != null
-   const trips = user.myTrips.length > 0 && user.myTrips.map((data, i) => {
+   const trips = user.myTrips && user.myTrips.length > 0 && user.myTrips.map((data, i) => {
     return <TripRow key={i} {...data} />;
   });
 
