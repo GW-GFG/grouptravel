@@ -2,6 +2,7 @@
 import styles from './addAccomodation.module.css';
 import { useState, useEffect } from 'react';
 import InputLabel from './InputLabel';
+import Button from './utils/Button';
 
 // import fonts to use them for menu items 
 import { lexend } from '../app/fonts';
@@ -23,7 +24,7 @@ export default function AddAccomodation() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        console.log('clicked');
         // check if url is valid 
         try {
             new URL(accomodationURL);   
@@ -196,7 +197,7 @@ export default function AddAccomodation() {
                 </div>
                 <div className={styles.buttonContainer}>
                     {formHasError && errorMessage}
-                    <button type="submit" className={styles.button}>Soumettre</button>
+                    <Button type="submit" buttonClass="primary" text="Soumettre" />
                 </div>
             </div>
             

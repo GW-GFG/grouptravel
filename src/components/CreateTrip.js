@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import InputLabel from './InputLabel';
 import styles from './creatTrip.module.css';
-import {updateMyTrips} from '../reducers/user';
+import {updateCurrentTrip, updateMyTrips} from '../reducers/user';
 // import fonts to use them for menu items
 import { lexend } from '../app/fonts';
 
@@ -22,28 +22,31 @@ export default function CreateTrip() {
 
     const token = user.token
     // const token = '7Az44VwjhOvapTcIHhyQH_IwYk04BDQG'
-    
+     
 
     const handleSubmit = () => {
+        // Unbreakable form
+        const locationToSend = location[0].toUpperCase()+ location.slice(1).toLowerCase()
+        const nameToSend = groupName[0].toUpperCase()+ groupName.slice(1).toLowerCase()
+        // fetch for add new trip in DDB
         fetch('http://localhost:5500/trips/new', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: groupName, location, departureDate, returnDate, token: token }),
+            body: JSON.stringify({ name: nameToSend, location : locationToSend, departureDate, returnDate, token: token }),
         }).then(response => response.json())
             .then(data => {
-            console.log('data : '+ JSON.stringify(data))
-            // If data.error > error.msg
+            // If data.error send error.msg to front
             if(data.error) {
-               console.log(data.error)
                 setErrorMsg(data.error)
             }
             else {
-            dispatch(updateMyTrips(data.newTrip.id))
+            // If no error > update reducer in redux
+            dispatch(updateMyTrips(data.newTrip))
+            dispatch(updateCurrentTrip(data.newTrip))
+            // rerouting user to dashboard of new trip
             router.push('/dashboard')
             }
-            // 
         });
-
     }
 
     return (
@@ -80,14 +83,15 @@ export default function CreateTrip() {
                         onChange={(e) => setReturnDate(e.target.value)}
                     />
                 </div>
-                </div>  
-                
-            </div>
-            
+                </div>
+                {/* only if error display error */}
                 {errorMsg != '' && <h2 className={styles.error}>{errorMsg}</h2>}
             
             <button className={styles.button} onClick={() => handleSubmit()}>Go!</button>
             
-        </div>
+            </div>
+        </div>  
+                
+            
     )
 }

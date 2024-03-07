@@ -1,3 +1,12 @@
+import { UseSelector } from "react-redux"
+
 export default function ActivitiesPage() {
-    return <div> Activities there</div>
+    const currentTrip = useSelector(state.user.value.currentTrip)
+    
+    return (
+        <div> 
+            Activities there
+        </div>
+    )
+
 }

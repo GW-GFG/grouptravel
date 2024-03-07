@@ -40,11 +40,13 @@ const AddActivity = () => {
     })
       .then(response => response.json())
       .then(data => {
-        if (!data) {
-          // setError(data.error)
-          console.log('Erreur')
+        // if no trip is found or activity's date is outside trip's date
+        if (data.result === false) {
+          setError(data.error)
+          alert(data.error)
           return
         }
+        // trip is found, add activity
         console.log('New activity added', data.newActivity)
         alert('Votre activité a bien été ajoutée à votre groupe !')
         setActivityName('')
@@ -144,7 +146,7 @@ const AddActivity = () => {
                 id="activity-location"
                 value={activityLocation}
                 onChange={(e) => setActivityLocation(e.target.value)}
-                placeholder='Il se situe où ce logement ?'
+                placeholder='Il se situe où cette activité ?'
               />
             </div>
             <div className={styles.rightSide}>
@@ -161,7 +163,6 @@ const AddActivity = () => {
             </div>
           </div>
           <div className={styles.buttonContainer}>
-            {error}
             <button type="submit" className={styles.button}>Soumettre</button>
           </div>
         </div>
