@@ -1,13 +1,15 @@
 'use client'
 import styles from './addAccomodation.module.css';
 import { useState, useEffect } from 'react';
-import InputLabel from './InputLabel';
+import { useSelector } from 'react-redux';
 import Button from './utils/Button';
 
 // import fonts to use them for menu items 
 import { lexend } from '../app/fonts';
 
 export default function AddAccomodation() {
+
+    const currentTrip = useSelector((state) => state.user.value.currentTrip);
 
     const [accomodationName, setAccomodationName] = useState('');
     const [accomodationPicture, setAccomodationPicture] = useState('');
@@ -24,20 +26,41 @@ export default function AddAccomodation() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('clicked');
-        // check if url is valid 
-        try {
-            new URL(accomodationURL);   
-        } catch (err) {
+
+        // check if url is valid (if url exists)
+        if (accomodationURL !== '') {
+            try {
+                new URL(accomodationURL);   
+            } catch (err) {
+                setFormHasError(true);
+                setErrorMessage("L'url saisie n'est pas valide");
+                return;
+            }
+        }
+
+        // Checking if end date is after start date
+        const accommodationDepartureDate = new Date(departureDate);
+        const accommodationReturnDate = new Date(returnDate);
+
+        if(accommodationDepartureDate >= accommodationReturnDate) {
             setFormHasError(true);
-            setErrorMessage("L'url saisie n'est pas valide");
-            return false;
+            setErrorMessage("La date de départ doit être postérieure à la date d'arrivée.")
+            return;  
+        }
+
+        // check if accommodation dates are within trip dates
+        const tripDepartureDate = new Date(currentTrip.dates.departure);
+        const tripReturnDate = new Date(currentTrip.dates.return);
+
+        if (accommodationDepartureDate < tripDepartureDate || accommodationDepartureDate > tripReturnDate 
+        || accommodationReturnDate < tripDepartureDate || accommodationReturnDate > tripReturnDate) {
+            setFormHasError(true);
+            setErrorMessage("Les dates du logement ne sont pas comprises dans celles du voyage.");
+            return;
         }
 
 
-        // new accomodationData object to be added
-        // TODO : REMOVE sampleId and replace with real ID
-        const sampleId = '65e97d36e72bdff0af47ae42';
+        // checks passed, new accomodationData object to be added
         const accomodationData = {
             name: accomodationName,
             picture: accomodationPicture,
@@ -47,7 +70,7 @@ export default function AddAccomodation() {
             budget: accomodationBudget,
             location: accomodationLocation,
             description: accomodationDescription,
-            tripId: sampleId
+            tripId: currentTrip._id
         }
 
         fetch(`http://localhost:5500/accomodations/new`, {
@@ -72,7 +95,8 @@ export default function AddAccomodation() {
                     setAccomodationDescription('');
                     setFormHasError(false);
                     setErrorMessage('');
-                    console.log(data.data);
+                    // replace with proper feedback
+                    console.log('AddAccomodation.js : nouveau logement ajouté au trip, yay !')
                 } else {
                     setFormHasError(true);
                     setErrorMessage(data.error);
