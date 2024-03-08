@@ -1,0 +1,26 @@
+.title {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+
+    /*display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-around;
+    margin: 0 auto;
+    */
+}
+
+.globalContainer {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

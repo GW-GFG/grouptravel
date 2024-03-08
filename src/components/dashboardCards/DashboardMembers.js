@@ -4,12 +4,13 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import Button from "../utils/Button";
 import MiniMemberRow from './MiniMemberRow';
-import { Router } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export default function DashboardMembers() {
 
     const currentTripMembersId = useSelector((state) => state.user.value.currentTrip.members);
-    const currentTripAdminId = useSelector((state) => state.user.value.currentTrip.admin)
+    const currentTripAdminId = useSelector((state) => state.user.value.currentTrip.admin);
+    const router = useRouter();
 
     const members = currentTripMembersId && currentTripMembersId.map((data, i) => {
 //Add avatar when ready

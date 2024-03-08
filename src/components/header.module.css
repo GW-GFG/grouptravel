@@ -49,6 +49,42 @@
     transition: all 0.3s ease-in-out;
 }
 
+/* Gestion "responsive" de la font-size */
+@media screen and (max-width: 1120px) {
+    .headerLeft {
+        gap: .4rem;
+    }
+
+    .headerRight {
+        gap: .4rem;
+    }
+
+    .link {
+        font-size: 1.1rem
+    }
+}
+
+/* Gestion "responsive" de la font-size */
+/*@media screen and (max-width: 960px) {
+    .headerLeft {
+        gap: .2rem;
+    }
+
+    .headerRight {
+        gap: .2rem;
+    }
+
+    .link {
+        font-size: .9rem
+    }
+}*/
+
+@media screen and (max-width: 950px) {
+    .header {
+        flex-direction: column;
+    }
+}
+
 .link:before {
     display: block;
     content: '';
@@ -114,3 +150,7 @@
     position: absolute;
 }
 
+.voyageNameContainer:hover {
+    color: var(--primary-blue-color);
+    font-size: 1.2rem;
+}
