@@ -11,9 +11,9 @@ return(
 <div className={styles.container} >
         <h2>Logements</h2>
         <div className={styles.bottom}>
-        <Link href="/accomodation"><Button type="text" buttonClass="primary" text="Voir les logements" /></Link>
+        <Link href="/accomodation" ><Button type="text" buttonClass="primary" text="Voir les logements" /></Link>
         <p>OU</p>
-        <Link href="/accomodation/add"><Button type="text" buttonClass="primary" text="Soumettre un logement" /></Link>
+        <Link href="/accomodation/add" ><Button type="text" buttonClass="primary" text="Soumettre un logement" /></Link>
         </div>
 </div>
 )}

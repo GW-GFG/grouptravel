@@ -9,8 +9,18 @@ import Image from 'next/image'
 
 const Activity = () => {
 
+    const user = useSelector((state) => state.user.value)
     const currentTrip = useSelector((state) => state.user.value.currentTrip)
 
+    if (!user.token) {
+        return (
+          <div className={`${styles.container} ${lexend.className}`}>
+            <p>Oups ! Apparemment tu n'es pas encore connecté(e)...</p>
+          </div>
+        );
+    } else if (currentTrip && currentTrip.activities) {
+
+    
     return (
         <div className={styles.container}>
             <h1 className={`${styles.title} ${lexend.className}`}>Mes activités</h1>
@@ -41,7 +51,19 @@ const Activity = () => {
                 </Card>
             ))}
         </div>
-    )
+    ) 
+    } else { 
+        return (
+        <>
+        <h1 className={`${styles.activitiesTitle} ${lexend.className}`}>Activités</h1>
+        <div className={styles.activitiesContainer}>
+        <p>Il semblerait qu'il n'y a pas encore d'activité proposée pour ce voyage !</p>
+        </div>
+        </>
+        
+        )
+        
+    }
 }
 
 export default Activity
