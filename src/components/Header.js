@@ -136,7 +136,7 @@ export default function Header() {
             <FontAwesomeIcon icon={iconBed.name} className={styles.headerIcon} />
             <Link className={styles[`${(pathname === '/accomodation' || pathname === '/accomodation/add') ? 'active' : 'link'}`]} href="/accomodation"> Hébergement </Link>
             <FontAwesomeIcon icon={iconTableTennisPaddleBall.name} className={styles.headerIcon} />
-            <Link className={styles[`${pathname === '/activities' ? 'active' : 'link'}`]} href="/activities"> Activités </Link>
+            <Link className={styles[`${(pathname === '/activities' || pathname === '/activities/add') ? 'active' : 'link'}`]} href="/activities"> Activités </Link>
             <FontAwesomeIcon icon={iconCalendar.name} className={styles.headerIcon} />
             <Link className={styles[`${pathname === '/planning' ? 'active' : 'link'}`]} href="/planning"> Planning </Link>
             <FontAwesomeIcon icon={iconMessage.name} className={styles.headerIcon} />
