@@ -11,23 +11,63 @@ import MissingInfos from './missingInfos/MissingInfos';
 
 
 export default function Accommodation() {
-
+    
+    const userToken = useSelector((state) => state.user.value.token)
     const currentTrip = useSelector((state) => state.user.value.currentTrip);
     if (currentTrip && currentTrip.accomodations.length > 0) { 
         const defaultPicture = "https://media.istockphoto.com/id/1145422105/fr/photo/vue-a%C3%A9rienne…";
-        //Picture or Picture[0] ??
 
-        const handleDo = () => {
 
+
+        const handleDo = (accomodationId) => {
+
+            const voteData = {
+                userToken,
+                accomodationId,
+                tripId: currentTrip,
+                status: true,
+            }
+
+            console.log('click id puis vote'+ JSON.stringify(voteData))
+            fetch('http://localhost:5500/accomodations/vote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify( voteData )
+            }).then(response => response.json())
+            .then(voteRes => {
+                console.log(voteRes)
+            })
+            
+            
         }
 
-        const handleDont = () => {
+        const handleDont = (accomodationId) => {
+            const voteData = {
+                userToken,
+                accomodationId,
+                tripId: currentTrip,
+                status: false,
+            }
 
+            console.log('click id puis vote'+ JSON.stringify(voteData))
+            fetch('http://localhost:5500/accomodations/vote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify( voteData )
+            }).then(response => response.json())
+            .then(voteRes => {
+                console.log(voteRes)
+            })
+
+            
         }
+        
         return(
             <div className={styles.containerTest}>
                 <h1 className={`${styles.title} ${lexend.className}`}>Mes logements</h1>
-                {currentTrip.accomodations.map((data, i) => (
+                {currentTrip.accomodations.map((data, i) => {
+                            
+                    return (
                     <div key={i} className={styles.container}>
                         <h3 className={`${styles.cardTitle} ${lexend.className}`}>{data.name}</h3>
                         <div className={styles.cardBody}>
@@ -48,21 +88,21 @@ export default function Accommodation() {
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div className={styles.rightContainer}>
                                 <div className={styles.voteIcons}>
-                                <FontAwesomeIcon style={{fontSize: '1.75rem'}} icon={faCircleCheck} onClick={() => handleDo(handleDo)} />
-                                <FontAwesomeIcon style={{fontSize: '1.75rem'}} icon={faCircleXmark} onClick={handleDont}  />
+                                <FontAwesomeIcon style={doStyle} icon={faCircleCheck} onClick={(e) => handleDo(data._id)} />
+                                <FontAwesomeIcon style={{fontSize: '1.75rem'}} icon={faCircleXmark} onClick={() => handleDont(data._id)}  />
                                 </div>
                             <Link href={data.url} target="_blank"><Button type="text" buttonClass="primary" text="En savoir plus" /></Link>
                             </div>
                         </div>
                     </div>
 
-                ))}
+                )})}
         </div>
         )
     } else {
-        return <MissingInfos title='Logement' text="de logement proposé" />
-    }
+        return <MissingInfos />
+    }   
 }
