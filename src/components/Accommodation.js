@@ -91,7 +91,7 @@ export default function Accommodation() {
                             
                             <div className={styles.rightContainer}>
                                 <div className={styles.voteIcons}>
-                                <FontAwesomeIcon style={doStyle} icon={faCircleCheck} onClick={(e) => handleDo(data._id)} />
+                                <FontAwesomeIcon style={{fontSize: '1.75rem'}} icon={faCircleCheck} onClick={(e) => handleDo(data._id)} />
                                 <FontAwesomeIcon style={{fontSize: '1.75rem'}} icon={faCircleXmark} onClick={() => handleDont(data._id)}  />
                                 </div>
                             <Link href={data.url} target="_blank"><Button type="text" buttonClass="primary" text="En savoir plus" /></Link>
