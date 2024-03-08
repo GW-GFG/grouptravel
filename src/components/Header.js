@@ -141,6 +141,8 @@ export default function Header() {
             <Link className={styles[`${pathname === '/planning' ? 'active' : 'link'}`]} href="/planning"> Planning </Link>
             <FontAwesomeIcon icon={iconMessage.name} className={styles.headerIcon} />
             <Link className={styles[`${pathname === '/chat' ? 'active' : 'link'}`]} href="/chat"> Messages </Link>
+            {/* TO REMOVE */}
+            <Link className={styles[`${pathname === '/chat' ? 'active' : 'link'}`]} href="/activities/add"> AddAccomodation </Link>
         </div>
         <div className={styles.headerRight}>
             <FontAwesomeIcon icon={iconPlane.name} className={styles.headerIcon} />
