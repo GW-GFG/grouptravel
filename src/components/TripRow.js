@@ -13,7 +13,7 @@ export default function TripRow(props) {
     const handleGoToDash = () => {
       dispatch(updateCurrentTrip(props));
 
-      router.push('/dashboard')
+      router.push('/')
     }
 
     return (

@@ -131,8 +131,6 @@ export default function Header() {
         <div className={styles.headerLeft}>
             <FontAwesomeIcon icon={iconHouse.name} className={styles.headerIcon} />
             <Link className={styles[`${pathname === '/' ? 'active' : 'link'}`]} href="/"> Accueil </Link>
-            <FontAwesomeIcon icon={iconLaptop.name} className={styles.headerIcon} />
-            <Link className={styles[`${pathname === '/dashboard' ? 'active' : 'link'}`]} href="/dashboard"> Dashboard </Link>
             <FontAwesomeIcon icon={iconBed.name} className={styles.headerIcon} />
             <Link className={styles[`${(pathname === '/accomodation' || pathname === '/accomodation/add') ? 'active' : 'link'}`]} href="/accomodation"> Hébergement </Link>
             <FontAwesomeIcon icon={iconTableTennisPaddleBall.name} className={styles.headerIcon} />
@@ -141,8 +139,6 @@ export default function Header() {
             <Link className={styles[`${pathname === '/planning' ? 'active' : 'link'}`]} href="/planning"> Planning </Link>
             <FontAwesomeIcon icon={iconMessage.name} className={styles.headerIcon} />
             <Link className={styles[`${pathname === '/chat' ? 'active' : 'link'}`]} href="/chat"> Messages </Link>
-            {/* TO REMOVE */}
-            <Link className={styles[`${pathname === '/chat' ? 'active' : 'link'}`]} href="/activities/add"> AddAccomodation </Link>
         </div>
         <div className={styles.headerRight}>
             <FontAwesomeIcon icon={iconPlane.name} className={styles.headerIcon} />

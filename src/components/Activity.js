@@ -1,25 +1,18 @@
 'use client'
-import styles from './Activity.module.css'
-import { lexend } from '../app/fonts'
-import { useSelector } from 'react-redux'
-import { Card } from 'antd'
-import Button from './utils/Button'
-import Link from 'next/link'
-import Image from 'next/image'
+import styles from './Activity.module.css';
+import { lexend } from '../app/fonts';
+import { useSelector } from 'react-redux';
+import { Card } from 'antd';
+import Button from './utils/Button';
+import Link from 'next/link';
+import Image from 'next/image';
+import MissingInfos from './missingInfos/MissingInfos';
 
 const Activity = () => {
 
-    const user = useSelector((state) => state.user.value)
-    const currentTrip = useSelector((state) => state.user.value.currentTrip)
+    const currentTrip = useSelector((state) => state.user.value.currentTrip);
 
-    if (!user.token) {
-        return (
-          <div className={`${styles.container} ${lexend.className}`}>
-            <p>Oups ! Apparemment tu n'es pas encore connecté(e)...</p>
-          </div>
-        );
-    } else if (currentTrip && currentTrip.activities) {
-
+    if (currentTrip && currentTrip.activities.length > 0) {
     
     return (
         <div className={styles.container}>
@@ -53,16 +46,7 @@ const Activity = () => {
         </div>
     ) 
     } else { 
-        return (
-        <>
-        <h1 className={`${styles.activitiesTitle} ${lexend.className}`}>Activités</h1>
-        <div className={styles.activitiesContainer}>
-        <p>Il semblerait qu'il n'y a pas encore d'activité proposée pour ce voyage !</p>
-        </div>
-        </>
-        
-        )
-        
+        return <MissingInfos title='Activités' text="d'activité proposée" />
     }
 }
 

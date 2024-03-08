@@ -1,6 +1,6 @@
 .footer {
 
     width: 100%;
-    background-color: red;
+    border: 1px solid var(--primary-blue-color);
     padding: 0 1.2rem;
 }
