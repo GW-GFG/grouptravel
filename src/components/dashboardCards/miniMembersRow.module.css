@@ -1,0 +1,6 @@
+.conatiner {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--primary-red-color);
+    text-align: center;
+}

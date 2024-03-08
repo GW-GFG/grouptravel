@@ -7,7 +7,7 @@ import { addUserToStore } from '../reducers/user';
 import { lexend } from '../app/fonts';
 import InputLabel from './InputLabel';
 
-export default function SignIn() {
+export default function SignIn({ handleConnexion }) {
     const dispatch = useDispatch();
 //import user data from reducer to verify if is connected
     const user = useSelector((state) => state.user.value);
@@ -40,7 +40,8 @@ export default function SignIn() {
             .then(data => {
                 const {token, username, myTrips, userPicture } = data; 
                 data.result && dispatch(addUserToStore({ token, username, userPicture, email: data.email, myTrips }));
-                !data.result && setSigninError(true)
+                !data.result && setSigninError(true);
+                data.result && handleConnexion();
             })
         } else {
             setEmptyField(true);

@@ -1,0 +1,6 @@
+.container {
+    width: 90%;
+    background-color: var(--primary-red-color);
+    border-radius: 1rem;
+    padding: 0.5rem;
+}

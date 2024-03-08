@@ -1,0 +1,19 @@
+.container {
+    width: 90%;
+    background-color: var(--primary-blue-color);
+    border-radius: 1rem;
+    height: max-content;
+    padding: 0.5rem;
+}
+
+.rowContainer {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

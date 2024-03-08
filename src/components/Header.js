@@ -23,7 +23,8 @@ export default function Header() {
     const user = useSelector((state) => state.user.value);
     const router = useRouter();
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+    const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
 
     // This will help us figure out what's the active link currently is, and add an "active" class to it
     const pathname = usePathname();
@@ -89,17 +90,31 @@ export default function Header() {
 
     /* modal logic */
 
-      const displayModal = () => {
-        setIsModalOpen(true);
+      const displaySignInModal = () => {
+        setIsSignInModalOpen(true);
       };
 
-      const handleOk = () => {
-        setIsModalOpen(false);
+      const displaySignUpModal = () => {
+        setIsSignUpModalOpen(true);
       };
 
-      const handleCancel = () => {
-        setIsModalOpen(false);
+      const handleCancelSignIn = () => {
+        setIsSignInModalOpen(false);
       };
+      const handleCancelSignUp = () => {
+        setIsSignUpModalOpen(false);
+      };
+
+      //Reverse data flow tu handle submit in SignIn SignUp
+
+      const handleConnexion = () => {
+        setIsSignInModalOpen(false);
+      }
+
+      const handleRegister = () => {
+        setIsSignUpModalOpen(false);
+      }
+
 
       //Logout
       const handleLogout = () => {
@@ -137,7 +152,7 @@ export default function Header() {
             </div>
             <FontAwesomeIcon icon={iconUser.name} className={styles.headerIcon} />
             <div>
-                {!user.token && <button onClick={() => displayModal('login')} className={`${styles.link} ${styles.buttonHeader}`}> Connexion </button>}
+                {!user.token && <button onClick={displaySignInModal} className={`${styles.link} ${styles.buttonHeader}`}> Connexion </button>}
                 {user.token && <button onClick={handleProfile} className={`${styles.link} ${styles.buttonHeader}`}> Profil </button>}
             </div>
 
@@ -147,11 +162,13 @@ export default function Header() {
                 <button onClick={handleLogout} className={`${styles.link} ${styles.buttonHeader}`}> Déconnexion </button>                
             </div>
             </>)}        
-            {!user.token && <button onClick={() => displayModal('signup')} className={`${styles.link} ${styles.buttonHeader}`}> Inscription </button>}
+            {!user.token && <button onClick={displaySignUpModal} className={`${styles.link} ${styles.buttonHeader}`}> Inscription </button>}
         </div>   
-        <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} style={{ padding: 0 }}>
-        <SignIn />
-        <SignUp />
-      </Modal>
+        <Modal open={isSignInModalOpen} onCancel={handleCancelSignIn} footer={null}>
+            <SignIn handleConnexion={handleConnexion} />
+        </Modal>
+        <Modal open={isSignUpModalOpen} onCancel={handleCancelSignUp} footer={null}>
+            <SignUp handleRegister={handleRegister} />
+        </Modal>
     </header>
 }

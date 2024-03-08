@@ -4,6 +4,12 @@ import styles from "./dashboard.module.css";
 import { lexend } from "../app/fonts";
 import { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
+import DashboardPlanning from "./dashboardCards/DashBoardPlanning";
+import DashboardInfo from "./dashboardCards/DashBoardInfo";
+import DashboardAccommodations from "./dashboardCards/DashboardAccommodations.js";
+import DashboardActivitie from "./dashboardCards/DashboardActivities";
+import DashboardMembers from "./dashboardCards/DashboardMembers";
+import DashboardMessages from "./dashboardCards/DashboardMessages";
 
 export default function Dashboard() {
 
@@ -12,41 +18,43 @@ export default function Dashboard() {
     const currentTrip = useSelector((state) => state.user.value.currentTrip);
 
 
-    useEffect(() => { // Utilisation d'un useEffect pour gérer la redirection
-        if (!user.currentTrip) {
-            alert('Selectionne ou créer un voyage avant de pouvoir accéder à cette page')
-            router.push('/profile');
-        }
-    }, [])
+    // useEffect(() => { // Utilisation d'un useEffect pour gérer la redirection
+    //     if (!user.currentTrip) {
+    //         alert('Selectionne ou créé un voyage avant de pouvoir accéder à cette page')
+    //         router.push('/profile');
+    //     }
+    // }, [])
 
     if (!user.token) {
-        console.log('dashboard user 13 :' + JSON.stringify(user));
         return (
           <div className={`${styles.container} ${lexend.className}`}>
             <p>Oups ! Apparemment tu n'es pas encore connecté(e)...</p>
           </div>
-        ); } else {
+        );
+    } else if (!user.currentTrip) {
+        return (
+            <div className={`${styles.container} ${lexend.className}`}>
+              <p>Selectionne ou créé un voyage pour profiter de cette page !</p>
+            </div>
+          );
+        }
     return (
         <div className={styles.container}>
             <div className={styles.leftContainer}>
-                <div className={styles.profilPictureContainer}>Info Trips
-                    <p>Nom du groupe : {currentTrip.name}</p>
-                    <p>Dates départ : {currentTrip.dates.departure}</p>
-                    <p>Dates retour : {currentTrip.dates.return}</p>
-                </div>
-                <div className={styles.userInfoContainer}>Budget
-                </div>
-                <div className={styles.backPicture}>Logement
-                </div>
+                <DashboardPlanning />
+                <DashboardInfo />
+                <DashboardAccommodations />
             </div>
-            <div className={styles.centerContainer}>
-                <div className={styles.profilPictureContainer}>Activies</div>
+        
+
+            <div className={styles.middleContainer}>
+             <DashboardActivitie />
             </div>
+
             <div className={styles.rightContainer}>
-                <div className={styles.profilPictureContainer}>Add Friends</div>
-                <div className={styles.userInfoContainer}>Chat</div>
+                <DashboardMembers />
+                <DashboardMessages />
             </div>
         </div>
     )
-}
 }

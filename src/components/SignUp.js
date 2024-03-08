@@ -7,7 +7,7 @@ import { addUserToStore } from '../reducers/user';
 import { lexend } from '../app/fonts';
 import InputLabel from './InputLabel';
 
-export default function SignUp() {
+export default function SignUp({ handleRegister }) {
     const dispatch = useDispatch();
 //import user data from reducer to verify if is connected
     const user = useSelector((state) => state.user.value);
@@ -43,6 +43,7 @@ export default function SignUp() {
                     const {token, myTrips, userPicture } = data; 
                     data.result && dispatch(addUserToStore({ token, username: data.username, userPicture, email: data.email, myTrips })) && setSubmitError(false);
                     !data.result && setSubmitError(true);
+                    data.result && handleRegister();
                 })
             } else {
                 setPasswordNotMatch(true)

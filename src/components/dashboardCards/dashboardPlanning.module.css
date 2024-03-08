@@ -1,0 +1,8 @@
+.container {
+    width: 90%;
+    background-color: var(--primary-green-color);
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
