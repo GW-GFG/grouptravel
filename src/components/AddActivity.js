@@ -25,7 +25,7 @@ const AddActivity = () => {
       try {
           new URL(activityURL);   
       } catch (err) {
-        // Kevin : @JB, si inutile, on peut supprimer ce setError
+        // Kevin : @JB, si inutile, on peut supprimer ce setError, sinon on peut l'afficher quelque part ?
           setError("L'url saisie n'est pas valide");
           return;
       }
