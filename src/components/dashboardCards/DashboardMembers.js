@@ -7,7 +7,7 @@ import MiniMemberRow from './MiniMemberRow';
 import { useRouter } from 'next/navigation';
 
 export default function DashboardMembers() {
-    const router = useRouter();
+    
     const currentTripMembersId = useSelector((state) => state.user.value.currentTrip.members);
     const currentTripAdminId = useSelector((state) => state.user.value.currentTrip.admin);
     const router = useRouter();
