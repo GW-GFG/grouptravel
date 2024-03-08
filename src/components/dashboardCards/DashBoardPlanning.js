@@ -14,7 +14,7 @@ return(
     <div className={styles.leftContainer}>
         <h2>Planning</h2>
         <p>En construction... Tu pourras bienôt cliquer ici pour de rendre sur la page du planning de ton voyage {currentTripName} !!</p>
-        <Link href="/planning" target="_blank"><Button type="text" buttonClass="primary" text="Voir" /></Link>
+        <Link href="/planning" ><Button type="text" buttonClass="primary" text="Voir" /></Link>
     </div>
     <Image width={50} height={100} className={styles.imgContainer} src={"next.svg"} alt="planning" />
 </div>

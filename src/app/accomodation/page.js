@@ -14,7 +14,7 @@ export default function AccommodationPage() {
   })
 
 
-   if (currentTrip && currentTrip.accomodations) { 
+   if (currentTrip && currentTrip.accomodations.length > 0 ) { 
       return (
         <>
         <h1 className={`${styles.title} ${lexend.className}`}>Logements</h1>

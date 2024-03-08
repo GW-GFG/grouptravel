@@ -19,9 +19,9 @@ export default function DashboardActivities() {
                 {activities}
             </div>
             <div className={styles.bottom}>
-            <Link href="/activities" target="_blank"><Button type="text" buttonClass="primary" text="Voir les activités" /></Link>
+            <Link href="/activities" ><Button type="text" buttonClass="primary" text="Voir les activités" /></Link>
             <p>OU</p>
-            <Link href="/activities/add" target="_blank"><Button type="text" buttonClass="primary" text="Soumettre une activité" /></Link>
+            <Link href="/activities/add" ><Button type="text" buttonClass="primary" text="Soumettre une activité" /></Link>
             </div>
     </div>
     )}
