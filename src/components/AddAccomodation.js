@@ -265,7 +265,7 @@ export default function AddAccomodation() {
                             />
                         </div>
                         <div className={styles.inputsBudget}>
-                            <label htmlFor="accomodation-budget-single" className={styles.label}>Budget per person:</label>
+                            <label htmlFor="accomodation-budget-single" className={styles.label}>Budget par personne:</label>
                             <input
                                 type="number"
                                 id="accomodation-budget-single"

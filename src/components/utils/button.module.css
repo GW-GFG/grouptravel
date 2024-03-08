@@ -21,4 +21,13 @@
     border-radius: 50%;
     padding: .8rem;
     border: none;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+}
+
+/* CUSTOM BUTTONS */
+
+.activityButton {
+    background-color: var(--primary-blue-color);
 }

@@ -73,7 +73,7 @@ export default function Header() {
         const voyageNamePopover = user.myTrips && user.myTrips.length > 0 && user.myTrips.filter(e => e !== user.currentTrip).map((data, i) => {
         return (
             <div key={i} className={styles.voyageNameContainer}>
-            <span className="voyageName" onClick={() => handleCurrentTrip(data)}>{data.name}</span>
+                <span className={styles.singleVoyageName} onClick={() => handleCurrentTrip(data)}>{data.name}</span>
             </div>
         );
         });

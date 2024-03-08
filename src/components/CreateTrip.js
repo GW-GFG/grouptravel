@@ -51,7 +51,7 @@ export default function CreateTrip() {
 
     return (
         <div className={styles.container}>
-            <div className={styles.logo}>LOGO GROUPTRAVEL</div>
+            <div className={`${styles.logo} ${lexend.className}`}>GROUPTRAVEL</div>
             <h3 className={`${styles.title} ${lexend.className}`}>Planification de votre voyage entre amis !</h3>
                 <div className={styles.inputTextContainer}>
                     <h4 className={styles.h4}>Défini le nom de ton groupe :</h4>
@@ -65,30 +65,29 @@ export default function CreateTrip() {
             
             <div className={styles.dateContainers}>
                 <div className={styles.dateRow}>  
-                <div className={styles.inputDateContainer}>
-                    <h5 className={styles.textDate}>Date de départ :</h5>
-                    <input className={styles.inputDate}
-                        type="date"
-                        id="departureDate"
-                        value={departureDate}
-                        onChange={(e) => setDepartureDate(e.target.value)}
-                    />
-                </div>
-                <div className={styles.inputDateContainer}>
-                    <h5 className={styles.textDate}>Date de retour :</h5>
-                    <input className={styles.inputDate}
-                        type="date"
-                        id="returnDate"
-                        value={returnDate}
-                        onChange={(e) => setReturnDate(e.target.value)}
-                    />
-                </div>
+                    <div className={styles.inputDateContainer}>
+                        <h5 className={styles.textDate}>Date de départ :</h5>
+                        <input className={styles.inputDate}
+                            type="date"
+                            id="departureDate"
+                            value={departureDate}
+                            onChange={(e) => setDepartureDate(e.target.value)}
+                        />
+                    </div>
+                    <div className={styles.inputDateContainer}>
+                        <h5 className={styles.textDate}>Date de retour :</h5>
+                        <input className={styles.inputDate}
+                            type="date"
+                            id="returnDate"
+                            value={returnDate}
+                            onChange={(e) => setReturnDate(e.target.value)}
+                        />
+                    </div>
+                    
                 </div>
                 {/* only if error display error */}
                 {errorMsg != '' && <h2 className={styles.error}>{errorMsg}</h2>}
-            
-            <button className={styles.button} onClick={() => handleSubmit()}>Go!</button>
-            
+                <button className={styles.button} onClick={() => handleSubmit()}>Go!</button>
             </div>
         </div>  
                 

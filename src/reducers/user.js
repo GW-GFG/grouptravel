@@ -17,11 +17,12 @@ export const userSlice = createSlice({
 		},
 		// Creation 
 		updateCurrentTrip : (state, action) => { 
-			state.value.currentTrip = action.payload
+			state.value.currentTrip = action.payload;
 		},
 		removeUserToStore: (state, action) => {
 			state.value = initialState;
 		},
+		// TODO : updateCurrentTripActivity & updateCurrentTripAccomodation
 	},
 });
 
