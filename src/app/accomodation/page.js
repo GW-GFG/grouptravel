@@ -9,12 +9,11 @@ export default function AccommodationPage() {
   const currentTrip = useSelector((state) => state.user.value.currentTrip)
     //currentTrip contains all data of the selected trip
 
-  const accommodations = currentTrip && currentTrip.accomodations && currentTrip.accomodations.map((data, i) => {
-    return <Accommodation key={i} {...data}/>
-  })
-
-
    if (currentTrip && currentTrip.accomodations) { 
+    const accommodations = currentTrip.accomodations.map((data, i) => {
+      return <Accommodation key={i} {...data}/>
+    })
+
       return (
         <>
         <h1 className={`${styles.title} ${lexend.className}`}>Logements</h1>

@@ -27,9 +27,9 @@ const AddActivity = () => {
     e.preventDefault() // prevents auto-refreshing of the page when submitting the form
 
     // check if url is valid (if url exists)
-    if (accomodationURL !== '') {
+    if (activityURL !== '') {
       try {
-        new URL(accomodationURL);
+        new URL(activityURL);
       } catch (err) {
         setFormHasError(true);
         setErrorMessage("L'url saisie n'est pas valide");
@@ -71,7 +71,6 @@ const AddActivity = () => {
         setActivityDate('')
         setActivityLocation('')
         setActivityDescription('')
-        setError('')
       })
   }
 
