@@ -1,27 +1,43 @@
 'use client'
 import styles from './AddActivity.module.css'
-import { useState, useEffect } from 'react'
-import Script from 'next/script'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import Button from './utils/Button'
 
 // import fonts to use them for menu items 
 import { lexend } from '../app/fonts';
 
 const AddActivity = () => {
+
+  const currentTrip = useSelector((state) => state.user.value.currentTrip)
+
   const [activityName, setActivityName] = useState('')
   const [activityPicture, setActivityPicture] = useState('')
   const [activityURL, setActivityURL] = useState('')
   const [activityDate, setActivityDate] = useState('')
-  const [activityBudget, setActivityBudget] = useState('')
-  const [activityBudgetPerPerson, setActivityBudgetPerPerson] = useState('')
+  const [activityBudget, setActivityBudget] = useState(0)
+  const [activityBudgetPerPerson, setActivityBudgetPerPerson] = useState(0)
   const [activityLocation, setActivityLocation] = useState('')
   const [activityDescription, setActivityDescription] = useState('')
-  const [error, setError] = useState('')
+
+  const [formHasError, setFormHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault() // prevents auto-refreshing of the page when submitting the form
 
-    const tripId = '65e7215ad02a86c957eb2e71'
+    // check if url is valid (if url exists)
+    if (accomodationURL !== '') {
+      try {
+        new URL(accomodationURL);
+      } catch (err) {
+        setFormHasError(true);
+        setErrorMessage("L'url saisie n'est pas valide");
+        return;
+      }
+    }
 
+    // new activity object
     const activityData = {
       name: activityName,
       picture: activityPicture,
@@ -30,7 +46,7 @@ const AddActivity = () => {
       budget: activityBudget,
       location: activityLocation,
       description: activityDescription,
-      tripId: tripId
+      tripId: currentTrip._id
     }
 
     fetch('http://localhost:5500/activities/new', {
@@ -42,7 +58,6 @@ const AddActivity = () => {
       .then(data => {
         // if no trip is found or activity's date is outside trip's date
         if (data.result === false) {
-          setError(data.error)
           alert(data.error)
           return
         }
@@ -77,7 +92,7 @@ const AddActivity = () => {
             </div>
             <div className={styles.rightSide}>
               <div className={styles.inputs}>
-                <label htmlFor="activity-name" className={styles.label}>Nom de l'activité</label>
+                <label htmlFor="activity-name" className={styles.label}>Nom de l'activité *</label>
                 <input
                   type="text"
                   id="activity-name"
@@ -103,7 +118,7 @@ const AddActivity = () => {
           </div>
           <div className={styles.middle}>
             <div className={styles.inputDate}>
-              <label htmlFor="activity-date" className={styles.label}>Sélectionnez la date:</label>
+              <label htmlFor="activity-date" className={styles.label}>Sélectionnez la date: *</label>
               <input
                 type="date"
                 id="activity-date"
@@ -163,7 +178,8 @@ const AddActivity = () => {
             </div>
           </div>
           <div className={styles.buttonContainer}>
-            <button type="submit" className={styles.button}>Soumettre</button>
+            {formHasError && errorMessage}
+            <Button type="submit" buttonClass="primary" text="Soumettre" />
           </div>
         </div>
 
