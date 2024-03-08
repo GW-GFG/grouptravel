@@ -1,12 +1,12 @@
-import styles from "./notConnected.module.css";
+import styles from "./noCurrentTrip.module.css";
 import { lexend } from "../../app/fonts";
 
-export default function NotConnected(props) {
+export default function NoCurrentTrip(props) {
   return (
     <div className={styles.altPageContainer}>
       <h1 className={`${styles.title} ${lexend.className}`}>{props.title}</h1>
       <div className={`${styles.container} ${lexend.className}`}>
-        <p>Oups ! Apparemment tu n'es pas encore connecté(e)...</p>
+        <p>Selectionne ou créé un voyage pour profiter de cette page !</p>
       </div>
     </div>
   );

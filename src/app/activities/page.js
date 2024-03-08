@@ -4,6 +4,7 @@ import styles from "./page.module.css";
 import { lexend } from "../fonts";
 import Activity from "@/components/Activity";
 import NotConnected from "@/components/missingInfos/NotConnected";
+import NoCurrentTrip from "@/components/missingInfos/NoCurrentTrip";
 import MissingInfos from "@/components/missingInfos/MissingInfos";
 import Button from "@/components/utils/Button";
 import { useRouter } from "next/navigation";
@@ -14,8 +15,10 @@ export default function ActivitiesPage() {
     const user = useSelector((state) => state.user.value);
     const currentTrip = useSelector((state) => state.user.value.currentTrip);
     if (!user.token) {
-        return <NotConnected />
-    } else {
+        return <NotConnected title="Activités" />
+    } else if (!currentTrip) {
+      return <NoCurrentTrip title="Activités" />
+  } else {
         const handleClickPlusButton = () => {
           router.push('/activities/add');
         };

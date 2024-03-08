@@ -5,6 +5,7 @@ import { lexend } from "../fonts";
 import { useSelector } from "react-redux";
 import Accommodation from "@/components/Accommodation";
 import NotConnected from "@/components/missingInfos/NotConnected";
+import NoCurrentTrip from "@/components/missingInfos/NoCurrentTrip";
 import MissingInfos from "@/components/missingInfos/MissingInfos";
 import Button from "@/components/utils/Button";
 import { useRouter } from "next/navigation";
@@ -16,12 +17,12 @@ export default function AccommodationPage() {
   const currentTrip = useSelector((state) => state.user.value.currentTrip);
   //currentTrip contains all data of the selected trip
   if (!user.token) {
-    return (
-      <NotConnected />
-    );
+    return <NotConnected title="Logements" />
+  } else if (!currentTrip) {
+    return <NoCurrentTrip title="Logements" />
   } else {
     const handleClickPlusButton = () => {
-      router.push('/accomodations/add');
+      router.push('/accomodation/add');
     };
     if (currentTrip && currentTrip.accomodations.length > 0) { 
       const accommodations = currentTrip.accomodations.map((data, i) => {

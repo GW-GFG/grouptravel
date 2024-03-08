@@ -6,34 +6,39 @@ import { faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 import Button from "./utils/Button";
 import Link from "next/link";
 import Image from 'next/image';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { voteToAccommodation } from "@/reducers/user";
 
 
-export default function Accommodation(props, i) {
 
-    //const currentTrip = useSelector((state) => state.user.value.currentTrip);
-    const { name, location, dates, photos, url, description, budget, vote, _id } = props;
+export default function Accommodation(props) {
     
+    const dispatch = useDispatch();
     const userToken = useSelector((state) => state.user.value.token)
-        const defaultPicture = "https://media.istockphoto.com/id/1145422105/fr/photo/vue-a%C3%A9rienne…";
+    const currentTrip = useSelector((state) => state.user.value.currentTrip);
+
+    const { name, location, dates, photos, url, description, budget, vote, _id } = props;
+      
+    const defaultPicture = "https://media.istockphoto.com/id/1145422105/fr/photo/vue-a%C3%A9rienne…";
+        
         const handleDo = (accomodationId) => {
 
-            // changer voteData, sorry Gwen j'ai tout cassé
             const voteData = {
                 userToken,
                 accomodationId,
-                tripId: _id,
+                tripId: currentTrip._id,
                 status: true,
             }
             
-            console.log('click id puis vote'+ JSON.stringify(voteData))
+            // console.log('Vote data avant fetch : '+ JSON.stringify(voteData))
             fetch('http://localhost:5500/accomodations/vote', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify( voteData )
             }).then(response => response.json())
             .then(voteRes => {
-                console.log(voteRes)
+                console.log('reponse vote : ' + JSON.stringify(voteRes))
+                dispatch(voteToAccommodation({ accommodationId: accomodationId, newStatus: voteRes.newStatus }));
             })    
         }
 
@@ -41,23 +46,33 @@ export default function Accommodation(props, i) {
             const voteData = {
                 userToken,
                 accomodationId,
-                tripId: _id,
+                tripId: currentTrip._id,
                 status: false,
             }
 
-            console.log('click id puis vote'+ JSON.stringify(voteData))
+            // console.log('click id puis vote'+ JSON.stringify(voteData))
             fetch('http://localhost:5500/accomodations/vote', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify( voteData )
             }).then(response => response.json())
             .then(voteRes => {
-                console.log(voteRes)
+                console.log('reponse vote : ' + JSON.stringify(voteRes))
+                dispatch(voteToAccommodation({ accommodationId: accomodationId, newStatus: voteRes.newStatus }));
             })
         }
+        const userHasVoted = () => {
+            if (!vote) return false; // Si le vote n'est pas défini, l'utilisateur n'a pas encore voté
+            const userVote = vote.find(voteItem => voteItem.userId === userToken); // Rechercher le vote de l'utilisateur
+            return userVote ? userVote.status : false; // Si l'utilisateur a voté, renvoyer son statut de vote (true ou false), sinon renvoyer false
+          };
+          let voteIconStyle = {};
+          if (userHasVoted()) {
+              voteIconStyle = { fontSize: '1.75rem', 'color': 'var(--primary-red-color)' }; // Changer la couleur si l'utilisateur a déjà voté
+          }
         
         return(
-            <div key={i} className={styles.container}>
+            <div className={styles.container}>
                 <h3 className={`${styles.cardTitle} ${lexend.className}`}>{name}</h3>
                 <div className={styles.cardBody}>
                     <div className={styles.leftContainer}>
@@ -80,8 +95,8 @@ export default function Accommodation(props, i) {
                     
                     <div className={styles.rightContainer}>
                         <div className={styles.voteIcons}>
-                        <FontAwesomeIcon style={{fontSize: '1.75rem'}} icon={faCircleCheck} onClick={(e) => handleDo(_id)} />
-                        <FontAwesomeIcon style={{fontSize: '1.75rem'}} icon={faCircleXmark} onClick={(e) => handleDont(_id)}  />
+                        <FontAwesomeIcon style={voteIconStyle} icon={faCircleCheck} onClick={(e) => handleDo(_id)} />
+                        <FontAwesomeIcon style={voteIconStyle} icon={faCircleXmark} onClick={(e) => handleDont(_id)}  />
                         </div>
                     <Link href={url} target="_blank"><Button type="text" buttonClass="primary" text="En savoir plus" /></Link>
                     </div>

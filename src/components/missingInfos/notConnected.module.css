@@ -1,3 +1,21 @@
-.container {
+/* .container {
     margin: 0 auto;
+} */
+.altPageContainer {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-items: center;
 }
+
+.container {
+    width: 80%;
+    padding: 2.5rem;
+    background: var(--primary-blue-color);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    border-radius: 1rem;
+    max-height: max-content;
+  }

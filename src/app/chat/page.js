@@ -1,5 +1,5 @@
+import InWorking from "../../components/missingInfos/InWorking"
+
 export default function ChatPage() {
-    return <div>
-        Chat
-    </div>
+    return <InWorking title="Messages" />
 }
