@@ -20,6 +20,17 @@ const AddActivity = () => {
   const handleSubmit = (e) => {
     e.preventDefault() // prevents auto-refreshing of the page when submitting the form
 
+    // check if url is valid (if url exists)
+    if (activityURL !== '') {
+      try {
+          new URL(activityURL);   
+      } catch (err) {
+        // Kevin : @JB, si inutile, on peut supprimer ce setError
+          setError("L'url saisie n'est pas valide");
+          return;
+      }
+  }
+
     const tripId = '65e7215ad02a86c957eb2e71'
 
     const activityData = {
