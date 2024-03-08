@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import Button from "../utils/Button";
 import MiniMemberRow from './MiniMemberRow';
+import { Router } from 'next/router';
 
 export default function DashboardMembers() {
 
@@ -15,11 +16,16 @@ export default function DashboardMembers() {
         return <MiniMemberRow key={i} name={data.name} />
     })
 console.log('admin : ', currentTripAdminId)
+
+const handleClick = () => {
+    router.push('/invitation')
+}
+
 return(
 <div className={styles.container} >
         <h2>Membres du groupe</h2>
         {members}
         <MiniMemberRow name={"Mon Joli Nom"} />
-        <Button text="+" />
+        <Button text="+"  onClick={() => handleClick()} />
 </div>
 )}
