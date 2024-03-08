@@ -3,22 +3,23 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
  
-export default function tokenPage() {
+export default function tokenPage( { params } ) {
 
     
-    const router = useRouter()
-    const token  = router.query;
 
     useEffect(() => { 
-
+        
+      console.log('token = ', params)
+    //  fetch('http://localhost:5500/confirmation/T03V7khXJS8xh4A_BI7tmYDlCwGe6-Uu')
 
     }, [])
 
   return ( 
   
     <div> 
-        confirmation whit token page
-        <p>Post: {router.query.slug}</p>
+        confirmation whit token page 
+
+        
     </div> 
   
   )

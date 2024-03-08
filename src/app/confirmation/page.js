@@ -1,5 +1,5 @@
 export default function ConfirmationPage() {
     return <div>
-        confirmation page
+        Tu n'as pas de confirmation en attente. Verife tes mails !
     </div>
 }
