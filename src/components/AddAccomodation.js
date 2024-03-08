@@ -1,11 +1,15 @@
 'use client'
 import styles from './addAccomodation.module.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import Button from './utils/Button';
 
 // import fonts to use them for menu items 
 import { lexend } from '../app/fonts';
+
+// import elements for Google map
+import GoogleMap from './utils/GoogleMap';
+import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
 export default function AddAccomodation() {
 
@@ -23,6 +27,84 @@ export default function AddAccomodation() {
 
     const [formHasError, setFormHasError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+
+    /* Google map stuff */
+    // Allows us to set map's center
+    const [center, setCenter] = useState({
+        lat: 48.866667,
+        lng: 2.333333,
+      });
+    const [zoom, setZoom] = useState(4);
+
+    // Allows us to set marker's position
+    const [position, setPosition] = useState({
+        lat: 48.866667,
+        lng: 2.333333, 
+    });
+
+    const Map = () => {};
+
+    const ref = useRef(null);
+    const [map, setMap] = useState();
+
+    useEffect(() => {
+    if (ref.current && !map) {
+        setMap(new window.google.maps.Map(ref.current, {}));
+    }
+    }, [ref, map]);
+
+    const Marker = (options) => {
+        const [marker, setMarker] = useState();
+      
+        useEffect(() => {
+          if (!marker) {
+            setMarker(new google.maps.Marker());
+          }
+      
+          // remove marker from map on unmount
+          return () => {
+            if (marker) {
+              marker.setMap(null);
+            }
+          };
+        }, [marker]);
+        useEffect(() => {
+          if (marker) {
+            marker.setOptions(options);
+          }
+        }, [marker, options]);
+        return null;
+      };
+
+
+    /*
+    // Possible de gérer l'affichage de la carte en créant des components <Spinner />, <ErrorComponent /> et <MyMapComponent />
+    // dans ce cas, il faut modifier en bas par : <Wrapper apiKey={"YOUR_API_KEY"} render={render} />
+    const render = (status) => {
+        switch (status) {
+          case Status.LOADING:
+            return <Spinner />;
+          case Status.FAILURE:
+            return <ErrorComponent />;
+          case Status.SUCCESS:
+            return <MyMapComponent />;
+        }
+      };
+
+      possible de faire comme ça aussi
+      const render = (status) => {
+        if (status === Status.FAILURE) return <ErrorComponent />;
+        return <Spinner />;
+        };
+      */
+
+        const render = (status) => {
+            if (status === Status.FAILURE) return <div>Hi</div>;
+            return <div>Ho</div>;
+          };
+
+
+    /* end Google map stuff */
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -196,8 +278,9 @@ export default function AddAccomodation() {
                     </div>
                 </div>
                 <div className={styles.bottom}>
-                    <div>
+                    <div style={{minWidth: '350px'}}>
                         <label htmlFor="accomodation-location" className={styles.label}>Localisation</label>
+                        {/* Kevin: input peut-être plus nécessaire, cf maquette (?)
                         <input
                             type="text"
                             id="accomodation-location"
@@ -205,6 +288,14 @@ export default function AddAccomodation() {
                             onChange={(e) => setAccomodationLocation(e.target.value)}
                             placeholder='Il se situe où ce logement ?'
                         />
+                        */}
+                        {/* Google map stuff */}
+                        <Wrapper apiKey={"AIzaSyAtN3JpGGPLuZkaD7j2zoSB0vE3e_B-Jn8"} render={render}>
+                            <GoogleMap style={{ width: '100%', height: '250px' }} center={center} zoom={zoom} position={position}>
+                                <Marker position={position} />
+                            </GoogleMap>
+                        </Wrapper>
+                        {/* end Google map stuff*/}
                     </div>
                     <div className={styles.rightSide}>
                         <div className={styles.inputs}>
