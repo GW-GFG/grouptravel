@@ -19,6 +19,7 @@ export default function Invitation() {
     const [emptyField, setEmptyField] = useState(false)
 
     const handleAddImput = () => {
+
         if (emails.length < 6) {
             setEmails([...emails, '']); // Add a new empty email input
         } else {
@@ -50,7 +51,7 @@ export default function Invitation() {
             const response = await fetch(`http://localhost:5500/trips/adduser/${user.currentTrip._id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email }), // Envoyer la liste des adresses e-mail
+            body: JSON.stringify({ email }), // Envoyer l'email valide au back pour chaque email valide
         });
 
         const data = await response.json();
@@ -85,7 +86,7 @@ export default function Invitation() {
                         style={{ width: "110%" }}
                     />
                 ))}
-                { emptyField && <div>Merci de renseigner une adresse mail</div> }
+                { emptyField && <div>Merci de renseigner une adresse e-mail valide </div> }
             </div>
             <Button  buttonClass="primary" text="+" onClick={() => handleAddImput()} />
             {errorNbImput && <div>Nombre d'email dépassés</div>}
