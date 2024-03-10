@@ -48,7 +48,7 @@ export default function Invitation() {
 
     try {
         for (let email of validEmails) {
-            const response = await fetch(`http://localhost:5500/trips/adduser/${user.currentTrip._id}`, {
+            const response = await fetch(`http://localhost:5500/trips/addnewuser/${user.currentTrip._id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email }), // Envoyer l'email valide au back pour chaque email valide
@@ -86,14 +86,14 @@ export default function Invitation() {
                         style={{ width: "110%" }}
                     />
                 ))}
-                { emptyField && <div>Merci de renseigner une adresse e-mail valide </div> }
+                { emptyField && <div className={styles.text}>Merci de renseigner une adresse e-mail valide </div> }
             </div>
             <Button  buttonClass="primary" text="+" onClick={() => handleAddImput()} />
-            {errorNbImput && <div>Nombre d'email dépassés</div>}
+            {errorNbImput && <div className={styles.text}>Nombre d'email dépassés</div>}
             <div className={styles.ButtonContainer}>
                 <Button buttonClass="primary" text="Envoyer invitation(s)" onClick={() => handleSendEmail()} />
             </div>
-            {confirmMsg && <div> Les invitations ont bien été envoyées</div>}
+            {confirmMsg && <div className={styles.text}> Les invitations ont bien été envoyées</div>}
         </div>
     )
 

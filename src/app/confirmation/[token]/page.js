@@ -14,6 +14,7 @@ export default function tokenPage( { params } ) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
+  const [tripId, setTripId] = useState ('');
   const [passwordNotMatch, setPasswordNotMatch] = useState(null);
   const [emptyField, setEmptyField] = useState(null);
   const [submitError, setSubmitError] = useState(null);
@@ -22,19 +23,20 @@ export default function tokenPage( { params } ) {
   const dispatch = useDispatch();
   
     useEffect(() => { 
-      console.log(token)
+      // console.log(token)
       fetch('http://localhost:5500/users/getUser', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( {token: token} )
       }).then(response => response.json())
       .then(data => {
-        console.log(data)
-        if(!data.result) {
+        console.log(data.user)
+        if(!data.result || data.user.username != '' ) {
           router.push('/confirmation');
           return ;
         } else {
           setEmail(data.user.email)
+          setTripId(data.user.myTrips[0])
         }
         
       })
@@ -43,7 +45,7 @@ export default function tokenPage( { params } ) {
     const handleAccept = () => {
       setPasswordNotMatch(false)
       setEmptyField(false)
-      console.log('click on handleAccept data to send', token + username + password);
+      // console.log('click on handleAccept data to send', token + username + password);
       if (username === '' || password === '' || password2 === '') {
           setEmptyField(true);
           console.log('Champs vides');
@@ -62,24 +64,36 @@ export default function tokenPage( { params } ) {
         body: JSON.stringify({ username, password, email }),
       })
         .then(response => response.json())
-        .then(data => {console.log(data)
-          data.result && dispatch(addUserToStore({ user: data.token, username: data.username, userPicture: data.userPicture, email: data.email, myTrips: data.myTrips })) && setSubmitError(false);
+        .then(data => {
+          // console.log(data.updatedUser) 
+          // if data result --> dispacth updatedUser send him to profile page.
+          data.result && dispatch(addUserToStore({ token: data.updatedUser.token, username: data.updatedUser.username, userPicture: data.updatedUser.userPicture, email: data.updatedUser.email, myTrips: data.updatedUser.myTrips })) && setSubmitError(false);
           !data.result && setSubmitError(true);
           router.push('/profile')
         })
         .catch(error => console.error('Error updating user:', error));
     };
-
+    console.log(tripId)
     const handleDecline = () => {
-      
+      console.log('click decline')
+        fetch(`http://localhost:5500/decline/invitateduser/${tripId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token }),
+      }).then(response => response.json())
+      .then(data => {
+        if(data)
+        console.log(data)
+        // router.push('/')
+      })      
     }
   
     
 
   return ( 
   
-    <div className={styles.mainContainer}> Confirmation 
-         
+    <div className={styles.mainContainer}> 
+        <div className={styles.title}>Confirmation</div>         
         <InputLabel readOnly value={email} label="Email"/>
         <InputLabel type="text" onChange={(e) => setUsername(e.target.value)} value={username} label="Nom d'utilisateur(trice)*" placeholder="Choisi ton nom !" />
         <InputLabel type="password" onChange={(e) => setPassword(e.target.value)} value={password} label="Mot de passe*" placeholder="Ecris ton mot de passe ... " />
@@ -90,7 +104,7 @@ export default function tokenPage( { params } ) {
             {emptyField && <p style={styles.error}>Veille a bien remplir tous les champs requis !</p>}
             {submitError && <p style={styles.error}> Une erreur est survenue !</p>}
         </div>
-        <div className={styles.ButtonsContainer}>
+        <div className={styles.buttonsContainer}>
 
             <div className={styles.singleBtn} >
                <Button buttonClass="primary" text="Confirmer l'invitation" onClick={() => handleAccept()} />
