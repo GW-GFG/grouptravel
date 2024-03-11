@@ -23,8 +23,11 @@ export const userSlice = createSlice({
 			state.value = initialState;
 		},
 		// TODO : updateCurrentTripActivity & updateCurrentTripAccomodation
+		updateCurrentTripActivities: (state, action) => {
+			state.value.currentTrip.activities.push(action.payload)
+		}
 	},
 });
 
-export const { addUserToStore, updateMyTrips, removeUserToStore, updateCurrentTrip } = userSlice.actions;
+export const { addUserToStore, updateMyTrips, removeUserToStore, updateCurrentTrip, updateCurrentTripActivities } = userSlice.actions;
 export default userSlice.reducer;
