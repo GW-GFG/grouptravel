@@ -8,14 +8,18 @@ import { useSelector } from 'react-redux';
 export default function Invitation() {
     
     const user = useSelector((state) => state.user.value);
-
+    const currentTrip = useSelector((state) => state.user.value.currentTrip)
+    // console.log(user)
+    // console.log(currentTrip)
     const [emails, setEmails] = useState(['']);
     const [errorNbImput, setErrorNbImput] = useState(false)
     const [confirmMsg, setConfirmMsg] = useState(false)
     const [errorMsg, setErrorMsg] = useState('')
     const [erroMail, setErrorMail] = useState(false)
+    const [emptyField, setEmptyField] = useState(false)
 
     const handleAddImput = () => {
+
         if (emails.length < 6) {
             setEmails([...emails, '']); // Add a new empty email input
         } else {
@@ -30,35 +34,41 @@ export default function Invitation() {
     };
 
     const handleSendEmail = async () => {
-        for(let email of emails) {
-            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-            if (!emailRegex.test(email)) {
-                setErrorMail(true);
-                return; // Arrêter le traitement si un email est invalide
-            }
-            console.log(user.currentTrips)
-            try {
-                const response = await fetch(`http://localhost:5500/trips/adduser/${email}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name: nameToSend, location : locationToSend, departureDate, returnDate, token: token }),
-                });
-                const data = await response.json();
 
-                if(data.error) {
-                    setErrorMsg(data.error);
-                    return; // Arrêter le traitement si une erreur est retournée par le serveur
-                }
-            } catch (error) {
-                console.error('Error sending email:', error);
-                setErrorMsg('Error sending email. Please try again later.');
-                return; // Arrêter le traitement en cas d'erreur réseau
-            }
+        console.log(currentTrip._id)
+
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+        const validEmails = emails.filter(email => email && emailRegex.test(email));
+        console.log(validEmails)
+    if (validEmails.length === 0) {
+        setEmptyField(true); // Aucune adresse e-mail valide n'est saisie
+        return;
+    }
+
+    try {
+        for (let email of validEmails) {
+            const response = await fetch(`http://localhost:5500/trips/addnewuser/${user.currentTrip._id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }), // Envoyer l'email valide au back pour chaque email valide
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+            setErrorMsg(data.error); // Afficher un message d'erreur si nécessaire
+            return;
+        }       
         }
-
-        setConfirmMsg(true); // Définir le message de confirmation une fois tous les emails envoyés avec succès
-        setEmails(['']); // Réinitialiser les emails après l'envoi
-    };
+        setConfirmMsg(true); // Afficher le message de confirmation une fois les e-mails envoyés
+        setEmails(['']); // Réinitialiser les e-mails après l'envoi réussi
+        setEmptyField(false)
+    } catch (error) {
+        console.error('Error sending emails:', error);
+        setErrorMsg('Error sending emails. Please try again later.');
+    }
+};
 
     
 
@@ -76,13 +86,14 @@ export default function Invitation() {
                         style={{ width: "110%" }}
                     />
                 ))}
+                { emptyField && <div className={styles.text}>Merci de renseigner une adresse e-mail valide </div> }
             </div>
             <Button  buttonClass="primary" text="+" onClick={() => handleAddImput()} />
-            {errorNbImput && <div>Nombre d'email dépassés</div>}
+            {errorNbImput && <div className={styles.text}>Nombre d'email dépassés</div>}
             <div className={styles.ButtonContainer}>
                 <Button buttonClass="primary" text="Envoyer invitation(s)" onClick={() => handleSendEmail()} />
-            {confirmMsg && <div> Les invitations ont bien été envoyées</div>}
             </div>
+            {confirmMsg && <div className={styles.text}> Les invitations ont bien été envoyées</div>}
         </div>
     )
 

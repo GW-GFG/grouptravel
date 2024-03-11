@@ -20,7 +20,7 @@ export default function TripRow(props) {
       <div className={styles.row}>
           <span className={styles.tripName}>{props.name}</span>
           {isAdmin && <span className={styles.adminBadge}>ADMIN</span>}         
-          <button className={styles.goButton} onClick={handleGoToDash}>Go</button>                   
+          <button className={styles.goButton} onClick={() => handleGoToDash(props)}>Go</button>                   
       </div>
     );
   }
