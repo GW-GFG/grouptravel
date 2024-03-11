@@ -90,10 +90,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--primary-black-color);
+  background-color: transparent;
   z-index: 1;
   position: relative;
 }
+
 
 .userInfoContainer {
   width: 12rem;

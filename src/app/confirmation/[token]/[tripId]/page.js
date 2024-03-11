@@ -46,7 +46,7 @@ export default function tokenwithTripsIdPage() {
             setUsername(data.user.username)
             setIdMember(data.user._id)
         // dispacth userdata dans reducer
-         dispatch(addUserToStore({ token, username: data.user.username, userPicture: data.user.userPicture, email, myTrips: [] }))    
+         dispatch(addUserToStore({ token, username: data.user.username, userPicture: data.user.userPicture, email, myTrips: data.user.myTrips }))    
           }
         });
         //** Fetch BDD pour récepurer donnée Trips*//
@@ -81,10 +81,12 @@ export default function tokenwithTripsIdPage() {
       })
         .then(response => response.json())
         .then(data => {
-          console.log(data.trip) 
+          console.log(data)
+          console.log(data.trip)
+           
           // if data result --> dispacth trip in currenttrip send him to profile page.
           dispatch(updateCurrentTrip(data.trip))
-          dispatch(updateMyTrips(data.trip))
+          // dispatch(updateMyTrips(data.trip))
           !data.result && setSubmitError(true);
           router.push('/dashboard')
         })

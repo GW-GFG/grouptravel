@@ -9,11 +9,14 @@ import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import TripRow from "./TripRow";
+import Image from "next/image";
+
 
 export default function Profile() {
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector((state) => state.user.value);
+  // console.log(user.userPicture)
 
    //Map on user.myTrips Only if != null
    const trips = user.myTrips && user.myTrips.length > 0 && user.myTrips.map((data, i) => {
@@ -24,7 +27,15 @@ export default function Profile() {
     router.push('/addTrip')
   }
 
-  
+  const pictureStyle = {
+    borderRadius: '50%',
+    border: '2px solid var(--primary-black-color)',
+  }
+
+  const backPictureStyle = {
+    borderRadius: '1rem 1rem',
+    border: '2px solid var(--primary-black-color)',
+  }
 
 
   if (!user.token) {
@@ -38,7 +49,15 @@ export default function Profile() {
       <div className={styles.container}>
 
         <div className={styles.leftContainer}>
-          <div className={styles.profilPictureContainer}>IMG
+          <div className={styles.profilPictureContainer}>
+                  <Image
+              // loader={myLoader}
+              src={user.userPicture}
+              alt="Avatar"
+              width={160}
+              height={160}
+              style={pictureStyle}
+                  />
             <button>
               <FontAwesomeIcon icon={faPen} className={styles.penIcon} />
             </button>
@@ -46,7 +65,15 @@ export default function Profile() {
           <div className={styles.userInfoContainer}>
             <span>Nom : {user.username}</span>
           </div>
-          <div className={styles.backPicture}>BACKPIC</div>
+          <div className={styles.backPicture}>
+          <Image
+              // loader={myLoader}
+              src='/image_profile.png'
+              alt="backgroundprofile"
+              width={360}
+              height={250}
+              style={backPictureStyle}
+                  /></div>
         </div>
 
         <div className={styles.rightContainer}>

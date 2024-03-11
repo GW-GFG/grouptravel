@@ -1,6 +1,15 @@
 .container {
-    width: 90%;
     background-color: var(--primary-red-color);
     border-radius: 1rem;
-    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.container h2 {
+    padding: .5rem 0;
+}
+
+.profilePictureContainer {
+    padding: 1rem 0;
 }

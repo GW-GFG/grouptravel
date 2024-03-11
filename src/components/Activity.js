@@ -1,20 +1,25 @@
 'use client'
 import styles from './Activity.module.css';
 import { lexend } from '../app/fonts';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
 import { Card } from 'antd';
 import Button from './utils/Button';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { participateToActivity } from '@/reducers/user';
 
 const Activity = (props, i) => {
 
-    //const currentTrip = useSelector((state) => state.user.value.currentTrip);
     const { name, location, date, picture, url, description, budget, participation, _id } = props
+    const dispatch = useDispatch()
     const userToken = useSelector((state) => state.user.value.token)
     const currentTrip = useSelector((state) => state.user.value.currentTrip)
+    const activity = currentTrip.activities.find(activity => activity._id === _id)
+
+    const [userParticipationStatus, setUserParticipationStatus] = useState(getInitialParticipationStatus())
 
     function capitalizeFirstLetter(str) {
         if (typeof str !== 'string' || str.length === 0) {
@@ -23,34 +28,57 @@ const Activity = (props, i) => {
         return str.charAt(0).toUpperCase() + str.slice(1)
     }
 
-    // const userVote = participation.find(vote => vote.userToken === userToken)
-    // const isParticipating = userVote ? userVote.status : null;
-
-    const handleParticipate = (participate) => {
-        const activityId = _id
-
-        const voteData = {
+    const handleParticipate = (activityId) => {
+        const participationData = {
             userToken,
             tripId: currentTrip._id,
             activityId,
-            status: participate
+            status: true
         }
-
-        fetch('http://localhost:5500/vote', {
+        fetch('http://localhost:5500/activities/vote', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(voteData)
+            body: JSON.stringify(participationData)
         })
             .then(response => response.json())
             .then(data => {
-                if (!data.result) {
-                    console.error('Erreur de vote', data.message)
-                    return
-                }
-                if (data.result) {
-                    console.log('Vote réussi', data)
-                }
+                console.log('Vote réussi', JSON.stringify(data))
+                    setUserParticipationStatus(true)
+                    dispatch(participateToActivity({ activityId: activityId, newStatus: data.newStatus }))
             })
+    }
+
+    const handleDontParticipate = (activityId) => {
+        const participationData = {
+            userToken,
+            tripId: currentTrip._id,
+            activityId,
+            status: false
+        }
+        fetch('http://localhost:5500/activities/vote', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(participationData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Vote réussi', JSON.stringify(data))
+                    setUserParticipationStatus(false)
+                    dispatch(participateToActivity({ activityId, newStatus: data.newStatus }))
+            })
+    }
+
+    function getInitialParticipationStatus() {
+        if (activity) {
+            const userParticipation = activity.participation && activity.participation.find(participationItem => participationItem.userToken === userToken)
+            return userParticipation ? userParticipation.status : null
+        }
+        return null
+    }
+
+    const participationIconStyle = {
+        check: userParticipationStatus === true ? { fontSize: '1.75rem', color: 'var(--primary-black-color)' } : { fontSize: '1.75rem' },
+        cross: userParticipationStatus === false ? { fontSize: '1.75rem', color: 'var(--primary-black-color)' } : { fontSize: '1.75rem' }
     }
 
     //if (currentTrip && currentTrip.activities.length > 0) {
@@ -82,25 +110,17 @@ const Activity = (props, i) => {
                     <div className={styles.participation}>
                         <p>Je participe !</p>
                         <FontAwesomeIcon
-                            style={{
-                                fontSize: '1.75rem',
-                                cursor: 'pointer',
-                                // color: isParticipating === true ? 'green' : 'grey'
-                            }}
+                            style={participationIconStyle.check}
                             icon={faCircleCheck}
-                            onClick={() => handleParticipate(true)}
+                            onClick={() => handleParticipate(_id)}
                         />
                     </div>
                     <div className={styles.participation}>
                         <p>Ouais bof...</p>
                         <FontAwesomeIcon
-                            style={{
-                                fontSize: '1.75rem',
-                                cursor: 'pointer',
-                                // color: isParticipating === true ? 'red' : 'grey'
-                            }}
+                            style={participationIconStyle.cross}
                             icon={faCircleXmark}
-                            onClick={() => handleParticipate(false)}
+                            onClick={() => handleDontParticipate(_id)}
                         />
                     </div>
                 </div>

@@ -52,8 +52,34 @@ export const userSlice = createSlice({
 			  }
 			}			
 		  },
+
+		  participateToActivity: (state, action) => {
+			const { activityId, newStatus } = action.payload;
+			const userToken = state.value.token;
+	  
+			// Rechercher l'index de l'hébergement (si -1 c'est qu'il n'est pas trouvé)
+			const activityIndex = state.value.currentTrip.activities.findIndex(activity => activity._id.toString() === activityId);	  
+			if (activityIndex!== -1) {
+			  // Si l'utilisateur a déjà voté, mettre à jour son vote
+
+			 const participationItem = state.value.currentTrip.activities[activityIndex].participation.find(participationItem => participationItem.userToken === state.value.token)
+			 console.log('participationItem : ', participationItem,' state.value.token', state.value.token, 'userToken : ', userToken) 
+			  if (participationItem) {
+				console.log('participationItem : ', participationItem)
+				participationItem.status = newStatus;
+				console.log('depuis reducer participationItem if' + JSON.stringify(participationItem))
+			  } else {
+				// Sinon, ajouter un nouveau vote
+				state.value.currentTrip.activities[activityIndex].participation.push({
+				  userId: state.value._id,
+				  status: newStatus,
+				  userToken: userToken
+				});
+			  }
+			}			
+		  },
 	},
 });
 
-export const { addUserToStore, updateMyTrips, removeUserToStore, updateCurrentTrip, voteToAccommodation, voteToActivity, updateCurrentTripAccommodations, updateCurrentTripActivities } = userSlice.actions;
+export const { addUserToStore, updateMyTrips, removeUserToStore, updateCurrentTrip, voteToAccommodation, participateToActivity, updateCurrentTripAccommodations, updateCurrentTripActivities } = userSlice.actions;
 export default userSlice.reducer;

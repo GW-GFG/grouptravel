@@ -1,8 +1,12 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
 .iconContainer {
     display: flex;
+    justify-content: center;
+    gap: 1rem;
     background-color: transparent;
-}
-.activityName {
-    display: flex;
-    
+    padding: .5rem 0;
 }
