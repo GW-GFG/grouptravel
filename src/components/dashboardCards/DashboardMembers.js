@@ -27,6 +27,6 @@ return(
         <h2>Membres du groupe</h2>
         {members}
         <MiniMemberRow name={"Mon Joli Nom"} />
-        <Button text="+"  onClick={() => handleClick()} />
+        <Button text="+" style={{marginTop: '1rem'}} onClick={() => handleClick()} />
 </div>
 )}

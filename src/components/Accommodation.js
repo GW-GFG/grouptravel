@@ -22,7 +22,7 @@ export default function Accommodation(props) {
   
     const [userVoteStatus, setUserVoteStatus] = useState(getInitialVoteStatus());
 
-    const defaultPicture = "https://media.istockphoto.com/id/1145422105/fr/photo/vue-a%C3%A9rienne…";
+    
         
         const handleDo = (accomodationId) => {
 

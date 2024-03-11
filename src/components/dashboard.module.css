@@ -1,11 +1,28 @@
 .container {
-    width: 80%;
-    padding: 2.5rem;
-    background: var(--primary-blue-color);
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    gap: 2rem;
-    border-radius: 1rem;
-    max-height: max-content;
-  }
+  width: 80%;
+  padding: 2.5rem;
+  background: var(--primary-blue-color);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  border-radius: 1rem;
+  max-height: max-content;
+}
+
+.leftContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 30rem;
+}
+
+.middleContainer {
+  min-width: 15rem;
+}
+
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

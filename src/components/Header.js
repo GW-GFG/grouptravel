@@ -126,8 +126,46 @@ export default function Header() {
         router.push('/profile');
       }
 
+      // Menu logic based on user.token
+      if (!user.token) {
+        return (
+        <header className={`${styles.header} ${lexend.className}`}>
+            <div className={styles.headerLeft}>
+                <FontAwesomeIcon icon={iconHouse.name} className={styles.headerIcon} />
+                <Link className={styles[`${pathname === '/' ? 'active' : 'link'}`]} href="/"> Accueil </Link>
+            </div>
+            <div className={styles.headerRight}>
+                <FontAwesomeIcon icon={iconPlane.name} className={styles.headerIcon} />
+                <div className={styles.tripsContainer}>
+                <Popover title="Mes autres voyages" content={popoverContent} className={styles.popover} trigger="hover">
+                    {!user.currentTrip && <p>Mes voyages</p>}
+                    {user.currentTrip && <p> {user.currentTrip.name}</p>}
+                </Popover>
+                </div>
+                <FontAwesomeIcon icon={iconUser.name} className={styles.headerIcon} />
+                <div>
+                    {!user.token && <button onClick={displaySignInModal} className={`${styles.link} ${styles.buttonHeader}`}> Connexion </button>}
+                    {user.token && <button onClick={handleProfile} className={`${styles.link} ${styles.buttonHeader}`}> Profil </button>}
+                </div>
 
-    return <header className={`${styles.header} ${lexend.className}`}>
+                {user.token && (<>
+                <FontAwesomeIcon icon={iconArrow.name} className={styles.headerIcon} onClick={handleLogout} />
+                <div>
+                    <button onClick={handleLogout} className={`${styles.link} ${styles.buttonHeader}`}> Déconnexion </button>                
+                </div>
+                </>)}        
+                {!user.token && <button onClick={displaySignUpModal} className={`${styles.link} ${styles.buttonHeader}`}> Inscription </button>}
+            </div>   
+            <Modal open={isSignInModalOpen} onCancel={handleCancelSignIn} footer={null}>
+                <SignIn handleConnexion={handleConnexion} />
+            </Modal>
+            <Modal open={isSignUpModalOpen} onCancel={handleCancelSignUp} footer={null}>
+                <SignUp handleRegister={handleRegister} />
+            </Modal> 
+        </header>)
+      } else {
+        return (
+        <header className={`${styles.header} ${lexend.className}`}>
         <div className={styles.headerLeft}>
             <FontAwesomeIcon icon={iconHouse.name} className={styles.headerIcon} />
             <Link className={styles[`${pathname === '/' ? 'active' : 'link'}`]} href="/"> Accueil </Link>
@@ -169,4 +207,8 @@ export default function Header() {
             <SignUp handleRegister={handleRegister} />
         </Modal>
     </header>
+        )
+      }
+
+    
 }
