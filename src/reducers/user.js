@@ -22,35 +22,38 @@ export const userSlice = createSlice({
 		removeUserToStore: (state, action) => {
 			state.value = initialState;
 		},
-		updateCurrentTripAccommodations: (state, value) => {
+		updateCurrentTripAccommodations: (state, action) => {
 			state.value.currentTrip.accomodations.push(action.payload)
 		},
-		updateCurrentTripActivities: (state, value) => {
+		updateCurrentTripActivities: (state, action) => {
 			state.value.currentTrip.activities.push(action.payload)
 		},
+
 		voteToAccommodation: (state, action) => {
 			const { accommodationId, newStatus } = action.payload;
-			//._id.$oid $oid is a mongoose methode to use object id as string (here to compare it)
-			const accommodationIndex = state.value.currentTrip.accomodations.findIndex(accommodation => accommodation._id.$oid === accommodationId);
-			//findIndex return -1 to false
+			const userToken = state.value.token;
+	  
+			// Rechercher l'index de l'hébergement (si -1 c'est qu'il n'est pas trouvé)
+			const accommodationIndex = state.value.currentTrip.accomodations.findIndex(accommodation => accommodation._id.toString() === accommodationId);	  
 			if (accommodationIndex !== -1) {
-			  state.value.currentTrip.accomodations[accommodationIndex].vote = [{
-				userId: state.value._id,
-				status: newStatus
-			  }];
-			}
-		  },
-		voteToActivity: (state, action) => {
-			const { activityId, newStatus } = action.payload;
+			  // Si l'utilisateur a déjà voté, mettre à jour son vote
 
-			const activityIndex = state.value.currentTrip.activities.findIndex(activity => activity._id.$oid === activityId);
-
-			if (activityIndex !== -1) {
-			  state.value.currentTrip.activities[activityIndex].vote = [{
-				userId: state.value._id,
-				status: newStatus
-			  }];
-			}
+			//   const voteItem = state.value.currentTrip.accomodations[accommodationIndex].vote.find(voteItem => voteItem.userId === state.value._id);
+			 const voteItem = state.value.currentTrip.accomodations[accommodationIndex].vote.find(voteItem => voteItem.userToken === state.value.token)
+			 console.log('voteItem : ', voteItem,' state.value.token', state.value.token, 'userToken : ', userToken) 
+			  if (voteItem) {
+				console.log('voteItem : ', voteItem)
+				voteItem.status = newStatus;
+				console.log('depuis reducer voteItem if' + JSON.stringify(voteItem))
+			  } else {
+				// Sinon, ajouter un nouveau vote
+				state.value.currentTrip.accomodations[accommodationIndex].vote.push({
+				  userId: state.value._id,
+				  status: newStatus,
+				  userToken: userToken
+				});
+			  }
+			}			
 		  },
 	},
 });

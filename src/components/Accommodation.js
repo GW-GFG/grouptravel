@@ -6,19 +6,22 @@ import { faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 import Button from "./utils/Button";
 import Link from "next/link";
 import Image from 'next/image';
+import { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { voteToAccommodation } from "@/reducers/user";
 
 
 
 export default function Accommodation(props) {
-    
+    const { name, location, dates, photos, url, description, budget, vote, _id } = props;   
     const dispatch = useDispatch();
     const userToken = useSelector((state) => state.user.value.token)
     const currentTrip = useSelector((state) => state.user.value.currentTrip);
+    //To keep vote updated
+    const accommodation = currentTrip.accomodations.find(accommodation => accommodation._id === _id);
+  
+    const [userVoteStatus, setUserVoteStatus] = useState(getInitialVoteStatus());
 
-    const { name, location, dates, photos, url, description, budget, vote, _id } = props;
-      
     const defaultPicture = "https://media.istockphoto.com/id/1145422105/fr/photo/vue-a%C3%A9rienne…";
         
         const handleDo = (accomodationId) => {
@@ -30,7 +33,6 @@ export default function Accommodation(props) {
                 status: true,
             }
             
-            // console.log('Vote data avant fetch : '+ JSON.stringify(voteData))
             fetch('http://localhost:5500/accomodations/vote', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -38,7 +40,8 @@ export default function Accommodation(props) {
             }).then(response => response.json())
             .then(voteRes => {
                 console.log('reponse vote : ' + JSON.stringify(voteRes))
-                dispatch(voteToAccommodation({ accommodationId: accomodationId, newStatus: voteRes.newStatus }));
+                setUserVoteStatus(true);
+                dispatch(voteToAccommodation({ accommodationId: accomodationId, newStatus: voteRes.newStatus  }));
             })    
         }
 
@@ -50,7 +53,6 @@ export default function Accommodation(props) {
                 status: false,
             }
 
-            // console.log('click id puis vote'+ JSON.stringify(voteData))
             fetch('http://localhost:5500/accomodations/vote', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -58,18 +60,32 @@ export default function Accommodation(props) {
             }).then(response => response.json())
             .then(voteRes => {
                 console.log('reponse vote : ' + JSON.stringify(voteRes))
+                setUserVoteStatus(false);
                 dispatch(voteToAccommodation({ accommodationId: accomodationId, newStatus: voteRes.newStatus }));
             })
         }
-        const userHasVoted = () => {
-            if (!vote) return false; // Si le vote n'est pas défini, l'utilisateur n'a pas encore voté
-            const userVote = vote.find(voteItem => voteItem.userId === userToken); // Rechercher le vote de l'utilisateur
-            return userVote ? userVote.status : false; // Si l'utilisateur a voté, renvoyer son statut de vote (true ou false), sinon renvoyer false
-          };
-          let voteIconStyle = {};
-          if (userHasVoted()) {
-              voteIconStyle = { fontSize: '1.75rem', 'color': 'var(--primary-red-color)' }; // Changer la couleur si l'utilisateur a déjà voté
-          }
+
+        function getInitialVoteStatus() {
+            if (accommodation) {
+                const userVote = accommodation.vote && accommodation.vote.find(voteItem => voteItem.userToken === userToken);
+                return userVote ? userVote.status : null;
+            }
+            return null;
+        }
+        // const userHasVoted = () => {
+        //     if (accommodation) {
+        //         return accommodation.vote.some(voteItem => voteItem.userToken === userToken);
+        //     }
+        //     return false;
+        // };
+        //if user didn't vote yet vote status is null
+        // const userVoteStatus = userHasVoted() ? accommodation.vote.find(voteItem => voteItem.userToken === userToken)?.status : null;
+
+        const voteIconStyle = {
+            check: userVoteStatus === true ? { fontSize: '1.75rem', color: 'var(--primary-black-color)' } : {fontSize: '1.75rem'},
+            cross: userVoteStatus === false ? { fontSize: '1.75rem', color: 'var(--primary-black-color)' } : {fontSize: '1.75rem'}
+        };  
+
         
         return(
             <div className={styles.container}>
@@ -95,8 +111,8 @@ export default function Accommodation(props) {
                     
                     <div className={styles.rightContainer}>
                         <div className={styles.voteIcons}>
-                        <FontAwesomeIcon style={voteIconStyle} icon={faCircleCheck} onClick={(e) => handleDo(_id)} />
-                        <FontAwesomeIcon style={voteIconStyle} icon={faCircleXmark} onClick={(e) => handleDont(_id)}  />
+                        <FontAwesomeIcon style={voteIconStyle.check} icon={faCircleCheck} onClick={(e) => handleDo(_id)} />
+                        <FontAwesomeIcon style={voteIconStyle.cross} icon={faCircleXmark} onClick={(e) => handleDont(_id)}  />
                         </div>
                     <Link href={url} target="_blank"><Button type="text" buttonClass="primary" text="En savoir plus" /></Link>
                     </div>
