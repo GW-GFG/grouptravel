@@ -7,6 +7,6 @@ export default function MiniMemberRow(props) {
 return(
 <div className={styles.container} >
 <div className={styles.photoContainer}></div>
-<p>Love {props.name}</p>
+<p>{props.name}</p>
 </div>
 )}
