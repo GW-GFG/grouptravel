@@ -1,13 +1,25 @@
 .mainContainer {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: space-around;
     background-color: var(--primary-blue-color);
     padding: 2.5rem 0;
     width: 80%;
-    border-radius: .625rem;
+    border-radius: 0.625rem;
+    flex-wrap: nowrap;
+    gap: 2rem;
 }
+
+.inputContainer {
+    width: 50%;
+}
+
 .buttonContainer {
     flex-direction: column;
 }
+
+.text {
+    text-align: center;
+}
+

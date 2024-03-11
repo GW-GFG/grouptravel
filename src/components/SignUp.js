@@ -57,9 +57,9 @@ export default function SignUp({ handleRegister }) {
         <div className={styles.container}>
             <h3 className={`${styles.title} ${lexend.className}`}>On se rencontre ? Inscris-toi !</h3>
             <InputLabel type="text" onChange={(e) => setEmail(e.target.value)} value={email} label="Email" placeholder="Entre ton email ici !" />
-            <InputLabel type="text" onChange={(e) => setUsername(e.target.value)} value={username} label="Nom d'utilisateur(trice)" placeholder="Choisi ton nom !" />
-            <InputLabel type="password" onChange={(e) => setPassword(e.target.value)} value={password} label="Mot de passe" placeholder="Ecris ton mot de passe ... " />
-            <InputLabel type="password" onChange={(e) => setPassword2(e.target.value)} value={password2} label="Confirmation" placeholder="Confirme ton mot de passe ! " />
+            <InputLabel type="text" onChange={(e) => setUsername(e.target.value)} value={username} label="Nom d'utilisateur(trice)*" placeholder="Choisi ton nom !" />
+            <InputLabel type="password" onChange={(e) => setPassword(e.target.value)} value={password} label="Mot de passe*" placeholder="Ecris ton mot de passe ... " />
+            <InputLabel type="password" onChange={(e) => setPassword2(e.target.value)} value={password2} label="Confirmation*" placeholder="Confirme ton mot de passe ! " />
             {passwordNotMatch && <p style={styles.error}>Les mots de passe sont différents</p>}
             {emailError && <p style={styles.error}>Entre une adresse email valide !</p>}
             {submitError && <p style={styles.error}>Il semble y avoir une erreur, vérifie les champs saisis !</p>}

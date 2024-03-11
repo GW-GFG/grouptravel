@@ -1,8 +1,9 @@
 'use client'
 import styles from './AddActivity.module.css'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Button from './utils/Button'
+import { updateCurrentTripActivities } from '@/reducers/user'
 
 // import fonts to use them for menu items 
 import { lexend } from '../app/fonts';
@@ -10,6 +11,7 @@ import { lexend } from '../app/fonts';
 const AddActivity = () => {
 
   const currentTrip = useSelector((state) => state.user.value.currentTrip)
+  const dispatch = useDispatch()
 
   const [activityName, setActivityName] = useState('')
   const [activityPicture, setActivityPicture] = useState('')
@@ -62,7 +64,8 @@ const AddActivity = () => {
           return
         }
         // trip is found, add activity
-        console.log('New activity added', data.newActivity)
+        console.log('New activity added', data.newActivity.activities[data.newActivity.activities.length - 1])
+        dispatch(updateCurrentTripActivities(data.newActivity.activities[data.newActivity.activities.length - 1]))
         alert('Votre activité a bien été ajoutée à votre groupe !')
         setActivityName('')
         setActivityPicture('')
