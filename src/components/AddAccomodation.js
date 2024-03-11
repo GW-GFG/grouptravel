@@ -171,7 +171,7 @@ export default function AddAccomodation() {
                 accomodationData.photos.push(pictureData.url);
             }
 //Return fetch to handle upload
-            console.log('accomodationData : ', accomodationData )
+        console.log('accomodationData : ', accomodationData )
         return fetch(`http://localhost:5500/accomodations/new`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -195,6 +195,7 @@ export default function AddAccomodation() {
                     setAccomodationDescription('');
                     setFormHasError(false);
                     setErrorMessage('');
+                    setAccomodationPicture('');
                     // replace with proper feedback
                     console.log('AddAccomodation.js : nouveau logement ajouté au trip, yay !')
                 } else {

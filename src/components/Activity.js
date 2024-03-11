@@ -63,8 +63,9 @@ const Activity = (props, i) => {
             key={i}
             className={styles.card}
             cover={
+                
                 <Image
-                    src='https://www.science.org/do/10.1126/science.aat9808/abs/cc_A5E67C_copy.jpg'
+                    src={`${picture || "next.svg"}`}
                     alt={name}
                     width={300}
                     height={200}

@@ -51,11 +51,28 @@ const AddActivity = () => {
       tripId: currentTrip._id
     }
 
-    fetch('http://localhost:5500/activities/new', {
+      //Handle picture
+      const formData = new FormData();
+      activityPicture && formData.append('image', activityPicture);
+      fetch('http://localhost:5500/upload', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(activityData)
-    })
+      body: formData
+      })
+      .then(response => response.json())
+      .then(pictureData => {
+          if (!pictureData || !pictureData.url){
+              return console.log(' No picture ')
+          } else {
+              console.log('pictureDataUrl : ', pictureData.url);
+              activityData.picture = pictureData.url;
+          }
+
+      return fetch('http://localhost:5500/activities/new', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(activityData)
+      });
+      })
       .then(response => response.json())
       .then(data => {
         // if no trip is found or activity's date is outside trip's date
@@ -74,6 +91,7 @@ const AddActivity = () => {
         setActivityDate('')
         setActivityLocation('')
         setActivityDescription('')
+        setActivityPicture('')
       })
   }
 
@@ -88,8 +106,7 @@ const AddActivity = () => {
               <input
                 type="file"
                 id="activity-picture"
-                value={activityPicture}
-                onChange={(e) => setActivityPicture(e.target.value)}
+                onChange={(e) => setActivityPicture(e.target.files[0])}
               />
             </div>
             <div className={styles.rightSide}>
