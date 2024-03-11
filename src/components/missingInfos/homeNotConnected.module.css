@@ -1,0 +1,44 @@
+.globalContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 80%;
+    margin: auto;
+}
+
+.top {
+    position: relative;
+    min-height: 25rem;
+    width: 100%;
+}
+
+.topLeftContainer {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.topLeftContainer h2 {
+    color: #ffffff;
+}
+
+.middle {
+    width: 100%;
+    min-height: 25rem;
+}
+
+.bottom {
+    background-color: var(--primary-red-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.bottom h2 {
+    color: #ffffff;
+}

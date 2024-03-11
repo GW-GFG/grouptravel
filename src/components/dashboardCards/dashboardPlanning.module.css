@@ -1,8 +1,23 @@
 .container {
-    width: 90%;
     background-color: var(--primary-green-color);
     border-radius: 1rem;
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem;
+    padding: 1rem;
+}
+
+.leftContainer {}
+
+.leftContainer h2 {
+    padding: .5rem 0;
+}
+
+.leftContainer p {
+    padding: 0 0 1rem;
+}
+
+.bottomContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }

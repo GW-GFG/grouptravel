@@ -1,19 +1,27 @@
 .container {
-    width: 90%;
     background-color: var(--primary-blue-color);
     border-radius: 1rem;
-    height: max-content;
-    padding: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.container h2 {
+    text-align: center;
+    padding: .5rem 0;
 }
 
 .rowContainer {
- display: flex;
- flex-direction: column;
- align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
 }
 
 .bottom {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: .5rem;
 }
