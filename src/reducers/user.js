@@ -40,11 +40,8 @@ export const userSlice = createSlice({
 
 			//   const voteItem = state.value.currentTrip.accomodations[accommodationIndex].vote.find(voteItem => voteItem.userId === state.value._id);
 			 const voteItem = state.value.currentTrip.accomodations[accommodationIndex].vote.find(voteItem => voteItem.userToken === state.value.token)
-			 console.log('voteItem : ', voteItem,' state.value.token', state.value.token, 'userToken : ', userToken) 
 			  if (voteItem) {
-				console.log('voteItem : ', voteItem)
 				voteItem.status = newStatus;
-				console.log('depuis reducer voteItem if' + JSON.stringify(voteItem))
 			  } else {
 				// Sinon, ajouter un nouveau vote
 				state.value.currentTrip.accomodations[accommodationIndex].vote.push({

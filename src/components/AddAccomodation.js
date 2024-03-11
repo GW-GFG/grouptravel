@@ -145,7 +145,7 @@ export default function AddAccomodation() {
         // checks passed, new accomodationData object to be added
         const accomodationData = {
             name: accomodationName,
-            picture: accomodationPicture,
+            photos: [],
             url: accomodationURL,
             departureDate: departureDate,
             returnDate: returnDate,
@@ -155,10 +155,28 @@ export default function AddAccomodation() {
             tripId: currentTrip._id
         }
 
-        fetch(`http://localhost:5500/accomodations/new`, {
+        //Handle picture
+        const formData = new FormData();
+        accomodationPicture && formData.append('image', accomodationPicture);
+        fetch('http://localhost:5500/upload', {
+        method: 'POST',
+        body: formData
+        })
+        .then(response => response.json())
+        .then(pictureData => {
+            if (!pictureData || !pictureData.url){
+                return console.log(' No picture ')
+            } else {
+                console.log('pictureDataUrl : ', pictureData.url);
+                accomodationData.photos.push(pictureData.url);
+            }
+//Return fetch to handle upload
+            console.log('accomodationData : ', accomodationData )
+        return fetch(`http://localhost:5500/accomodations/new`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(accomodationData)
+        });
         })
         .then(response => response.json())
         .then(data => {
@@ -197,8 +215,7 @@ export default function AddAccomodation() {
                         <input
                             type="file"
                             id="accomodation-picture"
-                            value={accomodationPicture}
-                            onChange={(e) => setAccomodationPicture(e.target.value)}
+                            onChange={(e) => setAccomodationPicture(e.target.files[0])}
                         />
                     </div>
                     <div className={styles.rightSide}>
