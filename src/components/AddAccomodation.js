@@ -1,8 +1,10 @@
 'use client'
 import styles from './addAccomodation.module.css';
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from './utils/Button';
+import { notification } from 'antd'
+import { updateCurrentTripAccommodations } from '@/reducers/user'
 
 // import fonts to use them for menu items 
 import { lexend } from '../app/fonts';
@@ -14,6 +16,7 @@ import GoogleMap from './utils/GoogleMap';
 export default function AddAccomodation() {
 
     const currentTrip = useSelector((state) => state.user.value.currentTrip);
+    const dispatch = useDispatch()
     // center of Google map based on trip location
     const [center, setCenter] = useState({
         lat: currentTrip.location.lat,
@@ -64,7 +67,7 @@ export default function AddAccomodation() {
         // check if url is valid (if url exists)
         if (accomodationURL !== '') {
             try {
-                new URL(accomodationURL);   
+                new URL(accomodationURL);
             } catch (err) {
                 setFormHasError(true);
                 setErrorMessage("L'url saisie n'est pas valide");
@@ -76,20 +79,25 @@ export default function AddAccomodation() {
         const accommodationDepartureDate = new Date(departureDate);
         const accommodationReturnDate = new Date(returnDate);
 
-        if(accommodationDepartureDate >= accommodationReturnDate) {
+        if (accommodationDepartureDate >= accommodationReturnDate) {
             setFormHasError(true);
             setErrorMessage("La date de départ doit être postérieure à la date d'arrivée.")
-            return;  
+            return;
         }
 
         // check if accommodation dates are within trip dates
         const tripDepartureDate = new Date(currentTrip.dates.departure);
         const tripReturnDate = new Date(currentTrip.dates.return);
 
-        if (accommodationDepartureDate < tripDepartureDate || accommodationDepartureDate > tripReturnDate 
-        || accommodationReturnDate < tripDepartureDate || accommodationReturnDate > tripReturnDate) {
+        if (accommodationDepartureDate < tripDepartureDate || accommodationDepartureDate > tripReturnDate
+            || accommodationReturnDate < tripDepartureDate || accommodationReturnDate > tripReturnDate) {
             setFormHasError(true);
             setErrorMessage("Les dates du logement ne sont pas comprises dans celles du voyage.");
+            notification.warning({
+                message: 'Attention !',
+                description: errorMessage,
+                placement: 'bottomRight'
+            })
             return;
         }
 
@@ -115,8 +123,8 @@ export default function AddAccomodation() {
         const formData = new FormData();
         accomodationPicture && formData.append('image', accomodationPicture);
         fetch('http://localhost:5500/upload', {
-        method: 'POST',
-        body: formData
+            method: 'POST',
+            body: formData
         })
         .then(response => response.json())
         .then(pictureData => {
@@ -134,11 +142,22 @@ export default function AddAccomodation() {
         })
         .then(response => response.json())
         .then(data => {
-            if (!data) {
-                console.log('Erreur');
+            if (data.result === false) {
+                notification.warning({
+                    message: 'Attention !',
+                    description: data.error,
+                    placement: 'bottomRight'
+                })
                 return
-            } else {
-                if (data.result === true) {
+            }
+            console.log(data)
+            console.log('New accomodation added', data.newAccomodation)
+            dispatch(updateCurrentTripAccommodations(data.newAccomodation))
+            notification.success({
+                message: 'Logement ajouté !',
+                description: 'Votre logement a bien été soumis à votre groupe !',
+                placement: 'bottomRight'
+            })
                     setAccomodationName('');
                     setAccomodationPicture('');
                     setAccomodationURL('');
@@ -152,11 +171,6 @@ export default function AddAccomodation() {
                     setAccomodationPicture('');
                     // replace with proper feedback
                     console.log('AddAccomodation.js : nouveau logement ajouté au trip, yay !')
-                } else {
-                    setFormHasError(true);
-                    setErrorMessage(data.error);
-                }
-            }
         });
     }
 
@@ -261,10 +275,12 @@ export default function AddAccomodation() {
                                 type="number"
                                 id="accomodation-budget-single"
                                 className={styles.input}
-                                value={accomodationBudgetPerPerson}
-                                onChange={(e) => setAccomodationBudgetPerPerson(e.target.value)}
+                                readOnly
+                                value={(accomodationBudget / (currentTrip.members.length + 1)).toFixed(2)}
+                                // onChange={(e) => setAccomodationBudgetPerPerson(e.target.value)}
                                 min="0"
                             />
+                            
                         </div>
                     </div>
                 </div>
@@ -301,11 +317,11 @@ export default function AddAccomodation() {
                     </div>
                 </div>
                 <div className={styles.buttonContainer}>
-                    {formHasError && errorMessage}
+                    {formHasError}
                     <Button type="submit" buttonClass="primary" text="Soumettre" />
                 </div>
             </div>
-            
+
         </form>
     </div>
 }

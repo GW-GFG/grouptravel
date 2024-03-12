@@ -42,11 +42,11 @@ export default function tokenwithTripsIdPage() {
           } else {
         //Si donnée ok récuperer infos pour personnaliser page
             // console.log(data.user)
-            setEmail(data.user.email)
-            setUsername(data.user.username)
+            setEmail(data.email)
+            setUsername(data.username)
             setIdMember(data.user._id)
         // dispacth userdata dans reducer
-         dispatch(addUserToStore({ token, username: data.user.username, userPicture: data.user.userPicture, email, myTrips: data.user.myTrips }))    
+         dispatch(addUserToStore({ token, username: data.username, userPicture: data.userPicture, email, myTrips: data.user.myTrips }))    
           }
         });
         //** Fetch BDD pour récepurer donnée Trips*//

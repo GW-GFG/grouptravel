@@ -30,13 +30,13 @@ export default function tokenPage( { params } ) {
         body: JSON.stringify( {token: token} )
       }).then(response => response.json())
       .then(data => {
-        console.log(data.user)
-        if(!data.result || data.user.username != '' ) {
+        console.log('data : ', JSON.stringify(data))
+        if(!data.result || data.username != '' ) {
           router.push('/confirmation');
           return ;
         } else {
-          setEmail(data.user.email)
-          setTripId(data.user.myTrips[0])
+          setEmail(data.email)
+          setTripId(data.myTrips[0])
         }
         
       })
@@ -73,7 +73,7 @@ export default function tokenPage( { params } ) {
         })
         .catch(error => console.error('Error updating user:', error));
     };
-    console.log(tripId)
+    // console.log(tripId)
     const handleDecline = () => {
       console.log('click decline')
         fetch(`http://localhost:5500/decline/invitateduser/${tripId}`, {
@@ -82,9 +82,9 @@ export default function tokenPage( { params } ) {
         body: JSON.stringify({ token }),
       }).then(response => response.json())
       .then(data => {
-        if(data)
-        console.log(data)
-        // router.push('/')
+        if(!data)
+        // console.log(data)
+        router.push('/')
       })      
     }
   

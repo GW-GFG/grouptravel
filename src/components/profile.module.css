@@ -1,7 +1,6 @@
 .container {
   width: 80%;
   padding: 2.5rem;
-  background: var(--primary-green-color);
   color: white;
   display: flex;
   justify-content: space-between;
@@ -73,9 +72,10 @@
 
 /* User part - left */
 .leftContainer {
-  width: 10%;
-  height: 100%;
+  width: 40%;
   position: relative;
+  background: var(--primary-green-color);
+  border-radius: 1rem;
 }
 
 .profilPictureContainer {

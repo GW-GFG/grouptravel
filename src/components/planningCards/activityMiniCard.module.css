@@ -1,0 +1,11 @@
+.miniCard {
+flex: 1;
+background-color: rgba (255, 255, 255, 0.724);
+margin: 2rem;
+padding: 2rem;
+border-radius: 0.32rem;
+}
+
+.miniTitle {
+    text-transform: uppercase;
+}

@@ -18,12 +18,12 @@ export default function DashboardInfo() {
         }).then(response => response.json())
         .then(data => {
           // console.log(data.tripData)
-          setTotalBudget(data.tripData.budget)
+          setTotalBudget(data.tripData.budget.toFixed(2))
           if (data.tripData.members.length > 0) {
             const tempBudget = data.tripData.budget / (data.tripData.members.length + 1)
-            setBudgetPerPerson(tempBudget)
+            setBudgetPerPerson(tempBudget.toFixed(2)) 
           } else { 
-            setBudgetPerPerson(data.budget)
+            setBudgetPerPerson(totalBudget.toFixed(2))
           }
         })    
   }, []);

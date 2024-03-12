@@ -1,41 +1,106 @@
 "use client";
-import { useState, useEffect} from "react";
+import { useState, useEffect, useRef} from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./profile.module.css";
 import { lexend } from "../app/fonts";
-import {updateCurrentTrip} from "@/reducers/user"
-import Link from "next/link";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import TripRow from "./TripRow";
 import Image from "next/image";
+import { addUserToStore } from "@/reducers/user";
 
 
 export default function Profile() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const user = useSelector((state) => state.user.value);
-  // console.log(user.userPicture)
 
-   //Map on user.myTrips Only if != null
-   const trips = user.myTrips && user.myTrips.length > 0 && user.myTrips.map((data, i) => {
-    return <TripRow key={i} {...data} />;
-  });
+  const user = useSelector((state) => state.user.value);;
+  const [rerender, setRerender] = useState(null)
+  const [profilePicture, setProfilePicture] = useState(null);
+  const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    fetch('http://localhost:5500/users/getUser', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify( {token: user.token} ),
+  }).then(response => response.json())
+  .then(userData => {  
+    dispatch(addUserToStore(userData))
+    });
+  } , [rerender]);
+
+  //Map on user.myTrips Only if != null
+  const trips =
+    user.myTrips &&
+    user.myTrips.length > 0 &&
+    user.myTrips.map((data, i) => {
+      return <TripRow key={i} {...data} />;
+    });
 
   const handleClickAddTrip = () => {
-    router.push('/addTrip')
-  }
+    router.push("/addTrip");
+  };
 
   const pictureStyle = {
-    borderRadius: '50%',
-    border: '2px solid var(--primary-black-color)',
-  }
+    borderRadius: "50%",
+    border: "2px solid var(--primary-black-color)",
+  };
 
   const backPictureStyle = {
-    borderRadius: '1rem 1rem',
-    border: '2px solid var(--primary-black-color)',
-  }
+    borderRadius: "1rem 1rem",
+    border: "2px solid var(--primary-black-color)",
+  };
+
+  //Handle picture
+
+  const handleClickProfilPicture = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+
+    const selectedPicture = e.target.files[0];
+  
+    if (selectedPicture){
+
+      const formData = new FormData();
+      formData.append("image", selectedPicture);
+
+      fetch("http://localhost:5500/upload", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((pictureData) => {
+          if (!pictureData || !pictureData.url) {
+            return console.log(" No picture ");
+          } else {
+
+            const newProfilePictureUrl = pictureData.url;
+
+            return fetch("http://localhost:5500/users/updateOne", {
+              method: "PUT",
+              headers: { "Content-Type": "application/json"},
+              body: JSON.stringify({
+                token: user.token,
+                profilPicture: newProfilePictureUrl,
+              }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.result) {
+                  console.log("Photo mise à jour");
+                  setRerender(!rerender)
+                } else {
+                  console.log("Impossible de mettre la photo à jour");
+                }
+              });
+          }
+        })  
+    }
+  };
 
 
   if (!user.token) {
@@ -47,18 +112,24 @@ export default function Profile() {
   } else {
     return (
       <div className={styles.container}>
-
         <div className={styles.leftContainer}>
           <div className={styles.profilPictureContainer}>
-                  <Image
+            <Image
               // loader={myLoader}
-              src={user.userPicture}
+              src={user.userPicture || 'next.svg'}
               alt="Avatar"
               width={160}
               height={160}
               style={pictureStyle}
-                  />
-            <button>
+            />
+            <input
+              type="file"
+              id="profile-picture"
+              ref={fileInputRef} // Ref to handleclick from penIcon
+              onChange={handleFileChange}
+              style={{ display: "none" }} // To hide input
+            />
+            <button onClick={handleClickProfilPicture}>
               <FontAwesomeIcon icon={faPen} className={styles.penIcon} />
             </button>
           </div>
@@ -66,27 +137,38 @@ export default function Profile() {
             <span>Nom : {user.username}</span>
           </div>
           <div className={styles.backPicture}>
-          <Image
+            <Image
               // loader={myLoader}
-              src='/image_profile.png'
+              src="/image_profile.png"
               alt="backgroundprofile"
               width={360}
               height={250}
               style={backPictureStyle}
-                  /></div>
+            />
+          </div>
         </div>
 
         <div className={styles.rightContainer}>
-            <h1 className={`${styles.title} ${lexend.className}`}>Mon Compte</h1>
+          <h1 className={`${styles.title} ${lexend.className}`}>Mon Compte</h1>
           <div className={styles.tripsContainer}>
-            <h2 className={`${styles.tripTitle} ${lexend.className}`}>Mes voyages :</h2>
+            <h2 className={`${styles.tripTitle} ${lexend.className}`}>
+              Mes voyages :
+            </h2>
             {trips}
             <div className={styles.addContainer}>
-            <button className={styles.addTravel} onClick={ () =>handleClickAddTrip()}>
-              <span className={styles.plus}><FontAwesomeIcon icon={faCirclePlus} className={styles.faCirclePlusIcon} /></span>
-              <br />
-              Organise un nouveau Travel entre amis
-            </button>
+              <button
+                className={styles.addTravel}
+                onClick={() => handleClickAddTrip()}
+              >
+                <span className={styles.plus}>
+                  <FontAwesomeIcon
+                    icon={faCirclePlus}
+                    className={styles.faCirclePlusIcon}
+                  />
+                </span>
+                <br />
+                Organise un nouveau Travel entre amis
+              </button>
             </div>
           </div>
         </div>

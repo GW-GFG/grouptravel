@@ -3,6 +3,7 @@ import styles from './AddActivity.module.css'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Button from './utils/Button'
+import { notification, DatePicker } from 'antd'
 import { updateCurrentTripActivities } from '@/reducers/user'
 
 // import fonts to use them for menu items 
@@ -77,37 +78,48 @@ const AddActivity = () => {
                     activityData.picture = pictureData.url;
                 }
 
-            return fetch('http://localhost:5500/activities/new', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(activityData)
-            });
-            })
-            .then(response => response.json())
-            .then(data => {
-              // if no trip is found or activity's date is outside trip's date
-              if (data.result === false) {
-                alert(data.error)
-                return
-              }
-              // trip is found, add activity
-              dispatch(updateCurrentTripActivities(data.newActivity.activities[data.newActivity.activities.length - 1]))
-              alert('Votre activité a bien été ajoutée à votre groupe !')
-              setActivityName('')
-              setActivityPicture('')
-              setActivityURL('')
-              setActivityBudget('')
-              setActivityDate('')
-              setActivityLocation('')
-              setActivityDescription('')
-              setActivityPicture('')
-            })
-          } else {
-            alert('Le voyage choisi n\'a pas pu être trouvé.');
-          }
-    });
+      return fetch('http://localhost:5500/activities/new', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(activityData)
+      });
+      })
+      .then(response => response.json())
+      .then(data => {
+        // if no trip is found or activity's date is outside trip's date
+        if (data.result === false) {
+          // notificatin to user that dates are not valid
+          notification.warning({
+            message: 'Attention !',
+            description: 'Les dates sélectionnées ne sont pas comprises dans les dates de votre voyage !',
+            placement: 'bottomRight'
+          })
+          return
+        }
+        // trip is found, add activity
+        // console.log('New activity added', data.newActivity.activities[data.newActivity.activities.length - 1])
+        // dispatch new activity into reducer
+        dispatch(updateCurrentTripActivities(data.newActivity.activities[data.newActivity.activities.length - 1]))
+        // notification to user that activity has been added
+        notification.success({
+          message: 'Activité ajoutée !',
+          description: 'Votre activité a bien été ajoutée à votre groupe !',
+          placement: 'bottomRight'
+        })
+        // reset fields
+        setActivityName('')
+        setActivityPicture('')
+        setActivityURL('')
+        setActivityBudget('')
+        setActivityDate('')
+        setActivityLocation('')
+        setActivityDescription('')
+        setActivityPicture('')
+      })
   }
 
+  });
+  };
   return (
     <div className={styles.newActivity}>
       <h1 className={lexend.className}>Une activité à proposer ? </h1>
@@ -151,6 +163,7 @@ const AddActivity = () => {
           <div className={styles.middle}>
             <div className={styles.inputDate}>
               <label htmlFor="activity-date" className={styles.label}>Sélectionnez la date: *</label>
+              {/* <DatePicker /> */}
               <input
                 type="date"
                 id="activity-date"
@@ -177,9 +190,10 @@ const AddActivity = () => {
                 <input
                   type="number"
                   id="activity-budget-single"
+                  readOnly
                   className={styles.input}
-                  value={activityBudgetPerPerson}
-                  onChange={(e) => setActivityBudgetPerPerson(e.target.value)}
+                  value={(activityBudget / (currentTrip.members.length + 1)).toFixed(2)}
+                  // onChange={(e) => setActivityBudgetPerPerson(e.target.value)}
                   placeholder='€'
                 />
               </div>
