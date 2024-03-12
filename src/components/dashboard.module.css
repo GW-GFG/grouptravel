@@ -3,26 +3,38 @@
   padding: 2.5rem;
   background: var(--primary-blue-color);
   color: white;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   border-radius: 1rem;
   max-height: max-content;
 }
 
 .leftContainer {
+  /*
   display: flex;
   flex-direction: column;
+  */
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
   gap: 2rem;
-  max-width: 30rem;
+  max-width: 26rem;
 }
 
 .middleContainer {
   min-width: 15rem;
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+  gap: 2rem;
 }
 
 .rightContainer {
+  /*
   display: flex;
   flex-direction: column;
+  */
+  display: grid;
+  grid-template-rows: 1fr 2fr;
   gap: 2rem;
+  justify-items: stretch;
 }

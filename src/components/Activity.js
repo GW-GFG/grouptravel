@@ -101,7 +101,7 @@ const Activity = (props, i) => {
             }
         >
             <h2 className={`${styles.cardTitle} ${lexend.className}`}>{capitalizeFirstLetter(name)}</h2>
-            <p>Lieu: {location}</p>
+            <p>Lieu: {location.name}</p>
             <p>Date: {new Date(date).toLocaleDateString()}</p>
             <p>Description: {description}</p>
             <p>Budget: {budget}</p>
