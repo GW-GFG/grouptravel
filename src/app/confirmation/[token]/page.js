@@ -73,7 +73,7 @@ export default function tokenPage( { params } ) {
         })
         .catch(error => console.error('Error updating user:', error));
     };
-    console.log(tripId)
+    // console.log(tripId)
     const handleDecline = () => {
       console.log('click decline')
         fetch(`http://localhost:5500/decline/invitateduser/${tripId}`, {
@@ -82,9 +82,9 @@ export default function tokenPage( { params } ) {
         body: JSON.stringify({ token }),
       }).then(response => response.json())
       .then(data => {
-        if(data)
-        console.log(data)
-        // router.push('/')
+        if(!data)
+        // console.log(data)
+        router.push('/')
       })      
     }
   

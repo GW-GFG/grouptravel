@@ -18,12 +18,12 @@ export default function DashboardInfo() {
         }).then(response => response.json())
         .then(data => {
           // console.log(data.tripData)
-          setTotalBudget(data.tripData.budget)
+          setTotalBudget(data.tripData.budget.toFixed(2))
           if (data.tripData.members.length > 0) {
             const tempBudget = data.tripData.budget / (data.tripData.members.length + 1)
-            setBudgetPerPerson(tempBudget)
+            setBudgetPerPerson(tempBudget.toFixed(2)) 
           } else { 
-            setBudgetPerPerson(data.budget)
+            setBudgetPerPerson(totalBudget.toFixed(2))
           }
         })    
   }, []);
@@ -37,11 +37,9 @@ export default function DashboardInfo() {
         <p>Dates retour : {new Date(currentTrip.dates.return).toLocaleDateString()}</p>
       </div>
       <div className={styles.userInfoContainer}>Budget :
-          <div className={styles.userInfoBudget}>Total : {totalBudget} €</div>
-          <div className={styles.userInfoBudget}>par Personne : {budgetPerPerson}€</div>
+          <div className={styles.userInfoBudget}>Total : {totalBudget} € - par Personne : {budgetPerPerson}€</div>
       </div>
-      <div className={styles.backPicture}>Logement</div>
-          <div className={styles.infoLogement}>lieu séjour: {currentTrip.location}</div>
+          <div className={styles.infoLogement}>lieu séjour: {currentTrip.location.name}</div>
           <div className={styles.infoLogement}>Logement: à définir !</div>
     </div>
   );

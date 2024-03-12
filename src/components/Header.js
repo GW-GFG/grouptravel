@@ -135,13 +135,6 @@ export default function Header() {
                 <Link className={styles[`${pathname === '/' ? 'active' : 'link'}`]} href="/"> Accueil </Link>
             </div>
             <div className={styles.headerRight}>
-                <FontAwesomeIcon icon={iconPlane.name} className={styles.headerIcon} />
-                <div className={styles.tripsContainer}>
-                <Popover title="Mes autres voyages" content={popoverContent} className={styles.popover} trigger="hover">
-                    {!user.currentTrip && <p>Mes voyages</p>}
-                    {user.currentTrip && <p> {user.currentTrip.name}</p>}
-                </Popover>
-                </div>
                 <FontAwesomeIcon icon={iconUser.name} className={styles.headerIcon} />
                 <div>
                     {!user.token && <button onClick={displaySignInModal} className={`${styles.link} ${styles.buttonHeader}`}> Connexion </button>}

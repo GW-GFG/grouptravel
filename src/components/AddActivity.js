@@ -29,44 +29,54 @@ const AddActivity = () => {
   const handleSubmit = (e) => {
     e.preventDefault() // prevents auto-refreshing of the page when submitting the form
 
-    // check if url is valid (if url exists)
-    if (activityURL !== '') {
-      try {
-        new URL(activityURL);
-      } catch (err) {
-        setFormHasError(true);
-        setErrorMessage("L'url saisie n'est pas valide");
-        return;
-      }
-    }
 
-    // new activity object
-    const activityData = {
-      name: activityName,
-      picture: activityPicture,
-      url: activityURL,
-      date: activityDate,
-      budget: activityBudget,
-      location: activityLocation,
-      description: activityDescription,
-      tripId: currentTrip._id
-    }
-
-      //Handle picture
-      const formData = new FormData();
-      activityPicture && formData.append('image', activityPicture);
-      fetch('http://localhost:5500/upload', {
-      method: 'POST',
-      body: formData
-      })
-      .then(response => response.json())
-      .then(pictureData => {
-          if (!pictureData || !pictureData.url){
-              return console.log(' No picture ')
-          } else {
-              console.log('pictureDataUrl : ', pictureData.url);
-              activityData.picture = pictureData.url;
+    // Google map input logic
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAtN3JpGGPLuZkaD7j2zoSB0vE3e_B-Jn8&address=${activityLocation}`)
+    .then(response => response.json()).then(data => {
+        if (data && data.results[0]) {
+          const coordinates = data.results[0].geometry.location;
+          // check if url is valid (if url exists)
+          if (activityURL !== '') {
+            try {
+              new URL(activityURL);
+            } catch (err) {
+              setFormHasError(true);
+              setErrorMessage("L'url saisie n'est pas valide");
+              return;
+            }
           }
+
+          // new activity object
+          const activityData = {
+            name: activityName,
+            picture: activityPicture,
+            url: activityURL,
+            date: activityDate,
+            budget: activityBudget,
+            location: {
+              name: activityLocation,
+              lat: coordinates.lat,
+              lng: coordinates.lng
+            },
+            description: activityDescription,
+            tripId: currentTrip._id
+          }
+
+            //Handle picture
+            const formData = new FormData();
+            activityPicture && formData.append('image', activityPicture);
+            fetch('http://localhost:5500/upload', {
+            method: 'POST',
+            body: formData
+            })
+            .then(response => response.json())
+            .then(pictureData => {
+                if (!pictureData || !pictureData.url){
+                    return console.log(' No picture ')
+                } else {
+                    console.log('pictureDataUrl : ', pictureData.url);
+                    activityData.picture = pictureData.url;
+                }
 
       return fetch('http://localhost:5500/activities/new', {
         method: 'POST',
@@ -108,6 +118,8 @@ const AddActivity = () => {
       })
   }
 
+  });
+  };
   return (
     <div className={styles.newActivity}>
       <h1 className={lexend.className}>Une activité à proposer ? </h1>
@@ -178,9 +190,10 @@ const AddActivity = () => {
                 <input
                   type="number"
                   id="activity-budget-single"
+                  readOnly
                   className={styles.input}
-                  value={activityBudgetPerPerson}
-                  onChange={(e) => setActivityBudgetPerPerson(e.target.value)}
+                  value={(activityBudget / (currentTrip.members.length + 1)).toFixed(2)}
+                  // onChange={(e) => setActivityBudgetPerPerson(e.target.value)}
                   placeholder='€'
                 />
               </div>

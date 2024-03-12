@@ -19,6 +19,8 @@ export default function Accommodation(props) {
     const currentTrip = useSelector((state) => state.user.value.currentTrip);
     //To keep vote updated
     const accommodation = currentTrip.accomodations.find(accommodation => accommodation._id === _id);
+
+    const budgetPerPerson = (currentTrip.budget / (currentTrip.members.length + 1)).toFixed(2)
   
     const [userVoteStatus, setUserVoteStatus] = useState(getInitialVoteStatus());
 
@@ -94,13 +96,13 @@ export default function Accommodation(props) {
                     <div className={styles.leftContainer}>
                         <div className={styles.leftColumn}>
                             <Image width={300} height={200} className={styles.imgContainer} src={`${photos[0] || "next.svg"}`} alt="My Trip Picture" />   
-                            <p>Budget par personne : {budget}</p>
+                            <p>Budget par personne : {budgetPerPerson}</p>
                         </div>
 
                         <div className={styles.middleColumn}>
                             <div>
                             <p className={styles.date}>Du : {new Date(dates.departure).toLocaleDateString()} Au : {new Date(dates.return).toLocaleDateString()}</p>
-                            <p className={styles.location}>Localisation : {location}</p>
+                            <p className={styles.location}>Localisation : {location.name}</p>
                             </div>
                             <div>
                             <p className={styles.miniTitles}>Descriptif du logement :</p>
