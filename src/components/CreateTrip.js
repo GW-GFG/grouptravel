@@ -46,7 +46,7 @@ export default function CreateTrip() {
             }
             else {
             // If no error > update reducer in redux
-            console.log('data.newTrip', data.newTrip)
+            // console.log('data.newTrip', data.newTrip)
             dispatch(updateMyTrips(data.newTrip))
             dispatch(updateCurrentTrip(data.newTrip))
             notification.success({

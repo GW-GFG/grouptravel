@@ -300,10 +300,12 @@ export default function AddAccomodation() {
                                 type="number"
                                 id="accomodation-budget-single"
                                 className={styles.input}
-                                value={accomodationBudgetPerPerson}
-                                onChange={(e) => setAccomodationBudgetPerPerson(e.target.value)}
+                                readOnly
+                                value={(accomodationBudget / (currentTrip.members.length + 1)).toFixed(2)}
+                                // onChange={(e) => setAccomodationBudgetPerPerson(e.target.value)}
                                 min="0"
                             />
+                            
                         </div>
                     </div>
                 </div>
