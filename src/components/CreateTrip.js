@@ -21,32 +21,46 @@ export default function CreateTrip() {
     const [errorMsg, setErrorMsg] = useState('')
 
     const token = user.token
-    // const token = '7Az44VwjhOvapTcIHhyQH_IwYk04BDQG'
      
 
     const handleSubmit = () => {
-        // Unbreakable form
-        const locationToSend = location[0].toUpperCase()+ location.slice(1).toLowerCase()
-        const nameToSend = groupName[0].toUpperCase()+ groupName.slice(1).toLowerCase()
-        // fetch for add new trip in DDB
-        fetch('http://localhost:5500/trips/new', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: nameToSend, location : locationToSend, departureDate, returnDate, token: token }),
-        }).then(response => response.json())
-            .then(data => {
-            // If data.error send error.msg to front
-            if(data.error) {
-                setErrorMsg(data.error)
+
+        // Google map input logic
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAtN3JpGGPLuZkaD7j2zoSB0vE3e_B-Jn8&address=${location}`)
+        .then(response => response.json()).then(data => {
+            if (data && data.results[0]) {
+                const coordinates = data.results[0].geometry.location;
+
+                // Unbreakable form
+                const locationToSend = {
+                    name: location[0].toUpperCase()+ location.slice(1).toLowerCase(),
+                    lat: coordinates.lat,
+                    lng: coordinates.lng,
+                }
+                const nameToSend = groupName[0].toUpperCase()+ groupName.slice(1).toLowerCase()
+                // fetch for add new trip in DDB
+                fetch('http://localhost:5500/trips/new', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: nameToSend, location : locationToSend, departureDate, returnDate, token: token }),
+                }).then(response => response.json())
+                    .then(data => {
+                    // If data.error send error.msg to front
+                    if(data.error) {
+                        setErrorMsg(data.error)
+                    }
+                    else {
+                    // If no error > update reducer in redux
+                    dispatch(updateMyTrips(data.newTrip))
+                    dispatch(updateCurrentTrip(data.newTrip))
+                    // rerouting user to dashboard of new trip
+                    router.push('/dashboard')
+                    }
+                });
+            } else {
+                setErrorMsg('Le lieu choisi n\'a pas pu être trouvé.')
             }
-            else {
-            // If no error > update reducer in redux
-            console.log('data.newTrip', data.newTrip)
-            dispatch(updateMyTrips(data.newTrip))
-            dispatch(updateCurrentTrip(data.newTrip))
-            // rerouting user to dashboard of new trip
-            router.push('/dashboard')
-            }
+            
         });
     }
 

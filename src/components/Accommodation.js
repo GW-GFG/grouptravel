@@ -100,7 +100,7 @@ export default function Accommodation(props) {
                         <div className={styles.middleColumn}>
                             <div>
                             <p className={styles.date}>Du : {new Date(dates.departure).toLocaleDateString()} Au : {new Date(dates.return).toLocaleDateString()}</p>
-                            <p className={styles.location}>Localisation : {location}</p>
+                            <p className={styles.location}>Localisation : {location.name}</p>
                             </div>
                             <div>
                             <p className={styles.miniTitles}>Descriptif du logement :</p>

@@ -28,71 +28,84 @@ const AddActivity = () => {
   const handleSubmit = (e) => {
     e.preventDefault() // prevents auto-refreshing of the page when submitting the form
 
-    // check if url is valid (if url exists)
-    if (activityURL !== '') {
-      try {
-        new URL(activityURL);
-      } catch (err) {
-        setFormHasError(true);
-        setErrorMessage("L'url saisie n'est pas valide");
-        return;
-      }
-    }
 
-    // new activity object
-    const activityData = {
-      name: activityName,
-      picture: activityPicture,
-      url: activityURL,
-      date: activityDate,
-      budget: activityBudget,
-      location: activityLocation,
-      description: activityDescription,
-      tripId: currentTrip._id
-    }
-
-      //Handle picture
-      const formData = new FormData();
-      activityPicture && formData.append('image', activityPicture);
-      fetch('http://localhost:5500/upload', {
-      method: 'POST',
-      body: formData
-      })
-      .then(response => response.json())
-      .then(pictureData => {
-          if (!pictureData || !pictureData.url){
-              return console.log(' No picture ')
-          } else {
-              console.log('pictureDataUrl : ', pictureData.url);
-              activityData.picture = pictureData.url;
+    // Google map input logic
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAtN3JpGGPLuZkaD7j2zoSB0vE3e_B-Jn8&address=${activityLocation}`)
+    .then(response => response.json()).then(data => {
+        if (data && data.results[0]) {
+          const coordinates = data.results[0].geometry.location;
+          // check if url is valid (if url exists)
+          if (activityURL !== '') {
+            try {
+              new URL(activityURL);
+            } catch (err) {
+              setFormHasError(true);
+              setErrorMessage("L'url saisie n'est pas valide");
+              return;
+            }
           }
 
-      return fetch('http://localhost:5500/activities/new', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(activityData)
-      });
-      })
-      .then(response => response.json())
-      .then(data => {
-        // if no trip is found or activity's date is outside trip's date
-        if (data.result === false) {
-          alert(data.error)
-          return
-        }
-        // trip is found, add activity
-        console.log('New activity added', data.newActivity.activities[data.newActivity.activities.length - 1])
-        dispatch(updateCurrentTripActivities(data.newActivity.activities[data.newActivity.activities.length - 1]))
-        alert('Votre activité a bien été ajoutée à votre groupe !')
-        setActivityName('')
-        setActivityPicture('')
-        setActivityURL('')
-        setActivityBudget('')
-        setActivityDate('')
-        setActivityLocation('')
-        setActivityDescription('')
-        setActivityPicture('')
-      })
+          // new activity object
+          const activityData = {
+            name: activityName,
+            picture: activityPicture,
+            url: activityURL,
+            date: activityDate,
+            budget: activityBudget,
+            location: {
+              name: activityLocation,
+              lat: coordinates.lat,
+              lng: coordinates.lng
+            },
+            description: activityDescription,
+            tripId: currentTrip._id
+          }
+
+            //Handle picture
+            const formData = new FormData();
+            activityPicture && formData.append('image', activityPicture);
+            fetch('http://localhost:5500/upload', {
+            method: 'POST',
+            body: formData
+            })
+            .then(response => response.json())
+            .then(pictureData => {
+                if (!pictureData || !pictureData.url){
+                    return console.log(' No picture ')
+                } else {
+                    console.log('pictureDataUrl : ', pictureData.url);
+                    activityData.picture = pictureData.url;
+                }
+
+            return fetch('http://localhost:5500/activities/new', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(activityData)
+            });
+            })
+            .then(response => response.json())
+            .then(data => {
+              // if no trip is found or activity's date is outside trip's date
+              if (data.result === false) {
+                alert(data.error)
+                return
+              }
+              // trip is found, add activity
+              dispatch(updateCurrentTripActivities(data.newActivity.activities[data.newActivity.activities.length - 1]))
+              alert('Votre activité a bien été ajoutée à votre groupe !')
+              setActivityName('')
+              setActivityPicture('')
+              setActivityURL('')
+              setActivityBudget('')
+              setActivityDate('')
+              setActivityLocation('')
+              setActivityDescription('')
+              setActivityPicture('')
+            })
+          } else {
+            alert('Le voyage choisi n\'a pas pu être trouvé.');
+          }
+    });
   }
 
   return (
