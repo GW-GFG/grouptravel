@@ -164,9 +164,10 @@ const AddActivity = () => {
                 <input
                   type="number"
                   id="activity-budget-single"
+                  readOnly
                   className={styles.input}
-                  value={activityBudgetPerPerson}
-                  onChange={(e) => setActivityBudgetPerPerson(e.target.value)}
+                  value={(activityBudget / (currentTrip.members.length + 1)).toFixed(2)}
+                  // onChange={(e) => setActivityBudgetPerPerson(e.target.value)}
                   placeholder='€'
                 />
               </div>

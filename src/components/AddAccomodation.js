@@ -197,6 +197,7 @@ export default function AddAccomodation() {
                     setErrorMessage('');
                     setAccomodationPicture('');
                     // replace with proper feedback
+                    alert('Votre logement a bien été ajoutée à votre groupe !')
                     console.log('AddAccomodation.js : nouveau logement ajouté au trip, yay !')
                 } else {
                     setFormHasError(true);
@@ -288,10 +289,12 @@ export default function AddAccomodation() {
                                 type="number"
                                 id="accomodation-budget-single"
                                 className={styles.input}
-                                value={accomodationBudgetPerPerson}
-                                onChange={(e) => setAccomodationBudgetPerPerson(e.target.value)}
+                                readOnly
+                                value={(accomodationBudget / (currentTrip.members.length + 1)).toFixed(2)}
+                                // onChange={(e) => setAccomodationBudgetPerPerson(e.target.value)}
                                 min="0"
                             />
+                            
                         </div>
                     </div>
                 </div>
