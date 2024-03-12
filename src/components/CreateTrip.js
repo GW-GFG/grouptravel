@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { notification } from 'antd'
 import InputLabel from './InputLabel';
 import styles from './creatTrip.module.css';
 import {updateCurrentTrip, updateMyTrips} from '../reducers/user';
@@ -38,12 +38,22 @@ export default function CreateTrip() {
             // If data.error send error.msg to front
             if(data.error) {
                 setErrorMsg(data.error)
+                notification.warning({
+                    message: 'Attention !',
+                    description: errorMsg,
+                    placement: 'bottomRight'
+                })
             }
             else {
             // If no error > update reducer in redux
             console.log('data.newTrip', data.newTrip)
             dispatch(updateMyTrips(data.newTrip))
             dispatch(updateCurrentTrip(data.newTrip))
+            notification.success({
+                message: 'Voyage créé !',
+                description: 'Votre voyage a bien été créé !',
+                placement: 'bottomRight'
+            })
             // rerouting user to dashboard of new trip
             router.push('/dashboard')
             }
@@ -87,7 +97,7 @@ export default function CreateTrip() {
                     
                 </div>
                 {/* only if error display error */}
-                {errorMsg != '' && <h2 className={styles.error}>{errorMsg}</h2>}
+                {/* {errorMsg != '' && <h2 className={styles.error}>{errorMsg}</h2>} */}
                 <button className={styles.button} onClick={() => handleSubmit()}>Go!</button>
             </div>
         </div>  

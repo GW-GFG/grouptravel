@@ -125,7 +125,7 @@ const Activity = (props, i) => {
                     </div>
                 </div>
                 <div className={styles.button}>
-                    <Link href=''>
+                    <Link href={url} target="_blank">
                         <Button type="text" buttonClass="primary" text="En savoir plus" />
                     </Link>
                 </div>

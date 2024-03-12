@@ -1,8 +1,10 @@
 'use client'
 import styles from './addAccomodation.module.css';
 import { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from './utils/Button';
+import { notification } from 'antd'
+import { updateCurrentTripAccommodations } from '@/reducers/user'
 
 // import fonts to use them for menu items 
 import { lexend } from '../app/fonts';
@@ -14,6 +16,7 @@ import { Wrapper, Status } from "@googlemaps/react-wrapper";
 export default function AddAccomodation() {
 
     const currentTrip = useSelector((state) => state.user.value.currentTrip);
+    const dispatch = useDispatch()
 
     const [accomodationName, setAccomodationName] = useState('');
     const [accomodationPicture, setAccomodationPicture] = useState('');
@@ -33,48 +36,48 @@ export default function AddAccomodation() {
     const [center, setCenter] = useState({
         lat: 48.866667,
         lng: 2.333333,
-      });
+    });
     const [zoom, setZoom] = useState(4);
 
     // Allows us to set marker's position
     const [position, setPosition] = useState({
         lat: 48.866667,
-        lng: 2.333333, 
+        lng: 2.333333,
     });
 
-    const Map = () => {};
+    const Map = () => { };
 
     const ref = useRef(null);
     const [map, setMap] = useState();
 
     useEffect(() => {
-    if (ref.current && !map) {
-        setMap(new window.google.maps.Map(ref.current, {}));
-    }
+        if (ref.current && !map) {
+            setMap(new window.google.maps.Map(ref.current, {}));
+        }
     }, [ref, map]);
 
     const Marker = (options) => {
         const [marker, setMarker] = useState();
-      
+
         useEffect(() => {
-          if (!marker) {
-            setMarker(new google.maps.Marker());
-          }
-      
-          // remove marker from map on unmount
-          return () => {
-            if (marker) {
-              marker.setMap(null);
+            if (!marker) {
+                setMarker(new google.maps.Marker());
             }
-          };
+
+            // remove marker from map on unmount
+            return () => {
+                if (marker) {
+                    marker.setMap(null);
+                }
+            };
         }, [marker]);
         useEffect(() => {
-          if (marker) {
-            marker.setOptions(options);
-          }
+            if (marker) {
+                marker.setOptions(options);
+            }
         }, [marker, options]);
         return null;
-      };
+    };
 
 
     /*
@@ -98,10 +101,10 @@ export default function AddAccomodation() {
         };
       */
 
-        const render = (status) => {
-            if (status === Status.FAILURE) return <div>Hi</div>;
-            return <div>Ho</div>;
-          };
+    const render = (status) => {
+        if (status === Status.FAILURE) return <div>Hi</div>;
+        return <div>Ho</div>;
+    };
 
 
     /* end Google map stuff */
@@ -112,7 +115,7 @@ export default function AddAccomodation() {
         // check if url is valid (if url exists)
         if (accomodationURL !== '') {
             try {
-                new URL(accomodationURL);   
+                new URL(accomodationURL);
             } catch (err) {
                 setFormHasError(true);
                 setErrorMessage("L'url saisie n'est pas valide");
@@ -124,20 +127,25 @@ export default function AddAccomodation() {
         const accommodationDepartureDate = new Date(departureDate);
         const accommodationReturnDate = new Date(returnDate);
 
-        if(accommodationDepartureDate >= accommodationReturnDate) {
+        if (accommodationDepartureDate >= accommodationReturnDate) {
             setFormHasError(true);
             setErrorMessage("La date de départ doit être postérieure à la date d'arrivée.")
-            return;  
+            return;
         }
 
         // check if accommodation dates are within trip dates
         const tripDepartureDate = new Date(currentTrip.dates.departure);
         const tripReturnDate = new Date(currentTrip.dates.return);
 
-        if (accommodationDepartureDate < tripDepartureDate || accommodationDepartureDate > tripReturnDate 
-        || accommodationReturnDate < tripDepartureDate || accommodationReturnDate > tripReturnDate) {
+        if (accommodationDepartureDate < tripDepartureDate || accommodationDepartureDate > tripReturnDate
+            || accommodationReturnDate < tripDepartureDate || accommodationReturnDate > tripReturnDate) {
             setFormHasError(true);
             setErrorMessage("Les dates du logement ne sont pas comprises dans celles du voyage.");
+            notification.warning({
+                message: 'Attention !',
+                description: errorMessage,
+                placement: 'bottomRight'
+            })
             return;
         }
 
@@ -159,51 +167,55 @@ export default function AddAccomodation() {
         const formData = new FormData();
         accomodationPicture && formData.append('image', accomodationPicture);
         fetch('http://localhost:5500/upload', {
-        method: 'POST',
-        body: formData
+            method: 'POST',
+            body: formData
         })
-        .then(response => response.json())
-        .then(pictureData => {
-            if (!pictureData || !pictureData.url){
-                return console.log(' No picture ')
-            } else {
-                console.log('pictureDataUrl : ', pictureData.url);
-                accomodationData.photos.push(pictureData.url);
-            }
-//Return fetch to handle upload
-        console.log('accomodationData : ', accomodationData )
-        return fetch(`http://localhost:5500/accomodations/new`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(accomodationData)
-        });
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (!data) {
-                console.log('Erreur');
-                return
-            } else {
-                if (data.result === true) {
-                    setAccomodationName('');
-                    setAccomodationPicture('');
-                    setAccomodationURL('');
-                    setAccomodationBudget(0);
-                    setDepartureDate('');
-                    setReturnDate('');
-                    setAccomodationLocation('');
-                    setAccomodationDescription('');
-                    setFormHasError(false);
-                    setErrorMessage('');
-                    setAccomodationPicture('');
-                    // replace with proper feedback
-                    console.log('AddAccomodation.js : nouveau logement ajouté au trip, yay !')
+            .then(response => response.json())
+            .then(pictureData => {
+                if (!pictureData || !pictureData.url) {
+                    return console.log(' No picture ')
                 } else {
-                    setFormHasError(true);
-                    setErrorMessage(data.error);
+                    console.log('pictureDataUrl : ', pictureData.url);
+                    accomodationData.photos.push(pictureData.url);
                 }
-            }
-        });
+                //Return fetch to handle upload
+                console.log('accomodationData : ', accomodationData)
+                return fetch(`http://localhost:5500/accomodations/new`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(accomodationData)
+                });
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === false) {
+                    notification.warning({
+                        message: 'Attention !',
+                        description: data.error,
+                        placement: 'bottomRight'
+                    })
+                    return
+                }
+                console.log(data)
+                console.log('New accomodation added', data.newAccomodation)
+                dispatch(updateCurrentTripAccommodations(data.newAccomodation))
+                notification.success({
+                    message: 'Logement ajouté !',
+                    description: 'Votre logement a bien été soumis à votre groupe !',
+                    placement: 'bottomRight'
+                })
+                setAccomodationName('');
+                setAccomodationPicture('');
+                setAccomodationURL('');
+                setAccomodationBudget(0);
+                setDepartureDate('');
+                setReturnDate('');
+                setAccomodationLocation('');
+                setAccomodationDescription('');
+                setFormHasError(false);
+                setErrorMessage('');
+                setAccomodationPicture('');
+            });
     }
 
     return <div className={styles.newAccomodation}>
@@ -296,7 +308,7 @@ export default function AddAccomodation() {
                     </div>
                 </div>
                 <div className={styles.bottom}>
-                    <div style={{minWidth: '350px'}}>
+                    <div style={{ minWidth: '350px' }}>
                         <label htmlFor="accomodation-location" className={styles.label}>Localisation</label>
                         {/* Kevin: input peut-être plus nécessaire, cf maquette (?)
                         <input
@@ -329,11 +341,11 @@ export default function AddAccomodation() {
                     </div>
                 </div>
                 <div className={styles.buttonContainer}>
-                    {formHasError && errorMessage}
+                    {formHasError}
                     <Button type="submit" buttonClass="primary" text="Soumettre" />
                 </div>
             </div>
-            
+
         </form>
     </div>
 }
