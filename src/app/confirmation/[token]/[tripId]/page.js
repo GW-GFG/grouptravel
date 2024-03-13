@@ -15,7 +15,7 @@ export default function tokenwithTripsIdPage() {
     const [tripName, setTripName] = useState('');
     const [currentTrip, setCurrentTrip] = useState('');
     const [submitError, setSubmitError] = useState(null);
-    const [idMember, setIdMember] = useState('');
+    // const [idMember, setIdMember] = useState('');
     
     const router = useRouter();
     const dispatch = useDispatch();
@@ -32,21 +32,18 @@ export default function tokenwithTripsIdPage() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify( {token: token} )
         }).then(response => response.json())
-        .then(data => {
-        //   console.log(data)
-         //Si pas de donnée orienter user vers home
-          if(!data.result) {
+        .then(userdata => {
+        //Si pas de donnée orienter user vers home
+          if(!userdata.result) {
         // TODO Rajouter condition pour que si user déjà dans Trip redirection vers Confirmation.
             router.push('/confirmation');
             return ;
           } else {
         //Si donnée ok récuperer infos pour personnaliser page
-            // console.log(data.user)
-            setEmail(data.email)
-            setUsername(data.username)
-            setIdMember(data.user._id)
+            setEmail(userdata.email)
+            setUsername(userdata.username)
         // dispacth userdata dans reducer
-         dispatch(addUserToStore({ token, username: data.username, userPicture: data.userPicture, email, myTrips: data.user.myTrips }))    
+         dispatch(addUserToStore({ token, username: userdata.username, userPicture: userdata.userPicture, email, myTrips: userdata.myTrips }))    
           }
         });
         //** Fetch BDD pour récepurer donnée Trips*//
@@ -56,15 +53,16 @@ export default function tokenwithTripsIdPage() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify( {tripId: params.tripId} )
         }).then(response => response.json())
-        .then(data => {
-          
-          if(!data.result || data.tripData.members.includes(idMember)) {
+        .then(oneTripData => {
+          // console.log('Onetripdata', oneTripData)
+          // || data.tripData.members.includes(idMember)
+          if(!oneTripData.result) {
             console.log('no data result')
             router.push('/confirmation');
             return ;
-        } if (data.result) {
+        } if (oneTripData.result) {
             // console.log(data.tripData.members)
-            setTripName(data.tripData.name);
+            setTripName(oneTripData.tripData.name);
         }
             
         })
@@ -81,10 +79,10 @@ export default function tokenwithTripsIdPage() {
       })
         .then(response => response.json())
         .then(data => {
-          console.log(data)
-          console.log(data.trip)
+          // console.log(data)
+          // console.log(data.trip)
            
-          // if data result --> dispacth trip in currenttrip send him to profile page.
+          // if data result -->  send him to profile page.
           dispatch(updateCurrentTrip(data.trip))
           // dispatch(updateMyTrips(data.trip))
           !data.result && setSubmitError(true);
@@ -94,7 +92,7 @@ export default function tokenwithTripsIdPage() {
     }
 
     const handleDecline = () => {
-        console.log('click decline')
+        // console.log('click decline')
         fetch(`http://localhost:5500/decline/invitation/${tripId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },

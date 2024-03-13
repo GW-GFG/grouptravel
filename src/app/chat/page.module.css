@@ -1,0 +1,19 @@
+.mainContainer {
+    display: flex;
+    width: 80%;
+    justify-content: flex-start;
+    gap: 2rem;
+}
+.listContainer {
+    background-color: var(--primary-blue-color);
+    color: white;
+    padding: 1rem;
+    border-radius: 0.625rem;
+}
+
+.chatContainer {
+    background-color: var(--primary-green-color);
+    padding: 1rem;
+    border-radius: 0.625rem;
+    width: 80%;
+}

@@ -12,6 +12,7 @@
 .whiteContainer {
     width: 80%;
     background-color: white;
+    color: var(--primary-black-color);
     border-radius: 1rem;
     padding: 0.25rem;
 }

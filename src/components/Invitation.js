@@ -35,12 +35,12 @@ export default function Invitation() {
 
     const handleSendEmail = async () => {
 
-        console.log(currentTrip._id)
+        // console.log(currentTrip._id)
 
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
         const validEmails = emails.filter(email => email && emailRegex.test(email));
-        console.log(validEmails)
+        // console.log(validEmails)
     if (validEmails.length === 0) {
         setEmptyField(true); // Aucune adresse e-mail valide n'est saisie
         return;
@@ -65,7 +65,7 @@ export default function Invitation() {
         setEmails(['']); // Réinitialiser les e-mails après l'envoi réussi
         setEmptyField(false)
     } catch (error) {
-        console.error('Error sending emails:', error);
+        // console.error('Error sending emails:', error);
         setErrorMsg('Error sending emails. Please try again later.');
     }
 };

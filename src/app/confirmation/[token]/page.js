@@ -30,7 +30,7 @@ export default function tokenPage( { params } ) {
         body: JSON.stringify( {token: token} )
       }).then(response => response.json())
       .then(data => {
-        console.log('data : ', JSON.stringify(data))
+        // console.log('data : ', JSON.stringify(data))
         if(!data.result || data.username != '' ) {
           router.push('/confirmation');
           return ;
@@ -75,14 +75,15 @@ export default function tokenPage( { params } ) {
     };
     // console.log(tripId)
     const handleDecline = () => {
-      console.log('click decline')
-        fetch(`http://localhost:5500/decline/invitateduser/${tripId}`, {
+      // console.log('trip id', tripId )
+        fetch(`http://localhost:5500/decline/invitateduser/${tripId._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token }),
       }).then(response => response.json())
       .then(data => {
-        if(!data)
+        // console.log(data)
+        if(data)
         // console.log(data)
         router.push('/')
       })      
