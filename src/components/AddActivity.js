@@ -1,10 +1,10 @@
-"use client";
-import styles from "./AddActivity.module.css";
-import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Button from "./utils/Button";
-import { notification, DatePicker } from "antd";
-import { updateCurrentTripActivities } from "@/reducers/user";
+'use client'
+import styles from './AddActivity.module.css'
+import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import Button from './utils/Button'
+import { notification } from 'antd'
+import { updateCurrentTripActivities } from '@/reducers/user'
 
 // import fonts to use them for menu items
 import { lexend } from "../app/fonts";
@@ -13,6 +13,7 @@ const AddActivity = () => {
   const currentTrip = useSelector((state) => state.user.value.currentTrip);
   const dispatch = useDispatch();
 
+  // declaring states that will be used for the form
   const [activityName, setActivityName] = useState("");
   const [activityPicture, setActivityPicture] = useState("");
   const [activityURL, setActivityURL] = useState("");
@@ -234,10 +235,7 @@ const AddActivity = () => {
           </div>
           <div className={styles.middle}>
             <div className={styles.inputDate}>
-              <label htmlFor="activity-date" className={styles.label}>
-                Sélectionnez la date: *
-              </label>
-              {/* <DatePicker /> */}
+              <label htmlFor="activity-date" className={styles.label}>Sélectionnez la date: *</label>
               <input
                 type="date"
                 id="activity-date"
@@ -275,12 +273,8 @@ const AddActivity = () => {
                   id="activity-budget-single"
                   readOnly
                   className={styles.input}
-                  value={(
-                    activityBudget /
-                    (currentTrip.members.length + 1)
-                  ).toFixed(2)}
-                  // onChange={(e) => setActivityBudgetPerPerson(e.target.value)}
-                  placeholder="€"
+                  value={(activityBudget / (currentTrip.members.length + 1)).toFixed(2)}
+                  placeholder='€'
                 />
               </div>
             </div>
@@ -295,7 +289,7 @@ const AddActivity = () => {
                 id="activity-location"
                 value={activityLocation}
                 onChange={(e) => setActivityLocation(e.target.value)}
-                placeholder="Il se situe où cette activité ?"
+                placeholder='Elle se situe où cette activité ?'
               />
             </div>
             <div className={styles.rightSide}>

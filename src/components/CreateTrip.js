@@ -50,7 +50,7 @@ export default function CreateTrip() {
                         setErrorMsg(data.error)
                         notification.warning({
                             message: 'Attention !',
-                            description: errorMsg,
+                            description: data.error,
                             placement: 'bottomRight'
                         })
                     }
@@ -65,7 +65,7 @@ export default function CreateTrip() {
                         placement: 'bottomRight'
                     })
                     // rerouting user to dashboard of new trip
-                    router.push('/dashboard')
+                    router.push('/')
                     }
                 });
             }
