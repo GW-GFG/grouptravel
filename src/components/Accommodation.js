@@ -20,7 +20,7 @@ export default function Accommodation(props) {
     //To keep vote updated
     const accommodation = currentTrip.accomodations.find(accommodation => accommodation._id === _id);
 
-    const budgetPerPerson = (currentTrip.budget / (currentTrip.members.length + 1)).toFixed(2)
+    const budgetPerPerson = (budget / (currentTrip.members.length + 1)).toFixed(2)
   
     const [userVoteStatus, setUserVoteStatus] = useState(getInitialVoteStatus());
 
