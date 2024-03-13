@@ -46,7 +46,7 @@ export default function Planning(props) {
   const currentDate = `${props.daily.getDate()}/${formatDate}`;
 
   const notFixedList = areNotFixed && areNotFixed.map((data, i) => {
-    // check if fixed activity matchs current (this planning's) day
+    // check if not fixed activity matchs current (this planning's) day
     const activityDate = new Date(data.date).getTime();
     const dateToday = new Date(props.daily).getTime();
     if (activityDate === dateToday) {
