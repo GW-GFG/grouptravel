@@ -9,14 +9,15 @@ import { faPen, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import TripRow from "./TripRow";
 import Image from "next/image";
 import { addUserToStore } from "@/reducers/user";
+import Button from "./utils/Button";
 
 
 export default function Profile() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const user = useSelector((state) => state.user.value);;
-  const [rerender, setRerender] = useState(null)
+  const user = useSelector((state) => state.user.value);
+  const [rerender, setRerender] = useState(null);
   const [profilePicture, setProfilePicture] = useState(null);
   const fileInputRef = useRef(null);
 
@@ -103,20 +104,12 @@ export default function Profile() {
   };
 
 
-  if (!user.token) {
-    return (
-      <div className={`${styles.container} ${lexend.className}`}>
-        <p>Oups ! Apparemment tu n'es pas encore connecté(e)...</p>
-      </div>
-    );
-  } else {
     return (
       <div className={styles.container}>
         <div className={styles.leftContainer}>
           <div className={styles.profilPictureContainer}>
             <Image
-              // loader={myLoader}
-              src={user.userPicture || 'next.svg'}
+              src={user.userPicture || 'avatar.png'}
               alt="Avatar"
               width={160}
               height={160}
@@ -129,16 +122,15 @@ export default function Profile() {
               onChange={handleFileChange}
               style={{ display: "none" }} // To hide input
             />
-            <button onClick={handleClickProfilPicture}>
+            <Button type="primary" onClick={handleClickProfilPicture} text={<FontAwesomeIcon icon={faPen} className={styles.penIcon} />} >
               <FontAwesomeIcon icon={faPen} className={styles.penIcon} />
-            </button>
+            </Button>
           </div>
           <div className={styles.userInfoContainer}>
             <span>Nom : {user.username}</span>
           </div>
           <div className={styles.backPicture}>
             <Image
-              // loader={myLoader}
               src="/image_profile.png"
               alt="backgroundprofile"
               width={360}
@@ -174,5 +166,4 @@ export default function Profile() {
         </div>
       </div>
     );
-  }
 }

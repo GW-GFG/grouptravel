@@ -7,6 +7,7 @@ export default function Planning() {
   const currentTrip = useSelector((state) => state.user.value.currentTrip);
   const [rerender, setRerender] = useState(null);
   const [areNotFixed, setAreNotFixed] = useState(null);
+  const [areFixed, setAreFixed] = useState(null);
 
   console.log(currentTrip);
 
@@ -24,6 +25,24 @@ export default function Planning() {
         .then((notFixedData) => {
           console.log("notFixedData : " + JSON.stringify(notFixedData.data));
           setAreNotFixed(notFixedData.data);
+        });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (user.token && currentTrip && currentTrip._id) {
+      fetch("http://localhost:5500/planning/areNotFixed", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userToken: user.token,
+          currentTripId: currentTrip._id,
+        }),
+      })
+        .then((response) => response.json())
+        .then((fixedData) => {
+          console.log("fixedData : " + JSON.stringify(fixedData.data));
+          setAreFixed(fixedData.data);
         });
     }
   }, []);

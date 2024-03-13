@@ -20,7 +20,7 @@ export default function Accommodation(props) {
     //To keep vote updated
     const accommodation = currentTrip.accomodations.find(accommodation => accommodation._id === _id);
 
-    const budgetPerPerson = (currentTrip.budget / (currentTrip.members.length + 1)).toFixed(2)
+    const budgetPerPerson = (budget / (currentTrip.members.length + 1)).toFixed(2)
   
     const [userVoteStatus, setUserVoteStatus] = useState(getInitialVoteStatus());
 
@@ -74,14 +74,6 @@ export default function Accommodation(props) {
             }
             return null;
         }
-        // const userHasVoted = () => {
-        //     if (accommodation) {
-        //         return accommodation.vote.some(voteItem => voteItem.userToken === userToken);
-        //     }
-        //     return false;
-        // };
-        //if user didn't vote yet vote status is null
-        // const userVoteStatus = userHasVoted() ? accommodation.vote.find(voteItem => voteItem.userToken === userToken)?.status : null;
 
         const voteIconStyle = {
             check: userVoteStatus === true ? { fontSize: '1.75rem', color: 'var(--primary-black-color)' } : {fontSize: '1.75rem'},
@@ -102,7 +94,7 @@ export default function Accommodation(props) {
                         <div className={styles.middleColumn}>
                             <div>
                             <p className={styles.date}>Du : {new Date(dates.departure).toLocaleDateString()} Au : {new Date(dates.return).toLocaleDateString()}</p>
-                            <p className={styles.location}>Localisation : {location.name}</p>
+                            <p className={styles.location}>Localisation : {location.name || "Pas déterminé"}</p>
                             </div>
                             <div>
                             <p className={styles.miniTitles}>Descriptif du logement :</p>

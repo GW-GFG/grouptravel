@@ -2,7 +2,7 @@
 
 // import elements for Google map
 import {APIProvider, Map, AdvancedMarker, Pin} from '@vis.gl/react-google-maps';
-
+const apiKey="AIzaSyAtN3JpGGPLuZkaD7j2zoSB0vE3e_B-Jn8"
 
 // envoyer les props suivantes au component GoogleMap
 export default function GoogleMap(props) {
