@@ -96,7 +96,7 @@ export default function Accommodation(props) {
             <div className={styles.cardBody}>
                 <div className={styles.leftContainer}>
                     <div className={styles.leftColumn}>
-                        <Image width={300} height={200} className={styles.imgContainer} src={`${photos[0] || "next.svg"}`} alt="My Trip Picture" />
+                        <Image fill={true} className={styles.imgContainer} src={`${photos[0] || "next.svg"}`} alt="My Trip Picture" />
                         <p>Budget par personne : {budgetPerPerson}</p>
                     </div>
 
