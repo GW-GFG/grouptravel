@@ -3,7 +3,7 @@ import styles from './AddActivity.module.css'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Button from './utils/Button'
-import { notification, DatePicker } from 'antd'
+import { notification } from 'antd'
 import { updateCurrentTripActivities } from '@/reducers/user'
 
 // import fonts to use them for menu items 
@@ -11,9 +11,12 @@ import { lexend } from '../app/fonts';
 
 const AddActivity = () => {
 
+  // get selected Trip data from reducer
   const currentTrip = useSelector((state) => state.user.value.currentTrip)
+
   const dispatch = useDispatch()
 
+  // declaring states that will be used for the form
   const [activityName, setActivityName] = useState('')
   const [activityPicture, setActivityPicture] = useState('')
   const [activityURL, setActivityURL] = useState('')
@@ -29,10 +32,9 @@ const AddActivity = () => {
   const handleSubmit = (e) => {
     e.preventDefault() // prevents auto-refreshing of the page when submitting the form
 
-
     // Google map input logic
     fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAtN3JpGGPLuZkaD7j2zoSB0vE3e_B-Jn8&address=${activityLocation}`)
-    .then(response => response.json()).then(data => {
+      .then(response => response.json()).then(data => {
         if (data && data.results[0]) {
           const coordinates = data.results[0].geometry.location;
           // check if url is valid (if url exists)
@@ -62,64 +64,62 @@ const AddActivity = () => {
             tripId: currentTrip._id
           }
 
-            //Handle picture
-            const formData = new FormData();
-            activityPicture && formData.append('image', activityPicture);
-            fetch('http://localhost:5500/upload', {
+          //Handle picture
+          const formData = new FormData();
+          activityPicture && formData.append('image', activityPicture);
+          fetch('http://localhost:5500/upload', {
             method: 'POST',
             body: formData
-            })
+          })
             .then(response => response.json())
             .then(pictureData => {
-                if (!pictureData || !pictureData.url){
-                    return console.log(' No picture ')
-                } else {
-                    console.log('pictureDataUrl : ', pictureData.url);
-                    activityData.picture = pictureData.url;
-                }
+              if (!pictureData || !pictureData.url) {
+                return console.log(' No picture ')
+              } else {
+                console.log('pictureDataUrl : ', pictureData.url);
+                activityData.picture = pictureData.url;
+              }
 
-      return fetch('http://localhost:5500/activities/new', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(activityData)
-      });
-      })
-      .then(response => response.json())
-      .then(data => {
-        // if no trip is found or activity's date is outside trip's date
-        if (data.result === false) {
-          // notificatin to user that dates are not valid
-          notification.warning({
-            message: 'Attention !',
-            description: 'Les dates sélectionnées ne sont pas comprises dans les dates de votre voyage !',
-            placement: 'bottomRight'
-          })
-          return
+              return fetch('http://localhost:5500/activities/new', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(activityData)
+              });
+            })
+            .then(response => response.json())
+            .then(data => {
+              // if no trip is found or activity's date is outside trip's date
+              if (data.result === false) {
+                // notificatin to user that dates are not valid
+                notification.warning({
+                  message: 'Attention !',
+                  description: "La date sélectionnée n'est pas pas comprise dans les dates de votre voyage !",
+                  placement: 'bottomRight'
+                })
+                return
+              }
+              // trip is found, activity is added to the database, dispatch it into reducer
+              dispatch(updateCurrentTripActivities(data.newActivity.activities[data.newActivity.activities.length - 1]))
+              // notification to user that activity has been added
+              notification.success({
+                message: 'Activité ajoutée !',
+                description: 'Votre activité a bien été ajoutée à votre groupe !',
+                placement: 'bottomRight'
+              })
+              // reset form's fields
+              setActivityName('')
+              setActivityPicture('')
+              setActivityURL('')
+              setActivityBudget('')
+              setActivityDate('')
+              setActivityLocation('')
+              setActivityDescription('')
+              setActivityPicture('')
+            })
         }
-        // trip is found, add activity
-        // console.log('New activity added', data.newActivity.activities[data.newActivity.activities.length - 1])
-        // dispatch new activity into reducer
-        dispatch(updateCurrentTripActivities(data.newActivity.activities[data.newActivity.activities.length - 1]))
-        // notification to user that activity has been added
-        notification.success({
-          message: 'Activité ajoutée !',
-          description: 'Votre activité a bien été ajoutée à votre groupe !',
-          placement: 'bottomRight'
-        })
-        // reset fields
-        setActivityName('')
-        setActivityPicture('')
-        setActivityURL('')
-        setActivityBudget('')
-        setActivityDate('')
-        setActivityLocation('')
-        setActivityDescription('')
-        setActivityPicture('')
-      })
-  }
-
-  });
+      });
   };
+
   return (
     <div className={styles.newActivity}>
       <h1 className={lexend.className}>Une activité à proposer ? </h1>
@@ -163,7 +163,6 @@ const AddActivity = () => {
           <div className={styles.middle}>
             <div className={styles.inputDate}>
               <label htmlFor="activity-date" className={styles.label}>Sélectionnez la date: *</label>
-              {/* <DatePicker /> */}
               <input
                 type="date"
                 id="activity-date"
@@ -193,7 +192,6 @@ const AddActivity = () => {
                   readOnly
                   className={styles.input}
                   value={(activityBudget / (currentTrip.members.length + 1)).toFixed(2)}
-                  // onChange={(e) => setActivityBudgetPerPerson(e.target.value)}
                   placeholder='€'
                 />
               </div>
@@ -207,7 +205,7 @@ const AddActivity = () => {
                 id="activity-location"
                 value={activityLocation}
                 onChange={(e) => setActivityLocation(e.target.value)}
-                placeholder='Il se situe où cette activité ?'
+                placeholder='Elle se situe où cette activité ?'
               />
             </div>
             <div className={styles.rightSide}>
