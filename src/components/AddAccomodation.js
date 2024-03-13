@@ -150,9 +150,7 @@ export default function AddAccomodation() {
                 })
                 return
             }
-            console.log(data)
-            console.log('New accomodation added', data.newAccomodation)
-            dispatch(updateCurrentTripAccommodations(data.newAccomodation))
+            dispatch(updateCurrentTripAccommodations(data.newAccomodation.accomodations[data.newAccomodation.accomodations.length - 1]))
             notification.success({
                 message: 'Logement ajouté !',
                 description: 'Votre logement a bien été soumis à votre groupe !',

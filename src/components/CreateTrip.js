@@ -65,7 +65,7 @@ export default function CreateTrip() {
                         placement: 'bottomRight'
                     })
                     // rerouting user to dashboard of new trip
-                    router.push('/dashboard')
+                    router.push('/')
                     }
                 });
             }
