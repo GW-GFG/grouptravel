@@ -14,6 +14,7 @@ export default function ActivitiesPage() {
     const router = useRouter();
     const user = useSelector((state) => state.user.value);
     const currentTrip = useSelector((state) => state.user.value.currentTrip);
+    console.log('actual id: ', currentTrip._id);
     if (!user.token) {
         return <NotConnected title="Activités" />
     } else if (!currentTrip) {

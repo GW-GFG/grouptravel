@@ -1,16 +1,30 @@
 .container {
+    /* These var are used to calculate the width of parent div and center .utilCenter */
+    --headingSize: 1.5rem;
+    --paddingSize: .5rem;
+    /* If parent padding changes, update the value here */
+    --parentPadding: 1rem;
+
     background-color: var(--primary-orange-color);
     border-radius: 1rem;
     padding: 1rem;
-}
 
-.container h2 {
-    padding: .5rem 0;
-}
+    .heading {
+        padding: var(--paddingSize) 0;
+        font-size: var(--headingSize);
+    }
 
-.bottom {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: .5rem;
+    .utilCenter {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: calc(100% - var(--headingSize) - (2*var(--paddingSize)) - (2*var(--parentPadding)));
+    }
+
+    .bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .5rem;
+    }
 }

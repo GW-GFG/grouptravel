@@ -14,13 +14,19 @@ import { participateToActivity } from '@/reducers/user';
 const Activity = (props, i) => {
 
     const { name, location, date, picture, url, description, budget, participation, _id } = props
+
     const dispatch = useDispatch()
+
+    // get user's token from reducer
     const userToken = useSelector((state) => state.user.value.token)
+    // get selected Trip data from reducer
     const currentTrip = useSelector((state) => state.user.value.currentTrip)
+    // get matching id activity
     const activity = currentTrip.activities.find(activity => activity._id === _id)
 
     const [userParticipationStatus, setUserParticipationStatus] = useState(getInitialParticipationStatus())
 
+    // takes a string as argument and capitalizes its first letter
     function capitalizeFirstLetter(str) {
         if (typeof str !== 'string' || str.length === 0) {
             return '';
@@ -42,7 +48,7 @@ const Activity = (props, i) => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log('Vote réussi', JSON.stringify(data))
+                // console.log('Vote réussi', JSON.stringify(data))
                     setUserParticipationStatus(true)
                     dispatch(participateToActivity({ activityId: activityId, newStatus: data.newStatus }))
             })
@@ -62,7 +68,7 @@ const Activity = (props, i) => {
         })
             .then(response => response.json())
             .then(data => {
-                console.log('Vote réussi', JSON.stringify(data))
+                // console.log('Vote réussi', JSON.stringify(data))
                     setUserParticipationStatus(false)
                     dispatch(participateToActivity({ activityId, newStatus: data.newStatus }))
             })
@@ -81,30 +87,40 @@ const Activity = (props, i) => {
         cross: userParticipationStatus === false ? { fontSize: '1.75rem', color: 'var(--primary-black-color)' } : { fontSize: '1.75rem' }
     }
 
+    // count the number of users with a true status on each activity's participation
+    const countParticipations = () => {
+        return participation.filter(participant => participant.status === true).length
+    }
+
     //if (currentTrip && currentTrip.activities.length > 0) {
+        /*
+            <Card
+                key={i}
+                className={styles.card}
+                cover={
+                    
+                    <Image
+                        src={`${picture || "next.svg"}`}
+                        alt={name}
+                        fill={true}
+                        width={300}
+                        height={200}
+                    />
+                }
+            >
+            */
 
     return (
-        //<div className={styles.container}>
-        //<h1 className={`${styles.title} ${lexend.className}`}>Mes activités</h1>
-        //{currentTrip.activities.map((activity, i) => (
-        <Card
-            key={i}
-            className={styles.card}
-            cover={
-                
-                <Image
-                    src={`${picture || "next.svg"}`}
-                    alt={name}
-                    width={300}
-                    height={200}
-                />
-            }
-        >
+        <div className={styles.card}>
+            <div className={styles.imgContainer}>
+                <Image fill={true} src={`${picture || "next.svg"}`} alt="My Activity Picture" /> 
+            </div>  
             <h2 className={`${styles.cardTitle} ${lexend.className}`}>{capitalizeFirstLetter(name)}</h2>
-            <p>Lieu: {location}</p>
+            <p>Lieu: {location.name || "Pas déterminé"}</p>
             <p>Date: {new Date(date).toLocaleDateString()}</p>
             <p>Description: {description}</p>
             <p>Budget: {budget}</p>
+            <p>{countParticipations() <= 1 ? 'Participant' : 'Participants'}: {countParticipations()}</p>
             <div className={styles.bottomCard}>
                 <div className={styles.bottomCardVotes}>
                     <div className={styles.participation}>
@@ -130,11 +146,8 @@ const Activity = (props, i) => {
                     </Link>
                 </div>
             </div>
-        </Card>
-        //))}
-        //</div>
+        </div>
     )
-    //}
 }
 
 export default Activity

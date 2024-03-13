@@ -44,6 +44,12 @@
     min-height: 15rem;
 }
 
+.leftSide {
+    display: flex;
+    align-items: baseline;
+    gap: .5rem;
+}
+
 .rightSide {
     width: min(90%, 40rem);
 }
@@ -86,13 +92,15 @@
     /*width: 70%;*/
 }
 
-.inputs label {
+.inputs label,
+.bottom label {
     margin: 1rem 0 .7rem;
 }
 
 .inputs input,
 .inputsBudget input,
-.inputDate input {
+.inputDate input,
+.bottom input {
     background-color: transparent;
     border: 2px solid #ffffff;
     border-radius: .625rem;
@@ -100,13 +108,15 @@
 
 .inputs input[type="text"],
 .inputsBudget input[type="number"],
-.inputDate input[type="date"] {
+.inputDate input[type="date"],
+.bottom input[type="text"] {
     padding: .7rem;
 }
 
 .inputs input:focus,
 .inputsBudget input:focus,
-.inputDate input:focus {
+.inputDate input:focus,
+.bottom input:focus {
     /* TODO change color to something beautiful */
     outline: 2px solid #C3C3C3;
 }
