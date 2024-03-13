@@ -82,24 +82,28 @@ const Activity = (props, i) => {
     }
 
     //if (currentTrip && currentTrip.activities.length > 0) {
+        /*
+            <Card
+                key={i}
+                className={styles.card}
+                cover={
+                    
+                    <Image
+                        src={`${picture || "next.svg"}`}
+                        alt={name}
+                        fill={true}
+                        width={300}
+                        height={200}
+                    />
+                }
+            >
+            */
 
     return (
-        //<div className={styles.container}>
-        //<h1 className={`${styles.title} ${lexend.className}`}>Mes activités</h1>
-        //{currentTrip.activities.map((activity, i) => (
-        <Card
-            key={i}
-            className={styles.card}
-            cover={
-                
-                <Image
-                    src={`${picture || "next.svg"}`}
-                    alt={name}
-                    width={300}
-                    height={200}
-                />
-            }
-        >
+        <div className={styles.card}>
+            <div className={styles.imgContainer}>
+                <Image fill={true} src={`${picture || "next.svg"}`} alt="My Activity Picture" /> 
+            </div>  
             <h2 className={`${styles.cardTitle} ${lexend.className}`}>{capitalizeFirstLetter(name)}</h2>
             <p>Lieu: {location.name}</p>
             <p>Date: {new Date(date).toLocaleDateString()}</p>
@@ -130,11 +134,8 @@ const Activity = (props, i) => {
                     </Link>
                 </div>
             </div>
-        </Card>
-        //))}
-        //</div>
+        </div>
     )
-    //}
 }
 
 export default Activity

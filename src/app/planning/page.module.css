@@ -1,0 +1,38 @@
+.globalContainer {
+    width: 80%;
+    padding: 2.5rem;
+    margin: 0 auto;
+    background: var(--primary-blue-color);
+    color: #ffffff;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* .title {
+    margin-bottom: 2rem;
+    text-align: center;
+} */
+
+/*
+/*old version to dynamically style our columns
+.container {
+    width: 100%;
+    display: grid;
+    gap: 2rem;
+}
+*/
+
+.container {
+    width: 100%;
+    display: grid;
+    gap: 2rem;
+    grid-auto-flow: column;
+    grid-auto-columns: 31%;
+
+    padding: 0 2rem 2rem;
+
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+}

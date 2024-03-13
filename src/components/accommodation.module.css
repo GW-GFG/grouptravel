@@ -19,22 +19,22 @@
 
 .leftContainer {
     display: flex;
+    padding: 1rem;
 }
 
 .leftColumn {
-    padding: 1rem;
+    max-width: 300px;
+    max-height: 300px;
+    position: relative;
 }
 
 .imgContainer {
     background-color: var(--primary-black-color);
-    min-height: 40%;
-    width: 300;
-    height: 200;
-    max-width: max-content;
+    /*max-width: max-content;*/
 }
 
 .middleColumn {
-    padding: 1rem;
+    padding: 0 1rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
