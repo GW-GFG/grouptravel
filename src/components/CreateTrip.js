@@ -50,7 +50,7 @@ export default function CreateTrip() {
                         setErrorMsg(data.error)
                         notification.warning({
                             message: 'Attention !',
-                            description: errorMsg,
+                            description: data.error,
                             placement: 'bottomRight'
                         })
                     }
