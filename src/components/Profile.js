@@ -192,7 +192,7 @@ export default function Profile() {
               </div>
             </div>
             <div className={styles.userInfoContainer}>
-              <span>Nom : {user.username}</span>
+              <span>Bienvenue {user.username} !</span>
             </div>
             <div className={styles.backPicture}>
               <Image

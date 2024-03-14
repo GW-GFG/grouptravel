@@ -79,8 +79,15 @@ export const userSlice = createSlice({
 			  }
 			}			
 		  },
+
+		  updateFixStatusAccommodation: (state, action) => {
+			const accommodationIndex = state.value.currentTrip.accomodations.findIndex(accommodation => accommodation._id.toString() === action.payload.accommodationId);	  
+			if (accommodationIndex!== -1) {
+			state.value.currentTrip.accomodations[accommodationIndex].isFixed = action.payload.isFixed;
+		  	}
+		}
 	},
 });
 
-export const { addUserToStore, updateMyTrips, removeUserToStore, updateCurrentTrip, voteToAccommodation, participateToActivity, updateCurrentTripAccommodations, updateCurrentTripActivities } = userSlice.actions;
+export const { addUserToStore, updateMyTrips, removeUserToStore, updateCurrentTrip, voteToAccommodation, participateToActivity, updateCurrentTripAccommodations, updateCurrentTripActivities, updateFixStatusAccommodation } = userSlice.actions;
 export default userSlice.reducer;
