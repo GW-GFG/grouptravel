@@ -35,8 +35,7 @@ export default function AccommodationPage() {
                 {accommodations}
               </div>
               <Button text="+" onClick={() => handleClickPlusButton()} style={{backgroundColor: '#ef8b7a'}}/>
-          </div>
-          
+          </div>        
       )
     } else {
       return (

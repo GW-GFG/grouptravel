@@ -2,7 +2,7 @@
 import styles from "./accommodation.module.css";
 import { lexend } from "../app/fonts";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import Button from "./utils/Button";
 import Link from "next/link";
 import Image from 'next/image';
@@ -13,7 +13,7 @@ import { voteToAccommodation } from "@/reducers/user";
 
 
 export default function Accommodation(props) {
-    const { name, location, dates, photos, url, description, budget, vote, _id } = props;
+    const { name, location, dates, photos, url, description, budget, vote, _id, isFixed } = props;
     const dispatch = useDispatch();
     const userToken = useSelector((state) => state.user.value.token)
     const currentTrip = useSelector((state) => state.user.value.currentTrip);
@@ -95,6 +95,9 @@ export default function Accommodation(props) {
         check: userVoteStatus === true ? { fontSize: '1.75rem', color: 'var(--primary-black-color)' } : { fontSize: '1.75rem' },
         cross: userVoteStatus === false ? { fontSize: '1.75rem', color: 'var(--primary-black-color)' } : { fontSize: '1.75rem' }
     };
+    // const fixStatusIcon = 
+    //    { fontSize: '1.75rem', color: 'var(--primary-black-color)' } : { fontSize: '1.75rem' };
+    
 
     // count the number of users with a true status on each accomodation's vote
     const countVotes = () => {
@@ -128,6 +131,7 @@ export default function Accommodation(props) {
                     <div className={styles.voteIcons}>
                         <FontAwesomeIcon style={voteIconStyle.check} icon={faCircleCheck} onClick={(e) => handleDo(_id)} />
                         <FontAwesomeIcon style={voteIconStyle.cross} icon={faCircleXmark} onClick={(e) => handleDont(_id)} />
+                        <FontAwesomeIcon style={{fontSize: '1.75rem'}} icon={faCalendar} onClick={(e) => handleFix()} />
                     </div>
                     <Link href={url} target="_blank"><Button type="text" buttonClass="primary" text="En savoir plus" /></Link>
                 </div>

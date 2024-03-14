@@ -13,7 +13,7 @@ return(
 <div className={styles.container} >
     <div className={styles.leftContainer}>
         <h2>Planning</h2>
-        <p>En construction... Tu pourras bienôt cliquer ici pour de rendre sur la page du planning de ton voyage {currentTripName} !!</p>
+        <p>Clique ici pour te rendre sur le planning de ton voyage : {currentTripName} !!</p>
         <div className={styles.bottomContainer}>
             <Link href="/planning" ><Button type="text" buttonClass="primary" text="Voir" /></Link>
             <Image width={50} height={50} className={styles.imgContainer} src={"next.svg"} alt="planning" />

@@ -4,17 +4,37 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.button:hover,
+/* .button:hover,
 .button:focus {
     box-shadow: 0 0.5rem 0.5rem -0.4rem var(--primary-black-color);
     transform: translateY(-0.2rem);
+} */
+
+.button:hover,
+.button:focus {
+    background-color: #ffffff;
+    color: var(--primary-red-color);
+    border: none;
 }
 
-.primary {
+/* .primary {
     background-color: transparent;
     border-radius: .625rem;
     border: 2px solid #ffffff;
     padding: .8rem 1.4rem;
+} */
+.primary {
+align-items: center;
+justify-content: center;
+width: 15vw;
+height: 5vh;
+background-color: transparent;
+border: 2px solid #ffff;
+color: #ffff;
+border-radius: 0.625rem;
+cursor: pointer;
+transition-duration: 0.5s;
+margin-bottom: 2%;
 }
 
 .secondary {
