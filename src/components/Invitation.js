@@ -89,11 +89,12 @@ export default function Invitation() {
                 { emptyField && <div className={styles.text}>Merci de renseigner une adresse e-mail valide </div> }
             </div>
             <Button  buttonClass="primary" text="+" onClick={() => handleAddImput()} />
-            {errorNbImput && <div className={styles.text}>Nombre d'email dépassés</div>}
+            {errorNbImput && <div className={styles.text}>Nombre d'email dépassé</div>}
             <div className={styles.ButtonContainer}>
                 <Button buttonClass="primary" text="Envoyer invitation(s)" onClick={() => handleSendEmail()} />
             </div>
-            {confirmMsg && <div className={styles.text}> Les invitations ont bien été envoyées</div>}
+            {confirmMsg && emails.length === 1 && <div className={styles.text}> L'invitation a bien été envoyée</div>}
+            {confirmMsg && emails.length > 1 && <div className={styles.text}> Les invitations ont bien été envoyées</div>}
         </div>
     )
 

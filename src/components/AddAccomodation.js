@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import Button from "./utils/Button";
 import { notification } from "antd";
 import { updateCurrentTripAccommodations } from "@/reducers/user";
+import { faCircleCheck, faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // import fonts to use them for menu items
 import { lexend } from "../app/fonts";
@@ -48,7 +50,8 @@ export default function AddAccomodation() {
 
   const [formHasError, setFormHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
+  //use ref to allow hide uggly input button
+  const fileInputRef = useRef(null);
   // Google map camera change
   const INITIAL_CAMERA = {
     center: { lat: currentTrip.location.lat, lng: currentTrip.location.lng },
@@ -221,6 +224,10 @@ export default function AddAccomodation() {
         }
       });
   };
+  //send the click on the button to the hidden button
+  const handleClickPicture = () => {
+    fileInputRef.current.click();
+  };
 
   return (
     <div className={styles.newAccomodation}>
@@ -230,13 +237,16 @@ export default function AddAccomodation() {
           <div className={styles.top}>
             <div>
               <label htmlFor="accomodation-picture" className={styles.label}>
-                Photo
+              Choisis une photo sympa !<br/>
               </label>
               <input className={styles.inputFile}
                 type="file"
                 id="accomodation-picture"
+                ref={fileInputRef} // Ref to handleclick from penIcon
+                style={{ display: "none" }} // To hide input
                 onChange={(e) => setAccomodationPicture(e.target.files[0])}
               />
+              <Button type="text" onClick={handleClickPicture} text={!accomodationPicture? <FontAwesomeIcon icon={faPen} className={styles.penIcon} /> : <FontAwesomeIcon icon={faCircleCheck} className={styles.penIcon} />} />
             </div>
             <div className={styles.rightSide}>
               <div className={styles.inputs}>

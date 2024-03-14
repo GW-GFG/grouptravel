@@ -33,7 +33,7 @@ const AddActivity = () => {
 
   const [formHasError, setFormHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-//use ref to allow hide ugly input button
+//use ref to allow hide uggly input button
   const fileInputRef = useRef(null);
 
   // center of Google map based on trip location
@@ -207,11 +207,6 @@ const AddActivity = () => {
               <label htmlFor="activity-picture" className={styles.label}>
                 Choisis une photo sympa !<br/> 
               </label>
-              {/* <input
-                type="file"
-                id="activity-picture"
-                onChange={(e) => setActivityPicture(e.target.files[0])}
-              /> */}
                 <input
                 type="file"
                 id="activity-picture"
