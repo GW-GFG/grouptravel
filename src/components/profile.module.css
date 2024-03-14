@@ -31,6 +31,7 @@
   /* Centrage vertical */
   justify-content: center;
   margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .tripsContainer {
@@ -38,6 +39,7 @@
   border-radius: 1rem;
   width: 100%;
   padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .tripTitle {
@@ -76,6 +78,7 @@
   position: relative;
   background: var(--primary-green-color);
   border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .profilPictureContainer {
@@ -114,5 +117,4 @@
   position: absolute;
   bottom: 0.1rem;
   z-index: 0;
-  border: 1px solid var(--primary-red-color);
 }

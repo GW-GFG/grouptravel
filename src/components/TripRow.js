@@ -18,7 +18,6 @@ export default function TripRow(props) {
             body: JSON.stringify( {currentTripId: props._id, token: token} )
           }).then(response => response.json())
           .then(data => {
-            console.log('isadmin : ', data.isAdmin)
               data && setIsAdmin(data.isAdmin)
           })    
     }, []);

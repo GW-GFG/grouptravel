@@ -65,7 +65,7 @@ function GroupChat() {
           </div>
           ))}
           <div ref={messagesEndRef}></div>
-          {messages.length === 0  && <div className={styles.empty}> Démarres la discussion !</div>}
+          {messages.length === 0  && <div className={styles.empty}> Démarre la discussion !</div>}
         </div >
         <div className={styles.inputContainer}>
         <InputLabel style={{width: "100%"}} type="text-area" onChange={(e) => setInputValue(e.target.value)} value={inputValue} label="Ton message" placeholder="Saisis ton message !" />

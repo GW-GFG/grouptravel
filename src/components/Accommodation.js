@@ -6,7 +6,7 @@ import { faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 import Button from "./utils/Button";
 import Link from "next/link";
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { voteToAccommodation } from "@/reducers/user";
 
@@ -17,14 +17,35 @@ export default function Accommodation(props) {
     const dispatch = useDispatch();
     const userToken = useSelector((state) => state.user.value.token)
     const currentTrip = useSelector((state) => state.user.value.currentTrip);
+    const [isAdmin, setIsAdmin] = useState(false);
     //To keep vote updated
     const accommodation = currentTrip.accomodations.find(accommodation => accommodation._id === _id);
 
     const budgetPerPerson = (budget / (currentTrip.members.length + 1)).toFixed(2)
-  
+    console.log('budget props : ', budget)
     const [userVoteStatus, setUserVoteStatus] = useState(getInitialVoteStatus());
 
+    useEffect(() => {
+        fetch('http://localhost:5500/users/isAdmin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify( {currentTripId: currentTrip._id, token: userToken} )
+          }).then(response => response.json())
+          .then(data => {
+            data && setIsAdmin(data.isAdmin)
+        })
+    }, []);
 
+    const handleFix = () => {
+        fetch('http://localhost:5500/accomodations/fixOne', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify( {isAdmin, accommodationId: _id , dates: currentTrip.dates, isFixed: true} )
+          }).then(response => response.json())
+          .then(data => {
+            console.log('handlefix res : ',data)
+        })
+    }
 
     const handleDo = (accomodationId) => {
         const voteData = {
@@ -39,7 +60,6 @@ export default function Accommodation(props) {
             body: JSON.stringify(voteData)
         }).then(response => response.json())
             .then(voteRes => {
-                // console.log('reponse vote : ' + JSON.stringify(voteRes))
                 setUserVoteStatus(true);
                 dispatch(voteToAccommodation({ accommodationId: accomodationId, newStatus: voteRes.newStatus }));
             })
@@ -58,7 +78,6 @@ export default function Accommodation(props) {
             body: JSON.stringify(voteData)
         }).then(response => response.json())
             .then(voteRes => {
-                //console.log('reponse vote : ' + JSON.stringify(voteRes))
                 setUserVoteStatus(false);
                 dispatch(voteToAccommodation({ accommodationId: accomodationId, newStatus: voteRes.newStatus }));
             })
@@ -101,7 +120,7 @@ export default function Accommodation(props) {
                             <p className={styles.miniTitles}>Descriptif du logement :</p>
                             <p className={styles.description}>{description}</p>
                         </div>  
-                        <p>{countVotes() <= 1 ? 'Partant' : 'Partants'}: {countVotes()}</p>
+                        <p>{countVotes() <= 1 ? 'Partant ' : 'Partants '}: {countVotes()}</p>
                     </div>
                 </div>
 

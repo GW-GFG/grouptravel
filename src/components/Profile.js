@@ -122,7 +122,7 @@ export default function Profile() {
               onChange={handleFileChange}
               style={{ display: "none" }} // To hide input
             />
-            <Button type="primary" onClick={handleClickProfilPicture} text={<FontAwesomeIcon icon={faPen} className={styles.penIcon} />} >
+            <Button type="text" onClick={handleClickProfilPicture} text={<FontAwesomeIcon icon={faPen} className={styles.penIcon} />} >
               <FontAwesomeIcon icon={faPen} className={styles.penIcon} />
             </Button>
           </div>

@@ -1,9 +1,11 @@
 .header {
-    width: 95%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.2rem 0;
+    padding: 1.2rem 2rem;
+    margin-bottom: 2rem;
+
 }
 
 /* MENU */
@@ -41,8 +43,8 @@
     -webkit-text-fill-color: transparent;
     /* last property of background-image sets the text color */
     background-image: linear-gradient(to right,
-            var(--primary-blue-color),
-            var(--primary-blue-color) 50%,
+            var(--primary-red-color),
+            var(--primary-red-color) 50%,
             var(--primary-black-color) 50%);
     background-size: 200% 100%;
     background-position: -100%;
@@ -95,7 +97,7 @@
     bottom: -3px;
     z-index: 0;
     position: absolute;
-    background: var(--primary-blue-color);
+    background: var(--primary-red-color);
     transition: all 0.3s ease-in-out;
 }
 
@@ -118,7 +120,7 @@
 .active {
     font-weight: bold;
     text-decoration: none;
-    color: var(--primary-blue-color);
+    color: var(--primary-red-color);
     font-size: 1.5rem;
 }
 
@@ -151,6 +153,6 @@
 }
 
 .voyageNameContainer:hover {
-    color: var(--primary-blue-color);
+    color: var(--primary-red-color);
     font-size: 1.2rem;
 }

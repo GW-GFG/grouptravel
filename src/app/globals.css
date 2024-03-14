@@ -31,11 +31,16 @@ video {
 /* Styling layout */
 
 body {
-  /*min-height: 100vh;*/
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  background-image: url('/backgreen.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
 }
 
 /*Make the modals transparents */
