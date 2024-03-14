@@ -14,13 +14,8 @@ export default function PlanningPage() {
     const [isAdmin, setIsAdmin] = useState(false);
     const [hasChanged, setHasChanged] = useState(false);
 
-  if (!user.token) {
-    return <NotConnected title="Planning" />;
-  } else if (!currentTrip) {
-    return <NoCurrentTrip title="Planning" />;
-  } else {
     useEffect(() => {
-      if (currentTrip._id) {
+      if (user.token && currentTrip && currentTrip._id) {
         
         fetch("http://localhost:5500/users/isAdmin", {
           method: "POST",
@@ -35,12 +30,17 @@ export default function PlanningPage() {
               setIsAdmin(data.isAdmin);
           });
       }
-    }, []);
+    }, [user.token, currentTrip]);
 
     const handleHasChanged = () => {
       setHasChanged(!hasChanged);
     }
 
+    if (!user.token) {
+      return <NotConnected title="Planning" />;
+    } else if (!currentTrip) {
+      return <NoCurrentTrip title="Planning" />;
+    } else {
 
     // Returns an array of dates between two dates, in order to display 1 Planning for reach trip day
     const getDates = (startDate, endDate) => {
@@ -65,8 +65,6 @@ export default function PlanningPage() {
       return <Planning daily={date} key={`${currentTrip.name}-${i}`} isAdmin={isAdmin} hasChanged={hasChanged} handleHasChanged={handleHasChanged}/>;
     });
 
-/* old version to style dynamically our nbr of columns
-<div className={styles.container} style={{gridTemplateColumns: `repeat(${nbrOfColumns}, 1fr)`}}>*/
     return (
       <div className={styles.globalContainer}>
         <div className={styles.container}>

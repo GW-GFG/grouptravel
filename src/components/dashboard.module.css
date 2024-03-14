@@ -11,6 +11,24 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+@media screen and (max-width: 930px) {
+  .container {
+    width: 95%;
+    padding: 1.5rem;
+    grid-template-rows: none;
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 795px) {
+  .container {
+    width: 80%;
+    grid-template-columns: none;
+    grid-template-rows: repeat(3, 1fr);
+    justify-content: center;
+  }
+}
+
 .leftContainer {
   /*
   display: flex;
