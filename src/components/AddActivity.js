@@ -1,10 +1,12 @@
 'use client'
-import styles from './AddActivity.module.css'
-import { useState, useCallback } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import Button from './utils/Button'
-import { notification } from 'antd'
-import { updateCurrentTripActivities } from '@/reducers/user'
+import styles from './AddActivity.module.css';
+import { useState, useCallback, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Button from './utils/Button';
+import { notification } from 'antd';
+import { updateCurrentTripActivities } from '@/reducers/user';
+import { faCircleCheck, faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // import fonts to use them for menu items
 import { lexend } from "../app/fonts";
@@ -31,6 +33,8 @@ const AddActivity = () => {
 
   const [formHasError, setFormHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+//use ref to allow hide ugly input button
+  const fileInputRef = useRef(null);
 
   // center of Google map based on trip location
   const [center, setCenter] = useState({
@@ -99,7 +103,7 @@ const AddActivity = () => {
         // notification to user that activity has been added
         notification.success({
           message: "Activité ajoutée !",
-          description: "Votre activité a bien été ajoutée à votre groupe !",
+          description: "Ton activité a bien été proposée pour ton voyage !",
           placement: "bottomRight",
         });
         // reset fields
@@ -187,6 +191,11 @@ const AddActivity = () => {
         }
       });
   }
+//send the click on the button to the hidden button
+  const handleClickPicture = () => {
+    fileInputRef.current.click();
+  };
+
 
   return (
     <div className={styles.newActivity}>
@@ -196,13 +205,21 @@ const AddActivity = () => {
           <div className={styles.top}>
             <div>
               <label htmlFor="activity-picture" className={styles.label}>
-                Photo
+                Choisis une photo sympa !<br/> 
               </label>
-              <input
+              {/* <input
                 type="file"
                 id="activity-picture"
                 onChange={(e) => setActivityPicture(e.target.files[0])}
+              /> */}
+                <input
+                type="file"
+                id="activity-picture"
+                ref={fileInputRef} // Ref to handleclick from penIcon
+                style={{ display: "none" }} // To hide input
+                onChange={(e) => setActivityPicture(e.target.files[0])}
               />
+              <Button type="text" onClick={handleClickPicture} text={!activityPicture? <FontAwesomeIcon icon={faPen} className={styles.penIcon} /> : <FontAwesomeIcon icon={faCircleCheck} className={styles.penIcon} />} />
             </div>
             <div className={styles.rightSide}>
               <div className={styles.inputs}>

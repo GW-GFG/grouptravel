@@ -14,7 +14,7 @@ export default function FixedInPlanning(props) {
         <div className={styles.activityContainer}>
             <h2 className={styles.headings}>{props.name}</h2>
             <div className={styles.imgContainer}>
-                <Image fill={true} src={props.picture} alt={props.name} />
+                <Image fill={true} src={props.picture || '/activity1.png'} alt={props.name} />
             </div>
             <div className={styles.basicInfo}>
                 <p>
