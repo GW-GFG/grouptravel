@@ -29,6 +29,11 @@
   gap: 2rem;
 }
 
+.gmap {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
 .rightContainer {
   /*
   display: flex;

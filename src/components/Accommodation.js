@@ -41,7 +41,7 @@ export default function Accommodation(props) {
         fetch('http://localhost:5500/accomodations/fixOne', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify( {isAdmin, accommodationId: _id , dates: currentTrip.dates, isFixed: newStatust} )
+            body: JSON.stringify( {isAdmin, accommodationId: _id , dates: currentTrip.dates, isFixed: newStatus} )
           }).then(response => response.json())
           .then(data => {
             console.log('handlefix res : ',data)
@@ -112,10 +112,12 @@ export default function Accommodation(props) {
             <div className={styles.cardBody}>
                 <div className={styles.leftContainer}>
                     <div className={styles.leftColumn}>
-                        <Image fill={true} className={styles.imgContainer} src={`${photos[0] || "next.svg"}`} alt="My Trip Picture" />
+                        <div className={styles.leftColumnImgContainer}>
+                            <Image fill={true} className={styles.imgContainer} src={`${photos[0] || "next.svg"}`} alt="My Trip Picture" />
+                        </div>
                         <p>Budget par personne : {budgetPerPerson}</p>
                     </div>
-
+                    
                     <div className={styles.middleColumn}>
                         <div>
                             <p className={styles.date}>Du : {new Date(dates.departure).toLocaleDateString()} Au : {new Date(dates.return).toLocaleDateString()}</p>

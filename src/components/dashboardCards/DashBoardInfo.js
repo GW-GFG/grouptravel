@@ -42,16 +42,16 @@ export default function DashboardInfo() {
     <div className={styles.container}>
       <h2>Informations</h2>
       <div className={styles.profilPictureContainer}>
-        <p>Nom du groupe : {currentTrip.name}</p>
-        <p>Dates départ : {new Date(currentTrip.dates.departure).toLocaleDateString()}</p>
-        <p>Dates retour : {new Date(currentTrip.dates.return).toLocaleDateString()}</p>
+        <p>Du {new Date(currentTrip.dates.departure).toLocaleDateString()} au {new Date(currentTrip.dates.return).toLocaleDateString()}</p>
+        <div>À {currentTrip.location.name}</div>
       </div>
-      <div className={styles.userInfoContainer}>Budget :
-          <div className={styles.userInfoBudget}>Total : {totalBudget} € - par Personne : {budgetPerPerson}€</div>
+      <div className={styles.userInfoContainer}>
+        <h3 className={styles.headings}> Budget :</h3>
+          <div className={styles.userInfoBudget}>Total : {totalBudget} € <br/> Par personne : {budgetPerPerson}€</div>
       </div>
-          <div className={styles.infoLogement}>lieu séjour: {currentTrip.location.name}</div>
+          <h3 className={styles.headings}>Logement :</h3>
           <ul className={styles.infoLogement}>
-        <h3>Logement :</h3>
+        
         {accommodationsList.length > 0 ? accommodationsList : <li>à définir !</li>}
       </ul>
     </div>

@@ -36,7 +36,5 @@ export default function DashboardMap() {
     );
 
 
-      return (
-        <GoogleMap currentTrip={currentTrip} center={center} markerPos={position} zoom={zoom} {...cameraProps} onCameraChanged={handleCameraChange}/>
-      )
+      return <GoogleMap currentTrip={currentTrip} center={center} markerPos={position} zoom={zoom} {...cameraProps} onCameraChanged={handleCameraChange}/>
 }

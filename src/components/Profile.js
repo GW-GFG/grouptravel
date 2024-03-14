@@ -46,7 +46,7 @@ export default function Profile() {
 
   const pictureStyle = {
     borderRadius: "50%",
-    border: "2px solid var(--primary-black-color)",
+    border: "2px solid #ffffff",
   };
 
   const backPictureStyle = {
@@ -103,69 +103,6 @@ export default function Profile() {
     }
   };
 
-
-  /*
-  <div className={styles.leftContainer}>
-          <div className={styles.profilPictureContainer}>
-            <Image
-              src={user.userPicture || 'avatar.png'}
-              alt="Avatar"
-              width={160}
-              height={160}
-              style={pictureStyle}
-            />
-            <input
-              type="file"
-              id="profile-picture"
-              ref={fileInputRef} // Ref to handleclick from penIcon
-              onChange={handleFileChange}
-              style={{ display: "none" }} // To hide input
-            />
-            <Button type="text" onClick={handleClickProfilPicture} text={<FontAwesomeIcon icon={faPen} className={styles.penIcon} />} >
-              <FontAwesomeIcon icon={faPen} className={styles.penIcon} />
-            </Button>
-          </div>
-          <div className={styles.userInfoContainer}>
-            <span>Bienvenue {user.username} !</span>
-          </div>
-          <div className={styles.backPicture}>
-            <Image
-              src="/image_profile.png"
-              alt="backgroundprofile"
-              width={360}
-              height={250}
-              style={backPictureStyle}
-            />
-          </div>
-        </div>
-
-        <div className={styles.rightContainer}>
-          <h1 className={`${styles.title} ${lexend.className}`}>Mon Compte</h1>
-          <div className={styles.tripsContainer}>
-            <h2 className={`${styles.tripTitle} ${lexend.className}`}>
-              Mes voyages :
-            </h2>
-            {trips}
-            <div className={styles.addContainer}>
-              <button
-                className={styles.addTravel}
-                onClick={() => handleClickAddTrip()}
-              >
-                <span className={styles.plus}>
-                  <FontAwesomeIcon
-                    icon={faCirclePlus}
-                    className={styles.faCirclePlusIcon}
-                  />
-                </span>
-                <br />
-                Organise un nouveau Travel entre amis
-              </button>
-            </div>
-          </div>
-        </div>
-
-        */
-
     return (
       <div className={styles.container}>
         <h1 className={`${styles.title} ${lexend.className}`}>Mon Compte</h1>
@@ -193,15 +130,6 @@ export default function Profile() {
             </div>
             <div>
               <span>Bienvenue {user.username} !</span>
-            </div>
-            <div className={styles.backPicture}>
-              <Image
-                src="/image_profile.png"
-                alt="backgroundprofile"
-                width={360}
-                height={250}
-                style={backPictureStyle}
-              />
             </div>
           </div>
           <div className={styles.tripsContainer}>

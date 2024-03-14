@@ -15,7 +15,6 @@
 .cardBody {
     display: flex;
     justify-content: space-between;
-    padding: 0 2rem;
 }
 
 .leftContainer {
@@ -26,6 +25,11 @@
 .leftColumn {
     max-width: 300px;
     max-height: 300px;
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+.leftColumnImgContainer {
     position: relative;
 }
 
