@@ -37,11 +37,11 @@ export default function Accommodation(props) {
     }, []);
 
     const handleFix = (newStatus) => {
-        console.log('isAdmin: ', isAdmin, 'accommodationId : ', _id , 'dates : ', currentTrip.dates, 'isFixed : ', newStatus)
+        console.log('isAdmin: ', isAdmin, 'accommodationId : ', _id , 'dates : ', currentTrip.dates, 'isFixed : ', newStatus )
         fetch('http://localhost:5500/accomodations/fixOne', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify( {isAdmin, accommodationId: _id , dates: currentTrip.dates, isFixed: newStatus} )
+            body: JSON.stringify( {isAdmin, accommodationId: _id , dates: currentTrip.dates, isFixed: newStatust} )
           }).then(response => response.json())
           .then(data => {
             console.log('handlefix res : ',data)

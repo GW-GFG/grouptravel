@@ -174,7 +174,11 @@ const AddActivity = () => {
           setZoom(12);
           setNewMarker(true);
         } else {
-          console.log("antd pop up pour dire qu'il y a une erreur ? :p");
+          notification.warning({
+            message: 'Localisation non trouvée',
+            description: "L'adresse saisie n'a pas pu être trouvée. Veuillez essayer avec une autre adresse.",
+            placement: 'bottomRight',
+          })
           setPosition({
             lat: currentTrip.location.lat,
             lng: currentTrip.location.lng,
