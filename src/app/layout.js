@@ -16,10 +16,11 @@ export default function RootLayout({ children }) {
   return (
       <html lang="en">
           <body className={poppins.className}>
+            <div className='bodybackground'></div>
           <StoreProvider>
             <Header />
             {children}
-            <Footer />
+            {/*<Footer />*/}
             </StoreProvider>
           </body>
       </html>

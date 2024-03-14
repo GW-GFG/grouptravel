@@ -2,12 +2,12 @@
 .row {
     background-color: white;
     border-radius: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 2rem;
     align-items: center;
-    margin-bottom: 2rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: .5rem 1rem;
 }
 
 .tripName {

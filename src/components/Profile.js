@@ -104,9 +104,8 @@ export default function Profile() {
   };
 
 
-    return (
-      <div className={styles.container}>
-        <div className={styles.leftContainer}>
+  /*
+  <div className={styles.leftContainer}>
           <div className={styles.profilPictureContainer}>
             <Image
               src={user.userPicture || 'avatar.png'}
@@ -147,6 +146,69 @@ export default function Profile() {
               Mes voyages :
             </h2>
             {trips}
+            <div className={styles.addContainer}>
+              <button
+                className={styles.addTravel}
+                onClick={() => handleClickAddTrip()}
+              >
+                <span className={styles.plus}>
+                  <FontAwesomeIcon
+                    icon={faCirclePlus}
+                    className={styles.faCirclePlusIcon}
+                  />
+                </span>
+                <br />
+                Organise un nouveau Travel entre amis
+              </button>
+            </div>
+          </div>
+        </div>
+
+        */
+
+    return (
+      <div className={styles.container}>
+        <h1 className={`${styles.title} ${lexend.className}`}>Mon Compte</h1>
+        <div className={styles.profileContent}>
+          <div className={styles.leftContainer}>
+            <div className={styles.profilPictureContainer}>
+              <Image
+                src={user.userPicture || 'avatar.png'}
+                alt="Avatar"
+                fill={true}
+                style={pictureStyle}
+              />
+              <input
+                type="file"
+                id="profile-picture"
+                ref={fileInputRef} // Ref to handleclick from penIcon
+                onChange={handleFileChange}
+                style={{ display: "none" }} // To hide input
+              />
+              <div className={styles.buttonPlace}>
+                <Button type="text" onClick={handleClickProfilPicture} text={<FontAwesomeIcon icon={faPen} className={styles.penIcon} />} >
+                  <FontAwesomeIcon icon={faPen} className={styles.penIcon} />
+                </Button>
+              </div>
+            </div>
+            <div className={styles.userInfoContainer}>
+              <span>Nom : {user.username}</span>
+            </div>
+            <div className={styles.backPicture}>
+              <Image
+                src="/image_profile.png"
+                alt="backgroundprofile"
+                width={360}
+                height={250}
+                style={backPictureStyle}
+              />
+            </div>
+          </div>
+          <div className={styles.tripsContainer}>
+            <h2 className={`${styles.tripTitle} ${lexend.className}`}> Mes voyages : </h2>
+            <div className={styles.tripsList}>
+              {trips}
+            </div>
             <div className={styles.addContainer}>
               <button
                 className={styles.addTravel}
