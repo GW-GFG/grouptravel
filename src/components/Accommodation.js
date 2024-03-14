@@ -112,10 +112,12 @@ export default function Accommodation(props) {
             <div className={styles.cardBody}>
                 <div className={styles.leftContainer}>
                     <div className={styles.leftColumn}>
-                        <Image fill={true} className={styles.imgContainer} src={`${photos[0] || "next.svg"}`} alt="My Trip Picture" />
+                        <div className={styles.leftColumnImgContainer}>
+                            <Image fill={true} className={styles.imgContainer} src={`${photos[0] || "next.svg"}`} alt="My Trip Picture" />
+                        </div>
                         <p>Budget par personne : {budgetPerPerson}</p>
                     </div>
-
+                    
                     <div className={styles.middleColumn}>
                         <div>
                             <p className={styles.date}>Du : {new Date(dates.departure).toLocaleDateString()} Au : {new Date(dates.return).toLocaleDateString()}</p>

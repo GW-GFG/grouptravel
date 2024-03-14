@@ -115,12 +115,14 @@ const Activity = (props, i) => {
             <div className={styles.imgContainer}>
                 <Image fill={true} src={`${picture || "next.svg"}`} alt="My Activity Picture" /> 
             </div>  
-            <h2 className={`${styles.cardTitle} ${lexend.className}`}>{capitalizeFirstLetter(name)}</h2>
-            <p>Lieu: {location.name || "Pas déterminé"}</p>
-            <p>Date: {new Date(date).toLocaleDateString()}</p>
-            <p>Description: {description}</p>
-            <p>Budget: {budget}</p>
-            <p>{countParticipations() <= 1 ? 'Participant' : 'Participants'}: {countParticipations()}</p>
+            <div className={styles.txtContainer}>
+                <h2 className={`${styles.cardTitle} ${lexend.className}`}>{capitalizeFirstLetter(name)}</h2>
+                <p>Lieu : {location.name || "Pas déterminé"}</p>
+                <p>Date : {new Date(date).toLocaleDateString()}</p>
+                <p>Description : {description}</p>
+                <p>Budget : {budget}</p>
+                <p>{countParticipations() <= 1 ? 'Participant' : 'Participants'} : {countParticipations()}</p>
+            </div>
             <div className={styles.bottomCard}>
                 <div className={styles.bottomCardVotes}>
                     <div className={styles.participation}>

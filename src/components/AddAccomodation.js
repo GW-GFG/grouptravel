@@ -364,15 +364,15 @@ export default function AddAccomodation() {
               </div>
               {/* Google map stuff */}
               {currentTrip && (
-                <GoogleMap
-                  currentTrip={currentTrip}
-                  newMarker={newMarker}
-                  center={center}
-                  markerPos={position}
-                  zoom={zoom}
-                  {...cameraProps}
-                  onCameraChanged={handleCameraChange}
-                />
+                  <GoogleMap
+                    currentTrip={currentTrip}
+                    newMarker={newMarker}
+                    center={center}
+                    markerPos={position}
+                    zoom={zoom}
+                    {...cameraProps}
+                    onCameraChanged={handleCameraChange}
+                  />
               )}
               {/* end Google map stuff*/}
             </div>

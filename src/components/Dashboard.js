@@ -32,7 +32,9 @@ export default function Dashboard() {
 
             <div className={styles.middleContainer}>
                 <DashboardActivitie />
-                <DashboardMap />
+                <div className={styles.gmap}>
+                    <DashboardMap />
+                </div>
             </div>
 
             <div className={styles.rightContainer}>

@@ -36,9 +36,13 @@
     object-fit: cover;
 }
 
+.txtContainer {
+    padding: 1rem;
+}
 
 .cardTitle {
     text-align: center;
+    padding: .5rem 0;
 }
 
 .bottomCard {
