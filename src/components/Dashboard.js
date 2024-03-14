@@ -25,7 +25,7 @@ export default function Dashboard() {
           <div className={styles.container}>
             <div className={styles.leftContainer}>
                 <DashboardPlanning />
-                <DashboardInfo />
+                <DashboardInfo key={currentTrip.name} />
                 <DashboardAccommodations />
             </div>
           

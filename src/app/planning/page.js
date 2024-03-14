@@ -19,7 +19,6 @@ export default function PlanningPage() {
   } else if (!currentTrip) {
     return <NoCurrentTrip title="Planning" />;
   } else {
-    console.log('currentTrip is: ', currentTrip);
     useEffect(() => {
       if (currentTrip._id) {
         
@@ -33,7 +32,6 @@ export default function PlanningPage() {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log('useEffet data: ', data.isAdmin);
               setIsAdmin(data.isAdmin);
           });
       }
@@ -64,7 +62,7 @@ export default function PlanningPage() {
     /*const nbrOfColumns = dates.length < 7 ? dates.length : 7;*/
     // split isFixed and isNotFixed and send it to different components
     const dailyPlanning = dates.map((date, i) => {
-      return <Planning daily={date} key={i} currentTrip={currentTrip} isAdmin={isAdmin} hasChanged={hasChanged} handleHasChanged={handleHasChanged}/>;
+      return <Planning daily={date} key={`${currentTrip.name}-${i}`} isAdmin={isAdmin} hasChanged={hasChanged} handleHasChanged={handleHasChanged}/>;
     });
 
 /* old version to style dynamically our nbr of columns
@@ -75,7 +73,7 @@ export default function PlanningPage() {
           {dailyPlanning}
         </div>
         <div className={styles.toFixContainer}>
-          <ToPlan key={currentTrip.name} currentTrip={currentTrip} isAdmin={isAdmin} hasChanged={hasChanged} handleHasChanged={handleHasChanged}/>
+          <ToPlan key={currentTrip.name} isAdmin={isAdmin} hasChanged={hasChanged} handleHasChanged={handleHasChanged}/>
         </div>
       </div>
     );

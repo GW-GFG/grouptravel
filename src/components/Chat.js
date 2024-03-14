@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import InputLabel from './InputLabel';
 import Button from './utils/Button';
+import { usePathname, useRouter } from 'next/navigation';
 
 
 function GroupChat() {
@@ -12,6 +13,7 @@ function GroupChat() {
   const currentTrip = useSelector((state) => state.user.value.currentTrip);
   const user = useSelector((state) => state.user.value);
   const messagesEndRef = useRef(null);
+  const pathname = usePathname();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -29,7 +31,9 @@ function GroupChat() {
         if(data)
         // console.log('chatData', data.chatData)
         setMessages(data.chatData)
-        scrollToBottom();
+        if (pathname === '/chat') {
+          scrollToBottom()
+        }
       })
 
     }, [user.token, currentTrip]);

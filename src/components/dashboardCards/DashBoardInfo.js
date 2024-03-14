@@ -11,7 +11,6 @@ export default function DashboardInfo() {
   const [fixedAccommodation, setFixedAccommodation] = useState([]);
   let accoName = null;
   useEffect(() => { 
-    // console.log(currentTrip)
     fetch('http://localhost:5500/trips/onetrip',{
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

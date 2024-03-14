@@ -18,6 +18,8 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem 0;
+    max-height: 30rem;
+    overflow: scroll;
 }
 
 .bottom {
