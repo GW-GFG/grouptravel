@@ -31,21 +31,30 @@ video {
 /* Styling layout */
 
 body {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  /* background-image: url('/backgreen.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; */
+}
+
+.bodybackground {
+  position: fixed;
+  min-height: 100vh;
+  width: 100vw;
   background-image: url('/backgreen.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-
+  z-index: -1;
 }
 
 /*Make the modals transparents */
 .css-dev-only-do-not-override-1drr2mu .ant-modal .ant-modal-content {
-  background-color: transparent; 
+  background-color: transparent;
   box-shadow: none;
 }
-
