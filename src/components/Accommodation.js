@@ -8,7 +8,7 @@ import Link from "next/link";
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
-import { voteToAccommodation } from "@/reducers/user";
+import { voteToAccommodation, updateFixStatusAccommodation } from "@/reducers/user";
 
 
 
@@ -20,8 +20,8 @@ export default function Accommodation(props) {
     const [isAdmin, setIsAdmin] = useState(false);
     //To keep vote updated
     const accommodation = currentTrip.accomodations.find(accommodation => accommodation._id === _id);
-
-    const budgetPerPerson = (budget / (currentTrip.members.length + 1)).toFixed(2)
+    const budgetPerPerson = (budget / (currentTrip.members.length + 1)).toFixed(2);
+    console.log(budgetPerPerson);
     console.log('budget props : ', budget)
     const [userVoteStatus, setUserVoteStatus] = useState(getInitialVoteStatus());
 
@@ -36,14 +36,16 @@ export default function Accommodation(props) {
         })
     }, []);
 
-    const handleFix = () => {
+    const handleFix = (newStatus) => {
+        console.log('isAdmin: ', isAdmin, 'accommodationId : ', _id , 'dates : ', currentTrip.dates, 'isFixed : ', newStatus)
         fetch('http://localhost:5500/accomodations/fixOne', {
-            method: 'POST',
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify( {isAdmin, accommodationId: _id , dates: currentTrip.dates, isFixed: true} )
+            body: JSON.stringify( {isAdmin, accommodationId: _id , dates: currentTrip.dates, isFixed: newStatus} )
           }).then(response => response.json())
           .then(data => {
             console.log('handlefix res : ',data)
+            dispatch(updateFixStatusAccommodation({accommodationId: _id, isFixed: newStatus}))
         })
     }
 
@@ -95,8 +97,8 @@ export default function Accommodation(props) {
         check: userVoteStatus === true ? { fontSize: '1.75rem', color: 'var(--primary-black-color)' } : { fontSize: '1.75rem' },
         cross: userVoteStatus === false ? { fontSize: '1.75rem', color: 'var(--primary-black-color)' } : { fontSize: '1.75rem' }
     };
-    // const fixStatusIcon = 
-    //    { fontSize: '1.75rem', color: 'var(--primary-black-color)' } : { fontSize: '1.75rem' };
+    const fixStatusIcon = 
+       isFixed? { fontSize: '1.75rem', color: 'var(--primary-black-color)' } : { fontSize: '1.75rem' };      
     
 
     // count the number of users with a true status on each accomodation's vote
@@ -131,7 +133,7 @@ export default function Accommodation(props) {
                     <div className={styles.voteIcons}>
                         <FontAwesomeIcon style={voteIconStyle.check} icon={faCircleCheck} onClick={(e) => handleDo(_id)} />
                         <FontAwesomeIcon style={voteIconStyle.cross} icon={faCircleXmark} onClick={(e) => handleDont(_id)} />
-                        <FontAwesomeIcon style={{fontSize: '1.75rem'}} icon={faCalendar} onClick={(e) => handleFix()} />
+                        {isAdmin && <FontAwesomeIcon style={fixStatusIcon} icon={faCalendar} onClick={(e) => handleFix(!isFixed)} />}
                     </div>
                     <Link href={url} target="_blank"><Button type="text" buttonClass="primary" text="En savoir plus" /></Link>
                 </div>

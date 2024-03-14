@@ -80,6 +80,13 @@ export const userSlice = createSlice({
 			}			
 		  },
 
+		  updateFixStatusAccommodation: (state, action) => {
+			const accommodationIndex = state.value.currentTrip.accomodations.findIndex(accommodation => accommodation._id.toString() === action.payload.accommodationId);	  
+			if (accommodationIndex!== -1) {
+			state.value.currentTrip.accomodations[accommodationIndex].isFixed = action.payload.isFixed;
+		  	}
+		},
+
 		  adminFixActivity: (state, action) => {
 			const { activityId, newStatus } = action.payload;
 			// Rechercher l'index de l'activité (si -1 c'est qu'il n'est pas trouvé)
@@ -93,5 +100,5 @@ export const userSlice = createSlice({
 	},
 });
 
-export const { addUserToStore, updateMyTrips, removeUserToStore, updateCurrentTrip, voteToAccommodation, participateToActivity, updateCurrentTripAccommodations, updateCurrentTripActivities, adminFixActivity } = userSlice.actions;
+export const { addUserToStore, updateMyTrips, removeUserToStore, updateCurrentTrip, voteToAccommodation, participateToActivity, updateCurrentTripAccommodations, updateCurrentTripActivities, updateFixStatusAccommodation, adminFixActivity } = userSlice.actions;
 export default userSlice.reducer;
