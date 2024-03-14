@@ -18,7 +18,7 @@ export default function CarouselHome() {
                 <div style={contentStyle}>
                     <div className={styles.container}> 
                         <div className={styles.imgCarousel}>
-                            <Image src='/groupfriend.jpg' alt='Group of friends' fill={true}/>
+                            <Image src='/photo1_carousel.jpg' alt='Prepare your journey' fill={true}/>
                         </div>
                         
                         <div className={styles.txtCarousel}>
@@ -52,7 +52,7 @@ export default function CarouselHome() {
             <div style={contentStyle}>
                     <div className={styles.container}> 
                         <div className={styles.imgCarousel}>
-                            <Image src='/groupfriend.jpg' alt='Group of friends' fill={true}/>
+                            <Image src='/photo3_carousel_v2.jpg' alt='Take-off airplane' fill={true}/>
                         </div>
                         
                         <div className={styles.txtCarousel}>

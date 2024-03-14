@@ -22,7 +22,7 @@
 }
 
 .topLeftContainer h2 {
-    color: #ffffff;
+    color: var(--primary-red-color);
 }
 
 .middle {

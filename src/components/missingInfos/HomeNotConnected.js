@@ -12,12 +12,12 @@ export default function HomeNotConnected() {
     return (
         <div className={styles.globalContainer}>
             <div className={styles.top}>
-                <Image src='/groupfriend.jpg' priority alt='Group of friends' fill={true}/>
+                <Image src='/photo_homepage.png' priority alt='Group of friends' fill={true}/>
                 <div className={styles.topLeftContainer}>
                     <h2> Enfin un plaisir de planifier ses voyages</h2>
-                    <Button buttonClass='primary' style={{position: 'absolute', top: '40px', left: '40px', backgroundColor: '#f3ad68', border: 'none'}} text='Nouveau voyage'>
+                    {/* <Button buttonClass='primary' style={{position: 'absolute', top: '40px', left: '40px', backgroundColor: '#f3ad68', border: 'none'}} text='Nouveau voyage'>
                         <Link href='/addTrip'>Nouveau compte</Link>
-                    </Button>
+                    </Button> */}
                 </div>
             </div>
             <div className={styles.middle}>
