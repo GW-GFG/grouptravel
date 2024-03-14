@@ -34,7 +34,8 @@ export default function PlanningPage() {
     }
 
     const dates = getDates(new Date(currentTrip.dates.departure), new Date(currentTrip.dates.return));
-    const nbrOfColumns = dates.length < 7 ? dates.length : 7;
+    /*const nbrOfColumns = dates.length < 7 ? dates.length : 7;*/
+    // split isFixed and isNotFixed and send it to different components
     const dailyPlanning = dates.map((date, i) => {
       return <Planning daily={date} key={i} currentTrip={currentTrip} />;
     });

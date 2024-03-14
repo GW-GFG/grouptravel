@@ -1,13 +1,23 @@
 .container {
   width: 80%;
-  padding: 2.5rem;
+  padding: 0 2.5rem 2.5rem;
   color: white;
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 1rem;
   border-radius: 1rem;
-  max-height: max-content;
+  position: relative;
 }
+
+/* refonte CSS */
+
+.profileContent {
+  display: flex;
+  gap: 1rem;
+}
+
+
+/* /refonce CSS */
 
 /*Right style */
 
@@ -47,6 +57,13 @@
   margin-bottom: 2rem;
 }
 
+.tripsList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
 .addContainer {
   display: flex;
   justify-content: center;
@@ -74,47 +91,55 @@
 
 /* User part - left */
 .leftContainer {
-  width: 40%;
+  /*width: 30%;*/
+  padding: 2rem;
   position: relative;
-  background: var(--primary-green-color);
+  /*background: var(--primary-green-color);*/
   border-radius: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);*/
 }
 
 .profilPictureContainer {
-  width: 12rem;
-  height: 12rem;
-  margin-left: 2rem;
-  margin-top: 1rem;
-  margin-bottom: 30%;
-  border-radius: 6rem;
-  overflow: hidden;
   /*keep the picture inside*/
+  /*
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  z-index: 1;
+  z-index: 1;*/
   position: relative;
+  width: 10rem;
+  height: 10rem;
+  padding: .5rem;
 }
 
 
 .userInfoContainer {
+  /*
   width: 12rem;
   height: 12rem;
   margin-left: 12%;
   overflow: visible;
   z-index: 1;
-  position: relative
+  position: relative;
+  */
+}
+
+.buttonPlace {
+  position: absolute;
+  bottom: .5rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .backPicture {
   width: 15rem;
-  height: 20rem;
-  left: 8%;
+  height: auto;
+  max-height: 15rem;
   overflow: hidden;
   border-radius: 1rem;
   position: absolute;
-  bottom: 0.1rem;
-  z-index: 0;
+  right: -3rem;
+  bottom: -3rem;
+  z-index: -1;
 }
