@@ -11,29 +11,40 @@ export default function DashboardInfo() {
   const [fixedAccommodation, setFixedAccommodation] = useState([]);
   let accoName = null;
   useEffect(() => { 
-    // console.log(currentTrip)
-    fetch('http://localhost:5500/trips/onetrip',{
+    fetch('http://localhost:5500/trips/budgetonetrip',{
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify( {tripId: currentTrip._id} )
+    }).then(response => response.json())
+    .then(data => {
+      console.log(data)
+      setTotalBudget(data.tripBudget.toFixed(2))
+     fetch('http://localhost:5500/trips/onetrip',{
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify( {tripId: currentTrip._id} )
         }).then(response => response.json())
         .then(data => {
-          // console.log(data.tripData)
-          setTotalBudget(data.tripData.budget.toFixed(2))
           if (data.tripData.members.length > 0) {
-            const tempBudget = data.tripData.budget / (data.tripData.members.length + 1)
+            // console.log(totalBudget)
+            let tempBudget = totalBudget / (data.tripData.members.length + 1)
             setBudgetPerPerson(tempBudget.toFixed(2)) 
           } else {             
             totalBudget && setBudgetPerPerson(totalBudget)
-          }
+          }          
           if (data.tripData.accomodations && data.tripData.accomodations.length > 0){
           accoName = data.tripData.accomodations
           .filter(accomodation => accomodation.isFixed === true)
           .map(accomodation => accomodation.name);
           setFixedAccommodation(accoName)
           }
-        })    
-  }, [currentTrip]);
+        })
+    })
+    
+        
+  }, [currentTrip, totalBudget ]);
+
+  
 
   const accommodationsList = fixedAccommodation.map((data, i) => {
     return <li key={i} >{data}</li>
@@ -48,7 +59,7 @@ export default function DashboardInfo() {
         <p>Dates retour : {new Date(currentTrip.dates.return).toLocaleDateString()}</p>
       </div>
       <div className={styles.userInfoContainer}>Budget :
-          <div className={styles.userInfoBudget}>Total : {totalBudget} € - par Personne : {budgetPerPerson}€</div>
+          <div className={styles.userInfoBudget}>Total : {totalBudget} € - par Personne : {budgetPerPerson} €</div>
       </div>
           <div className={styles.infoLogement}>lieu séjour: {currentTrip.location.name}</div>
           <ul className={styles.infoLogement}>
