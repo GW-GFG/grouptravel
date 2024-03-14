@@ -1,6 +1,7 @@
 'use client'
 import styles from './fixedInPlanning.module.css';
 import Image from 'next/image';
+import Button from '../utils/Button';
 
 export default function FixedInPlanning(props) {
 
@@ -23,7 +24,7 @@ export default function FixedInPlanning(props) {
                     Prix: {props.budget}
                 </p>
             </div>
-            {props.isAdmin && <button onClick={() => handleClick()}>CLick me to fix me</button>}
+            {props.isAdmin && <Button type="text" style={{ width: '80%', margin: 'auto' }} text="Retirer l'activité" onClick={() => handleClick()} />}
 
         </div>
     )
