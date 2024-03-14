@@ -77,7 +77,7 @@ export default function CreateTrip() {
             <div className={`${styles.logo} ${lexend.className}`}>GROUPTRAVEL</div>
             <h3 className={`${styles.title} ${lexend.className}`}>Planification de votre voyage entre amis !</h3>
                 <div className={styles.inputTextContainer}>
-                    <h4 className={styles.h4}>Défini le nom de ton groupe :</h4>
+                    <h4 className={styles.h4}>Définis le nom de ton groupe :</h4>
                     <InputLabel style={{width: "60%"}} type="text" onChange={(e) => setgroupName(e.target.value)} value={groupName} label="Nom du groupe" placeholder="Entre le nom de ton Groupe !" />
                 </div>
                 <div className={styles.inputTextContainer}>

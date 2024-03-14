@@ -21,8 +21,8 @@ export default function MiniActivityRow(props) {
       <div className={styles.container}>
           <p className={styles.activityName}>{name}</p>
           <div className={styles.iconContainer}>
-            <FontAwesomeIcon style={{fontSize: '1.75rem'}} icon={faCircleCheck} onClick={handleDo} />
-            <FontAwesomeIcon style={{fontSize: '1.75rem'}} icon={faCircleXmark} onClick={handleDont}  />
+            {/* <FontAwesomeIcon style={{fontSize: '1.75rem'}} icon={faCircleCheck} onClick={handleDo} />
+            <FontAwesomeIcon style={{fontSize: '1.75rem'}} icon={faCircleXmark} onClick={handleDont}  /> */}
           </div>
 
       </div>

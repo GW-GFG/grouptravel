@@ -259,7 +259,7 @@ export default function AddAccomodation() {
               <label htmlFor="accomodation-picture" className={styles.label}>
                 Photo
               </label>
-              <input
+              <input className={styles.inputFile}
                 type="file"
                 id="accomodation-picture"
                 onChange={(e) => setAccomodationPicture(e.target.files[0])}

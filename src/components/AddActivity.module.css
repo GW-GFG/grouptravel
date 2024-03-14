@@ -58,6 +58,7 @@
 
 .input {
     margin-bottom: 1rem;
+    color: var(--primary-black-color);
 }
 
 /* special rule for budget inputs to be in the same row */

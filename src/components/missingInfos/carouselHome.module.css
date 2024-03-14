@@ -13,19 +13,30 @@
 
 .txtCarousel {
     color: var(--primary-black-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 2rem;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: space-around; */
+    /* gap: 2rem; */
     padding: 2rem
 }
 
+.txtCarousel h3,
+.txtCarousel h2 {
+text-align: center;
+}
+
+.txtCarousel h3 {
+padding: 1rem 0;
+}
+
+.txtCarousel h2,
 .txtCarousel h3,
 .txtCarousel p {
     line-height: 1rem;
 }
 
+
 .descCarousel {
     text-align: left;
-    padding: 2rem;
+    /* padding: 2rem; */
 }

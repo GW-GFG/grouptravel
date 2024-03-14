@@ -60,6 +60,16 @@
     margin-bottom: 1rem;
 }
 
+.inputFile {
+    background-color: transparent;
+    border: 2px solid #ffff;
+    color: #ffff;
+    border-radius: 0.625rem;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    margin-bottom: 2%; 
+}
+
 /* special rule for budget inputs to be in the same row */
 .inputsBudgetContainer {
     display: flex;
