@@ -2,8 +2,8 @@
 import styles from './fixedInPlanning.module.css';
 import Image from 'next/image';
 
-export default function FixedInPlanning(props) {
-
+export default function NotFixedInPlanning(props) {
+    
     const handleClick = () => {
         props.handleClick(props);
         props.handleHasChanged();

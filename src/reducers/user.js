@@ -79,8 +79,19 @@ export const userSlice = createSlice({
 			  }
 			}			
 		  },
+
+		  adminFixActivity: (state, action) => {
+			const { activityId, newStatus } = action.payload;
+			// Rechercher l'index de l'activité (si -1 c'est qu'il n'est pas trouvé)
+			const activityIndex = state.value.currentTrip.activities.findIndex(activity => activity._id.toString() === activityId);	  
+			if (activityIndex!== -1) {
+			  // Changing "isFixed" to newStatus
+			  state.value.currentTrip.activities[activityIndex].isFixed = newStatus;
+			}			
+		  },
+		  
 	},
 });
 
-export const { addUserToStore, updateMyTrips, removeUserToStore, updateCurrentTrip, voteToAccommodation, participateToActivity, updateCurrentTripAccommodations, updateCurrentTripActivities } = userSlice.actions;
+export const { addUserToStore, updateMyTrips, removeUserToStore, updateCurrentTrip, voteToAccommodation, participateToActivity, updateCurrentTripAccommodations, updateCurrentTripActivities, adminFixActivity } = userSlice.actions;
 export default userSlice.reducer;

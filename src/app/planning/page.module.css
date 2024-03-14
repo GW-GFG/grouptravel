@@ -36,3 +36,8 @@
     overflow-x: auto;
     overscroll-behavior-inline: contain;
 }
+
+.toFixContainer {
+    width: 100%;
+    padding: 2rem;
+}

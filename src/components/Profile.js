@@ -191,7 +191,7 @@ export default function Profile() {
                 </Button>
               </div>
             </div>
-            <div className={styles.userInfoContainer}>
+            <div>
               <span>Nom : {user.username}</span>
             </div>
             <div className={styles.backPicture}>

@@ -113,18 +113,6 @@
   padding: .5rem;
 }
 
-
-.userInfoContainer {
-  /*
-  width: 12rem;
-  height: 12rem;
-  margin-left: 12%;
-  overflow: visible;
-  z-index: 1;
-  position: relative;
-  */
-}
-
 .buttonPlace {
   position: absolute;
   bottom: .5rem;

@@ -11,8 +11,8 @@
 }
 
 .activityContainer {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
     background-color: #ffffff;
     border-radius: 1rem;

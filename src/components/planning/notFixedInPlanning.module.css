@@ -1,0 +1,26 @@
+.activityContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: var(--primary-green-color);
+    border-radius: 1rem;
+    padding: .5rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.headings {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.imgContainer {
+    width: 100%;
+    position: relative;
+    min-height: 5rem;
+}
+
+.basicInfo {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-evenly;
+}
