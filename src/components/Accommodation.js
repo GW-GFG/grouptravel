@@ -41,7 +41,7 @@ export default function Accommodation(props) {
         fetch('http://localhost:5500/accomodations/fixOne', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify( {isAdmin, accommodationId: _id , dates: currentTrip.dates, isFixed: newStatust} )
+            body: JSON.stringify( {isAdmin, accommodationId: _id , dates: currentTrip.dates, isFixed: newStatus} )
           }).then(response => response.json())
           .then(data => {
             console.log('handlefix res : ',data)
