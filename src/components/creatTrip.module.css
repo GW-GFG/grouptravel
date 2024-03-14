@@ -26,10 +26,12 @@
 
 .logo {
     width: 35%;
-    color: var(--primary-black-color);
+    /* color: var(--primary-blue-color); */
     font-weight: bold;
     font-size: 2rem;
     text-align: center;
+    color: #ffff;
+
 }
 
 .h4 {

@@ -34,14 +34,14 @@ export default function ActivitiesPage() {
                   <div className={styles.container}>
                     {activities}
                   </div>
-                    <Button text="+" onClick={() => handleClickPlusButton()} style={{backgroundColor: '#64b9bd'}}/>
+                    <Button text="+" onClick={() => handleClickPlusButton()} buttonClass={'bgBlue'}/>
               </div>
             )
           } else {
             return (
               <>
                 <MissingInfos title='Activités' text="d'activité proposée" />
-                  <Button text="+" onClick={() => handleClickPlusButton()} style={{backgroundColor: '#64b9bd'}}/>
+                  <Button text="+" onClick={() => handleClickPlusButton()} buttonClass={'bgBlue'}/>
               </>
             
             )

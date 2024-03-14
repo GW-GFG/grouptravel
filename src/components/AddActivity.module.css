@@ -58,6 +58,7 @@
 
 .input {
     margin-bottom: 1rem;
+    color: var(--primary-black-color);
 }
 
 /* special rule for budget inputs to be in the same row */
@@ -92,13 +93,15 @@
     /*width: 70%;*/
 }
 
-.inputs label {
+.inputs label,
+.bottom label {
     margin: 1rem 0 .7rem;
 }
 
 .inputs input,
 .inputsBudget input,
-.inputDate input {
+.inputDate input,
+.bottom input {
     background-color: transparent;
     border: 2px solid #ffffff;
     border-radius: .625rem;
@@ -106,13 +109,15 @@
 
 .inputs input[type="text"],
 .inputsBudget input[type="number"],
-.inputDate input[type="date"] {
+.inputDate input[type="date"],
+.bottom input[type="text"] {
     padding: .7rem;
 }
 
 .inputs input:focus,
 .inputsBudget input:focus,
-.inputDate input:focus {
+.inputDate input:focus,
+.bottom input:focus {
     /* TODO change color to something beautiful */
     outline: 2px solid #C3C3C3;
 }
@@ -135,4 +140,5 @@
 .buttonContainer {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 }

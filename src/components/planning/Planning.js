@@ -8,10 +8,11 @@ import { notification } from 'antd';
 
 export default function Planning(props) {
   const user = useSelector((state) => state.user.value);
-  const currentTrip = props.currentTrip;
+  const currentTrip = useSelector((state) => state.user.value.currentTrip);
   const dispatch = useDispatch();
   const [areFixed, setAreFixed] = useState(null);
 
+  //console.log('planning component props.hasChanged: ', props.hasChanged);
   useEffect(() => {
     if (user.token && currentTrip && currentTrip._id) {
       
@@ -25,11 +26,11 @@ export default function Planning(props) {
       })
         .then((response) => response.json())
         .then((data) => {
-            //console.log("notFixedData : " + JSON.stringify(data.data));
+            //console.log('planning component has fetched: ', data.data);
             setAreFixed(data.data);
         });
     }
-  }, [props.hasChanged]);
+  }, [currentTrip]); 
 
   const handleClick = (myActivity, newDate) => {
 

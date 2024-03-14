@@ -19,19 +19,24 @@
     color: white;
     background-color: var(--primary-red-color);
     border-radius: 0.625rem;
-    padding: 0.2rem;
-    margin-left: 1rem;
+    padding: .5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.inviteBadge {
+    color: white;
+    background-color: var(--primary-green-color);
+    border-radius: 0.625rem;
+    padding: .5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .goButton {
     background-color: var(--primary-orange-color);
-    border-radius: 1rem;
-    width: 3rem;
+    border-radius: 50%;
     color: white;
-    border: 1px solid transparent;
-    padding: 1%;
-    margin: 0.2rem;
+    border: none;
+    padding: .5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 

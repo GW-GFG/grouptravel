@@ -8,11 +8,11 @@ import { notification } from 'antd';
 
 export default function ToPlan(props) {
   const user = useSelector((state) => state.user.value);
-  const currentTrip = props.currentTrip;
+  const currentTrip = useSelector((state) => state.user.value.currentTrip);
   const dispatch = useDispatch();
   const [areNotFixed, setAreNotFixed] = useState(null);
 
-
+  //console.log('toplan component props hasChanged: ', props.hasChanged);
   useEffect(() => {
     if (user.token && currentTrip && currentTrip._id) {
       
@@ -26,10 +26,11 @@ export default function ToPlan(props) {
       })
         .then((response) => response.json())
         .then((data) => {
+            //console.log('toplan component has fetched: ', data.data);
             setAreNotFixed(data.data);
         });
     }
-  }, [props.hasChanged]);
+  }, [currentTrip]); 
 
   const handleClick = (myActivity, newDate) => {
 
@@ -59,6 +60,7 @@ export default function ToPlan(props) {
                 description: "Votre activité a bien été ajoutée du planning !",
                 placement: "bottomRight",
             });
+            props.handleHasChanged(); // modifs
         });
   };
 

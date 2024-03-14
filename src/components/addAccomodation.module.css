@@ -60,6 +60,20 @@
     margin-bottom: 1rem;
 }
 
+.inputFile {
+    background-color: transparent;
+    border: 2px solid #ffff;
+    color: #ffff;
+    border-radius: 0.625rem;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    margin-bottom: 2%;
+}
+
+.top input[type="file"] {
+    color: white;
+}
+
 /* special rule for budget inputs to be in the same row */
 .inputsBudgetContainer {
     display: flex;
@@ -140,4 +154,9 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+}
+
+.gmap {
+    border-radius: .625rem;
+    overflow: hidden;
 }

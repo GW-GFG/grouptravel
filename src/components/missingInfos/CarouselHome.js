@@ -1,6 +1,7 @@
 import { Carousel } from 'antd';
 import Image from 'next/image';
 import styles from './carouselHome.module.css';
+import { lexend } from "../../app/fonts";
 
 export default function CarouselHome() {
 
@@ -22,10 +23,15 @@ export default function CarouselHome() {
                         </div>
                         
                         <div className={styles.txtCarousel}>
-                            <h3>Avant le voyage</h3>
+                            <h2>Avant le voyage</h2>
                             <div className={styles.descCarousel}>
-                                <p>Superbes fonctionnalités !</p>
-                                <p>Planifiez en toute simplicité grace à Group Travel ! </p>
+                                <h3>Bienvenue sur GroupTravel</h3>
+                                <p className={lexend.className}>Choisis un nom pour ton groupe de voyage,<br/>
+                                    Dis nous les dates de ton départ et celles de ton arrivée,<br/>
+                                    Précise nous l'endroit idéal pour partir en vacances ...<br/>
+                                    ... et c'est parti !
+                                    
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -39,10 +45,16 @@ export default function CarouselHome() {
                         </div>
                         
                         <div className={styles.txtCarousel}>
-                            <h3>Pendant le voyage</h3>
+                            <h2>Pendant le voyage</h2>
                             <div className={styles.descCarousel}>
-                                <p>Superbes fonctionnalités !</p>
-                                <p>Planifiez en toute simplicité grace à Group Travel ! </p>
+                                <h3>Planifiez en toute simplicité grâce à Group Travel !</h3>
+                                <p>Découvres nos superbes fonctionnalités !<br/>
+                                    Invite des amis,<br/>
+                                    Proposez des logements sympas est des activités merveilleuses (ou tranquilles),<br/>
+                                    Donnez votre avis pour décider de ce que vous allez faire,<br/>                              
+                                    Visualisez en quelques coup d'oeil de quoi votre voyage sera fait,<br/>
+                                    Laissez des petits messages à vos amis et profitez des bons moments !                                
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -56,10 +68,13 @@ export default function CarouselHome() {
                         </div>
                         
                         <div className={styles.txtCarousel}>
-                            <h3>Après le voyage</h3>
+                            <h2>Après le voyage</h2>
                             <div className={styles.descCarousel}>
-                                <p>Superbes fonctionnalités !</p>
-                                <p>Planifiez en toute simplicité grace à Group Travel ! </p>
+                                <h3>C'est simple d'y revenir</h3>
+                                <p>Après ces bons moments passés ensembles<br/>
+                                Revenez vous rappeler de vos derniers voyages ...<br/>
+                                ... puis en créer de nouveaux !
+                                </p>
                             </div>
                         </div>
                     </div>

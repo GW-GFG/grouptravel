@@ -49,8 +49,6 @@ export default function AddAccomodation() {
   const [formHasError, setFormHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  // console.log('currentTrip from addacco: ', currentTrip);
-
   // Google map camera change
   const INITIAL_CAMERA = {
     center: { lat: currentTrip.location.lat, lng: currentTrip.location.lng },
@@ -92,12 +90,10 @@ export default function AddAccomodation() {
           });
           return;
         }
-        // console.log(data)
-        // console.log('New accomodation added', data.newAccomodation)
         dispatch(
           updateCurrentTripAccommodations(
             data.newAccomodation.accomodations[
-              data.newAccomodation.accomodations.length - 1
+            data.newAccomodation.accomodations.length - 1
             ]
           )
         );
@@ -193,33 +189,6 @@ export default function AddAccomodation() {
           //Return fetch to handle upload
           return fetchPostNewAccommodation(accomodationData);
         });
-      // fetch(`http://localhost:5500/accomodations/new`, {
-      // method: 'POST',
-      // headers: { 'Content-Type': 'application/json' },
-      // body: JSON.stringify(accomodationData)
-      // });
-      // })
-      // .then(response => response.json())
-      // .then(data => {
-      //     if (data.result === false) {
-      //         notification.warning({
-      //             message: 'Attention !',
-      //             description: data.error,
-      //             placement: 'bottomRight'
-      //         })
-      //         return
-      //     }
-      //     console.log(data)
-      //     console.log('New accomodation added', data.newAccomodation)
-      //     dispatch(updateCurrentTripAccommodations(data.newAccomodation))
-      //     notification.success({
-      //         message: 'Logement ajouté !',
-      //         description: 'Votre logement a bien été soumis à votre groupe !',
-      //         placement: 'bottomRight'
-      //     })
-      //     clearAllfields()
-      //     console.log('AddAccomodation.js : nouveau logement ajouté au trip, yay !')
-      // });
     } else {
       return fetchPostNewAccommodation(accomodationData);
     }
@@ -239,7 +208,11 @@ export default function AddAccomodation() {
           setZoom(12);
           setNewMarker(true);
         } else {
-          console.log("antd pop up pour dire qu'il y a une erreur ? :p");
+          notification.warning({
+            message: 'Localisation non trouvée',
+            description: "L'adresse saisie n'a pas pu être trouvée. Veuillez essayer avec une autre adresse.",
+            placement: 'bottomRight',
+          })
           setPosition({
             lat: currentTrip.location.lat,
             lng: currentTrip.location.lng,
@@ -259,7 +232,7 @@ export default function AddAccomodation() {
               <label htmlFor="accomodation-picture" className={styles.label}>
                 Photo
               </label>
-              <input
+              <input className={styles.inputFile}
                 type="file"
                 id="accomodation-picture"
                 onChange={(e) => setAccomodationPicture(e.target.files[0])}
@@ -364,7 +337,6 @@ export default function AddAccomodation() {
                     accomodationBudget /
                     (currentTrip.members.length + 1)
                   ).toFixed(2)}
-                  // onChange={(e) => setAccomodationBudgetPerPerson(e.target.value)}
                   min="0"
                 />
               </div>
@@ -392,15 +364,15 @@ export default function AddAccomodation() {
               </div>
               {/* Google map stuff */}
               {currentTrip && (
-                <GoogleMap
-                  currentTrip={currentTrip}
-                  newMarker={newMarker}
-                  center={center}
-                  markerPos={position}
-                  zoom={zoom}
-                  {...cameraProps}
-                  onCameraChanged={handleCameraChange}
-                />
+                  <GoogleMap
+                    currentTrip={currentTrip}
+                    newMarker={newMarker}
+                    center={center}
+                    markerPos={position}
+                    zoom={zoom}
+                    {...cameraProps}
+                    onCameraChanged={handleCameraChange}
+                  />
               )}
               {/* end Google map stuff*/}
             </div>

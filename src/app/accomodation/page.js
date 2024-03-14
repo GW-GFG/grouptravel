@@ -34,14 +34,14 @@ export default function AccommodationPage() {
               <div className={styles.accommodationsContainer}>
                 {accommodations}
               </div>
-              <Button text="+" onClick={() => handleClickPlusButton()} style={{backgroundColor: '#ef8b7a'}}/>
+              <Button text="+" onClick={() => handleClickPlusButton()} buttonClass={'bgRed'}/>
           </div>        
       )
     } else {
       return (
         <>
           <MissingInfos title='Logements' text="de logement proposé" />
-          <Button text="+" onClick={() => handleClickPlusButton()} style={{backgroundColor: '#ef8b7a'}}/>
+          <Button text="+" onClick={() => handleClickPlusButton()} buttonClass={'bgBlue'}/>
         </>
       )
 

@@ -25,14 +25,16 @@ export default function Dashboard() {
           <div className={styles.container}>
             <div className={styles.leftContainer}>
                 <DashboardPlanning />
-                <DashboardInfo />
+                <DashboardInfo key={currentTrip.name} />
                 <DashboardAccommodations />
             </div>
           
 
             <div className={styles.middleContainer}>
                 <DashboardActivitie />
-                <DashboardMap />
+                <div className={styles.gmap}>
+                    <DashboardMap />
+                </div>
             </div>
 
             <div className={styles.rightContainer}>

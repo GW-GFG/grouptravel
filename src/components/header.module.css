@@ -156,3 +156,7 @@
     color: var(--primary-red-color);
     font-size: 1.2rem;
 }
+
+.popover {
+    cursor: pointer;
+}

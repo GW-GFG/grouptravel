@@ -9,15 +9,10 @@
   position: relative;
 }
 
-/* refonte CSS */
-
 .profileContent {
   display: flex;
   gap: 1rem;
 }
-
-
-/* /refonce CSS */
 
 /*Right style */
 
@@ -100,13 +95,6 @@
 }
 
 .profilPictureContainer {
-  /*keep the picture inside*/
-  /*
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  z-index: 1;*/
   position: relative;
   width: 10rem;
   height: 10rem;

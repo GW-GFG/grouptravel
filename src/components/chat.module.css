@@ -1,14 +1,17 @@
 .mainContainer {
-    border-radius: 0.625rem;
-    color: white;
+  border-radius: 0.625rem;
+  color: white;
 }
+
 .allMsgContainer {
-    background-color: white;
-    border-radius: 0.625rem;
-    padding: 0.25rem 1rem 0.5rem;
-    min-height: 10rem;
-    max-height: 30rem; /* Définissez la taille maximale souhaitée */
-    overflow-y: auto; /* Ajoutez un défilement vertical si nécessaire */
+  background-color: white;
+  border-radius: 0.625rem;
+  padding: 0.25rem 1rem 0.5rem;
+  min-height: 20rem;
+  max-height: 30rem;
+  /* Définissez la taille maximale souhaitée */
+  overflow-y: auto;
+  /* Ajoutez un défilement vertical si nécessaire */
 }
 
 .empty {
@@ -16,57 +19,72 @@
 }
 
 .messagesContainer {
-    background-color: white;
-    flex: 1; /* Pour que le conteneur des messages prenne tout l'espace disponible */
-    overflow-y: auto; /* Pour activer le défilement vertical si nécessaire */
-    border-radius: 0.625rem;
+  background-color: white;
+  flex: 1;
+  /* Pour que le conteneur des messages prenne tout l'espace disponible */
+  overflow-y: auto;
+  /* Pour activer le défilement vertical si nécessaire */
+  border-radius: 0.625rem;
 }
+
 .userMessagesContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-  
-  .otherMessagesContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.otherMessagesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
 .messagesRow {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end; /* Les messages seront alignés à droite */
-    border-radius: 0.625rem; /* Ajout du rayon de bordure */
-    padding: 0.5rem; /* Ajout d'un espacement intérieur pour le contenu du message */
-    max-width: 80%; /* Ajustement de la largeur maximale pour éviter le débordement */
-    margin-bottom: 0.5rem; /* Espacement entre les messages */
-  }
-  
-  .otherMessage {
-    align-items: flex-start;
-    background-color: var(--primary-red-color) /* Les messages des autres utilisateurs seront alignés à gauche */
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  /* Les messages seront alignés à droite */
+  border-radius: 0.625rem;
+  /* Ajout du rayon de bordure */
+  padding: 0.5rem;
+  /* Ajout d'un espacement intérieur pour le contenu du message */
+  max-width: 80%;
+  /* Ajustement de la largeur maximale pour éviter le débordement */
+  margin-bottom: 0.5rem;
+  /* Espacement entre les messages */
+}
 
-  .userMessage {
-    background-color: var(--primary-blue-color);
-  }
-  
-  .author {
-    font-weight: bold; /* Pour rendre le nom de l'auteur en gras */
-    font-size: 0.75rem
-  }
-  
-  .msgContent {
-    margin-left: .75rem; /* Marge à gauche pour l'affichage du message */
-    margin-right: .75rem; /* Marge à droite pour l'affichage du message */
-    font-size: 0.75rem; /* Définissez la taille de la police comme vous le souhaitez */
-    line-height: 1.2; /* Définissez la hauteur de ligne pour contrôler l'espacement entre les lignes */
-  }
-  
-  .inputContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0; /* Espacement entre le champ de saisie et le bouton */
-  }
+.otherMessage {
+  align-items: flex-start;
+  background-color: var(--primary-red-color)
+    /* Les messages des autres utilisateurs seront alignés à gauche */
+}
+
+.userMessage {
+  background-color: var(--primary-blue-color);
+}
+
+.author {
+  font-weight: bold;
+  /* Pour rendre le nom de l'auteur en gras */
+  font-size: 0.75rem
+}
+
+.msgContent {
+  margin-left: .75rem;
+  /* Marge à gauche pour l'affichage du message */
+  margin-right: .75rem;
+  /* Marge à droite pour l'affichage du message */
+  font-size: 0.75rem;
+  /* Définissez la taille de la police comme vous le souhaitez */
+  line-height: 1.2;
+  /* Définissez la hauteur de ligne pour contrôler l'espacement entre les lignes */
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  /* Espacement entre le champ de saisie et le bouton */
+}
