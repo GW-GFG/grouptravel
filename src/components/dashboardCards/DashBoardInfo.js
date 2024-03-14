@@ -17,7 +17,6 @@ export default function DashboardInfo() {
       body: JSON.stringify( {tripId: currentTrip._id} )
     }).then(response => response.json())
     .then(data => {
-      console.log(data)
       setTotalBudget(data.tripBudget.toFixed(2))
      fetch('http://localhost:5500/trips/onetrip',{
           method: 'POST',

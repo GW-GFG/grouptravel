@@ -2,13 +2,14 @@
 
 // import elements for Google map
 import {APIProvider, Map, AdvancedMarker, Pin} from '@vis.gl/react-google-maps';
-const apiKey="AIzaSyAtN3JpGGPLuZkaD7j2zoSB0vE3e_B-Jn8"
 
 // envoyer les props suivantes au component GoogleMap
 export default function GoogleMap(props) {
+
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API;
     //console.log('props from GoogleMap.js: ', props);
     return (
-      <APIProvider apiKey={'AIzaSyAtN3JpGGPLuZkaD7j2zoSB0vE3e_B-Jn8'}>
+      <APIProvider apiKey={apiKey}>
           <Map
           defaultCenter={{lat: props.currentTrip.location.lat, lng: props.currentTrip.location.lng}}
           defaultZoom={props.zoom}
