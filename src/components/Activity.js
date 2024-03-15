@@ -116,7 +116,7 @@ const Activity = (props, i) => {
     return (
         <div className={styles.card}>
             <div className={styles.imgContainer}>
-                <Image fill={true} src={`${picture || "next.svg"}`} alt="My Activity Picture" /> 
+                <Image fill={true} src={`${picture || "/activity1.png"}`} alt="My Activity Picture" /> 
             </div>  
             <div className={styles.txtContainer}>
                 <h2 className={`${styles.cardTitle} ${lexend.className}`}>{capitalizeFirstLetter(name)}</h2>

@@ -18,6 +18,14 @@
     */
 }
 
+@media screen and (max-width: 660px) {
+    .container {
+        grid-template-columns: none;
+        grid-template-rows: repeat(3, 1fr);
+        justify-content: center;
+    }
+}
+
 .globalContainer {
     width: 80%;
     margin: 0 auto;

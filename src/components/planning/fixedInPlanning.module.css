@@ -16,7 +16,8 @@
 .imgContainer {
     width: 100%;
     position: relative;
-    min-height: 5rem;
+    /* min-height: 5rem; */
+    min-height: 12rem;
 }
 
 .basicInfo {

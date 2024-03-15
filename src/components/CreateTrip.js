@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { notification } from 'antd'
 import InputLabel from './InputLabel';
 import styles from './creatTrip.module.css';
-import { updateCurrentTrip, updateMyTrips } from '../reducers/user';
+import { updateCurrentTrip, updateMyTrips } from '@/reducers/user';
 // import fonts to use them for menu items
 import { lexend } from '../app/fonts';
 
@@ -53,26 +53,26 @@ export default function CreateTrip() {
                     }).then(response => response.json())
                         .then(data => {
                             // If data.error send error.msg to front
-                            if (data.error) {
+                            console.log('verif data avant if : ', data)
+                            if (!data.result) {
                                 setErrorMsg(data.error)
                                 notification.warning({
                                     message: 'Attention !',
                                     description: errorMsg,
                                     placement: 'bottomRight'
                                 })
-                            }
-                            else {
+                            } else {
                                 // If no error > update reducer in redux
-                                // console.log('data.newTrip', data.newTrip)
-                                dispatch(updateMyTrips(data.newTrip))
-                                dispatch(updateCurrentTrip(data.newTrip))
-                                notification.success({
-                                    message: 'Voyage créé !',
-                                    description: 'Votre voyage a bien été créé !',
-                                    placement: 'bottomRight'
-                                })
+                                dispatch(updateMyTrips(data.newTrip));
+                                dispatch(updateCurrentTrip(data.newTrip));
                                 // rerouting user to dashboard of new trip
-                                router.push('/')
+                                router.push('/');                               
+                                // notification.success({
+                                //     message: 'Voyage créé !',
+                                //     description: 'Votre voyage a bien été créé !',
+                                //     placement: 'bottomRight'
+                                // })
+                                                               
                             }
                         });
                 } else {

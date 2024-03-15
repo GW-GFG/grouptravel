@@ -21,8 +21,6 @@ export default function Accommodation(props) {
     //To keep vote updated
     const accommodation = currentTrip.accomodations.find(accommodation => accommodation._id === _id);
     const budgetPerPerson = (budget / (currentTrip.members.length + 1)).toFixed(2);
-    console.log(budgetPerPerson);
-    console.log('budget props : ', budget)
     const [userVoteStatus, setUserVoteStatus] = useState(getInitialVoteStatus());
 
     useEffect(() => {
@@ -113,7 +111,7 @@ export default function Accommodation(props) {
                 <div className={styles.leftContainer}>
                     <div className={styles.leftColumn}>
                         <div className={styles.leftColumnImgContainer}>
-                            <Image fill={true} className={styles.imgContainer} src={`${photos[0] || "next.svg"}`} alt="My Trip Picture" />
+                            <Image fill={true} className={styles.imgContainer} src={`${photos[0] || "/acco1.png"}`} alt="My Trip Picture" />
                         </div>
                         <p>Budget par personne : {budgetPerPerson}</p>
                     </div>

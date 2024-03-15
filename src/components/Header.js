@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse, faLaptop, faBed, faTableTennisPaddleBall, faCalendar, faMessage, faPlane, faUser, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { usePathname, useRouter } from 'next/navigation'
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import { Modal, Popover } from 'antd';
 // import fonts to use them for menu items 
@@ -14,6 +14,7 @@ import { lexend } from '../app/fonts';
 import styles from './header.module.css';
 import SignIn from '@/components/SignIn';
 import SignUp from "./SignUp";
+import BurgerMenu from "./menu/BurgerMenu";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUserToStore, updateCurrentTrip } from "@/reducers/user";
@@ -119,7 +120,7 @@ export default function Header() {
 
       //Logout
       const handleLogout = () => {
-        dispatch(removeUserToStore())
+        dispatch(removeUserToStore());
         router.push('/');
       };
 
@@ -127,8 +128,42 @@ export default function Header() {
         router.push('/profile');
       }
 
+
+      /* BURGER MENU LOGIC, MATCH BREAKPOINT TO THE ONES IN CSS FILE */
+      const useMediaQuery = (width) => {
+        const [targetReached, setTargetReached] = useState(false);
+      
+        const updateTarget = useCallback((e) => {
+          if (e.matches) {
+            setTargetReached(true);
+          } else {
+            setTargetReached(false);
+          }
+        }, []);
+      
+        useEffect(() => {
+          const media = window.matchMedia(`(max-width: ${width}px)`);
+          media.addListener(updateTarget);
+      
+          // Check on mount (callback is not called until a change occurs)
+          if (media.matches) {
+            setTargetReached(true);
+          }
+      
+          return () => media.removeListener(updateTarget);
+        }, []);
+      
+        return targetReached;
+      };
+
+      const isBreakpoint = useMediaQuery(660);
+      // END BURGER MENU LOGIC */
+
       // Menu logic based on user.token
       if (!user.token) {
+        if (isBreakpoint) {
+            return <BurgerMenu hasToken={false}/>
+        } else {
         return (
         <header className={`${styles.header} ${lexend.className}`}>
             <div className={styles.headerLeft}>
@@ -156,8 +191,11 @@ export default function Header() {
             <Modal open={isSignUpModalOpen} onCancel={handleCancelSignUp} footer={null}>
                 <SignUp handleRegister={handleRegister} />
             </Modal> 
-        </header>)
+        </header>)}
       } else {
+            if (isBreakpoint) {
+                return <BurgerMenu hasToken={true}/>
+            } else {
         return (
         <header className={`${styles.header} ${lexend.className}`}>
         <div className={styles.headerLeft}>
@@ -201,7 +239,7 @@ export default function Header() {
             <SignUp handleRegister={handleRegister} />
         </Modal>
     </header>
-        )
+        )}
       }
 
     
