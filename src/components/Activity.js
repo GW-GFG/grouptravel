@@ -2,7 +2,7 @@
 import styles from './Activity.module.css';
 import { lexend } from '../app/fonts';
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card } from 'antd';
 import Button from './utils/Button';
 import Link from 'next/link';
@@ -33,6 +33,7 @@ const Activity = (props, i) => {
         }
         return str.charAt(0).toUpperCase() + str.slice(1)
     }
+    
 
     const handleParticipate = (activityId) => {
         const participationData = {
@@ -92,6 +93,8 @@ const Activity = (props, i) => {
         return participation.filter(participant => participant.status === true).length
     }
 
+
+
     //if (currentTrip && currentTrip.activities.length > 0) {
         /*
             <Card
@@ -142,11 +145,11 @@ const Activity = (props, i) => {
                         />
                     </div>
                 </div>
-                <div className={styles.button}>
+                {url && <div className={styles.button}>
                     <Link href={url} target="_blank">
                         <Button type="text" buttonClass="primary" text="En savoir plus" />
                     </Link>
-                </div>
+                </div>}
             </div>
         </div>
     )
