@@ -50,7 +50,7 @@ export default function CarouselHome() {
                                 <h3>Planifiez en toute simplicité grâce à Group Travel !</h3>
                                 <p>Découvres nos superbes fonctionnalités !<br/>
                                     Invite des amis,<br/>
-                                    Proposez des logements sympas est des activités merveilleuses (ou tranquilles),<br/>
+                                    Puis, ensemble proposez des logements sympas et des activités merveilleuses (ou tranquilles),<br/>
                                     Donnez votre avis pour décider de ce que vous allez faire,<br/>                              
                                     Visualisez en quelques coup d'oeil de quoi votre voyage sera fait,<br/>
                                     Laissez des petits messages à vos amis et profitez des bons moments !                                

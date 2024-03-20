@@ -44,6 +44,7 @@ export default function SignUp({ handleRegister }) {
                     data.result && dispatch(addUserToStore({ token, username: data.username, userPicture, email: data.email, myTrips })) && setSubmitError(false);
                     !data.result && setSubmitError(true);
                     data.result && handleRegister();
+                    router.push('/profile')
                 })
             } else {
                 setPasswordNotMatch(true)
