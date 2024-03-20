@@ -1,11 +1,11 @@
 'use client'
-import AddAccomodation from "@/components/AddAccomodation"
+import Addaccommodation from "@/components/Addaccommodation"
 import { useSelector } from "react-redux";
 import NoCurrentTrip from "@/components/missingInfos/NoCurrentTrip";
 import NotConnected from "@/components/missingInfos/NotConnected";
 
 
-export default function AddAccomodationPage() {
+export default function AddaccommodationPage() {
     const user = useSelector((state) => state.user.value);
     const currentTrip = useSelector((state) => state.user.value.currentTrip);
     if (!user.token) {
@@ -13,6 +13,6 @@ export default function AddAccomodationPage() {
       } else if (!currentTrip) {
         return <NoCurrentTrip title="Logements" />
       } else { 
-        return <AddAccomodation />
+        return <Addaccommodation />
       }   
 }

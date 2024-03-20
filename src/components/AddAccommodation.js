@@ -1,5 +1,5 @@
 "use client";
-import styles from "./addAccomodation.module.css";
+import styles from "./addaccommodation.module.css";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "./utils/Button";
@@ -18,7 +18,7 @@ import {
 } from "@vis.gl/react-google-maps";
 import GoogleMap from "./utils/GoogleMap";
 
-export default function AddAccomodation() {
+export default function Addaccommodation() {
   const currentTrip = useSelector((state) => state.user.value.currentTrip);
   const dispatch = useDispatch();
   // center of Google map based on trip location
@@ -37,16 +37,16 @@ export default function AddAccomodation() {
   // check if new marker should be added
   const [newMarker, setNewMarker] = useState(false);
 
-  const [accomodationName, setAccomodationName] = useState("");
-  const [accomodationPicture, setAccomodationPicture] = useState("");
-  const [accomodationURL, setAccomodationURL] = useState("");
+  const [accommodationName, setaccommodationName] = useState("");
+  const [accommodationPicture, setaccommodationPicture] = useState("");
+  const [accommodationURL, setaccommodationURL] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
-  const [accomodationBudget, setAccomodationBudget] = useState(0);
-  const [accomodationBudgetPerPerson, setAccomodationBudgetPerPerson] =
+  const [accommodationBudget, setaccommodationBudget] = useState(0);
+  const [accommodationBudgetPerPerson, setaccommodationBudgetPerPerson] =
     useState(0);
-  const [accomodationLocation, setAccomodationLocation] = useState("");
-  const [accomodationDescription, setAccomodationDescription] = useState("");
+  const [accommodationLocation, setaccommodationLocation] = useState("");
+  const [accommodationDescription, setaccommodationDescription] = useState("");
 
   const [formHasError, setFormHasError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -63,25 +63,25 @@ export default function AddAccomodation() {
 
   //To clear all input fields when the form is registered
   const clearAllfields = () => {
-    setAccomodationName("");
-    setAccomodationPicture("");
-    setAccomodationURL("");
-    setAccomodationBudget(0);
+    setaccommodationName("");
+    setaccommodationPicture("");
+    setaccommodationURL("");
+    setaccommodationBudget(0);
     setDepartureDate("");
     setReturnDate("");
-    setAccomodationLocation("");
-    setAccomodationDescription("");
+    setaccommodationLocation("");
+    setaccommodationDescription("");
     setFormHasError(false);
     setErrorMessage("");
-    setAccomodationPicture("");
+    setaccommodationPicture("");
   };
 
   //handle fetch form
-  const fetchPostNewAccommodation = (accomodationData) => {
-    fetch(`http://localhost:5500/accomodations/new`, {
+  const fetchPostNewAccommodation = (accommodationData) => {
+    fetch(`http://localhost:5500/accommodations/new`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(accomodationData),
+      body: JSON.stringify(accommodationData),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -95,8 +95,8 @@ export default function AddAccomodation() {
         }
         dispatch(
           updateCurrentTripAccommodations(
-            data.newAccomodation.accomodations[
-            data.newAccomodation.accomodations.length - 1
+            data.newaccommodation.accommodations[
+            data.newaccommodation.accommodations.length - 1
             ]
           )
         );
@@ -113,9 +113,9 @@ export default function AddAccomodation() {
     e.preventDefault();
 
     // check if url is valid (if url exists)
-    if (accomodationURL !== "") {
+    if (accommodationURL !== "") {
       try {
-        new URL(accomodationURL);
+        new URL(accommodationURL);
       } catch (err) {
         setFormHasError(true);
         setErrorMessage("L'url saisie n'est pas valide");
@@ -157,27 +157,27 @@ export default function AddAccomodation() {
       return;
     }
 
-    // checks passed, new accomodationData object to be added
-    const accomodationData = {
-      name: accomodationName,
+    // checks passed, new accommodationData object to be added
+    const accommodationData = {
+      name: accommodationName,
       photos: [],
-      url: accomodationURL,
+      url: accommodationURL,
       departureDate: departureDate,
       returnDate: returnDate,
-      budget: accomodationBudget,
+      budget: accommodationBudget,
       location: {
-        name: accomodationLocation,
+        name: accommodationLocation,
         lat: position.lat,
         lng: position.lng,
       },
-      description: accomodationDescription,
+      description: accommodationDescription,
       tripId: currentTrip._id,
     };
 
     //Handle picture
-    if (accomodationPicture) {
+    if (accommodationPicture) {
       const formData = new FormData();
-      formData.append("image", accomodationPicture);
+      formData.append("image", accommodationPicture);
       fetch("http://localhost:5500/upload", {
         method: "POST",
         body: formData,
@@ -187,13 +187,13 @@ export default function AddAccomodation() {
           if (!pictureData || !pictureData.url) {
             return console.log(" No picture ");
           } else {
-            accomodationData.photos.push(pictureData.url);
+            accommodationData.photos.push(pictureData.url);
           }
           //Return fetch to handle upload
-          return fetchPostNewAccommodation(accomodationData);
+          return fetchPostNewAccommodation(accommodationData);
         });
     } else {
-      return fetchPostNewAccommodation(accomodationData);
+      return fetchPostNewAccommodation(accommodationData);
     }
   };
 
@@ -201,7 +201,7 @@ export default function AddAccomodation() {
   const handleClickLocation = (e) => {
     e.preventDefault();
     fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAtN3JpGGPLuZkaD7j2zoSB0vE3e_B-Jn8&address=${accomodationLocation}`
+      `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAtN3JpGGPLuZkaD7j2zoSB0vE3e_B-Jn8&address=${accommodationLocation}`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -230,49 +230,49 @@ export default function AddAccomodation() {
   };
 
   return (
-    <div className={styles.newAccomodation}>
+    <div className={styles.newaccommodation}>
       <h1 className={lexend.className}>Un logement à proposer ? </h1>
       <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
         <div className={styles.layout}>
           <div className={styles.top}>
             <div>
-              <label htmlFor="accomodation-picture" className={styles.label}>
+              <label htmlFor="accommodation-picture" className={styles.label}>
               Choisis une photo sympa !<br/>
               </label>
               <input className={styles.inputFile}
                 type="file"
-                id="accomodation-picture"
+                id="accommodation-picture"
                 ref={fileInputRef} // Ref to handleclick from penIcon
                 style={{ display: "none" }} // To hide input
-                onChange={(e) => setAccomodationPicture(e.target.files[0])}
+                onChange={(e) => setaccommodationPicture(e.target.files[0])}
               />
-              <Button type="text" onClick={handleClickPicture} text={!accomodationPicture? <FontAwesomeIcon icon={faPen} className={styles.penIcon} /> : <FontAwesomeIcon icon={faCircleCheck} className={styles.penIcon} />} />
+              <Button type="text" onClick={handleClickPicture} text={!accommodationPicture? <FontAwesomeIcon icon={faPen} className={styles.penIcon} /> : <FontAwesomeIcon icon={faCircleCheck} className={styles.penIcon} />} />
             </div>
             <div className={styles.rightSide}>
               <div className={styles.inputs}>
-                <label htmlFor="accomodation-name" className={styles.label}>
+                <label htmlFor="accommodation-name" className={styles.label}>
                   Nom du logement *
                 </label>
                 <input
                   type="text"
-                  id="accomodation-name"
+                  id="accommodation-name"
                   className={styles.input}
-                  value={accomodationName}
-                  onChange={(e) => setAccomodationName(e.target.value)}
+                  value={accommodationName}
+                  onChange={(e) => setaccommodationName(e.target.value)}
                   placeholder="Un petit nom pour le logement ?"
                   required
                 />
               </div>
               <div className={styles.inputs}>
-                <label htmlFor="accomodation-url" className={styles.label}>
+                <label htmlFor="accommodation-url" className={styles.label}>
                   Url vers le logement
                 </label>
                 <input
                   type="text"
-                  id="accomodation-url"
+                  id="accommodation-url"
                   className={styles.input}
-                  value={accomodationURL}
-                  onChange={(e) => setAccomodationURL(e.target.value)}
+                  value={accommodationURL}
+                  onChange={(e) => setaccommodationURL(e.target.value)}
                   placeholder="Avec un lien c'est encore mieux !"
                 />
               </div>
@@ -284,14 +284,14 @@ export default function AddAccomodation() {
             >
               <div className={styles.inputDate}>
                 <label
-                  htmlFor="accomodation-departure-date"
+                  htmlFor="accommodation-departure-date"
                   className={styles.label}
                 >
                   Date de début *
                 </label>
                 <input
                   type="date"
-                  id="accomodation-departure-date"
+                  id="accommodation-departure-date"
                   className={styles.input}
                   value={departureDate}
                   onChange={(e) => setDepartureDate(e.target.value)}
@@ -300,14 +300,14 @@ export default function AddAccomodation() {
               </div>
               <div className={styles.inputDate}>
                 <label
-                  htmlFor="accomodation-return-date"
+                  htmlFor="accommodation-return-date"
                   className={styles.label}
                 >
                   Date de fin *
                 </label>
                 <input
                   type="date"
-                  id="accomodation-return-date"
+                  id="accommodation-return-date"
                   className={styles.input}
                   value={returnDate}
                   onChange={(e) => setReturnDate(e.target.value)}
@@ -319,32 +319,32 @@ export default function AddAccomodation() {
               className={`${styles.inputsBudgetContainer} ${styles.rightSide}`}
             >
               <div className={styles.inputsBudget}>
-                <label htmlFor="accomodation-budget" className={styles.label}>
+                <label htmlFor="accommodation-budget" className={styles.label}>
                   Budget:
                 </label>
                 <input
                   type="number"
-                  id="accomodation-budget"
+                  id="accommodation-budget"
                   className={styles.input}
-                  value={accomodationBudget}
-                  onChange={(e) => setAccomodationBudget(e.target.value)}
+                  value={accommodationBudget}
+                  onChange={(e) => setaccommodationBudget(e.target.value)}
                   min="0"
                 />
               </div>
               <div className={styles.inputsBudget}>
                 <label
-                  htmlFor="accomodation-budget-single"
+                  htmlFor="accommodation-budget-single"
                   className={styles.label}
                 >
                   Budget par personne:
                 </label>
                 <input
                   type="number"
-                  id="accomodation-budget-single"
+                  id="accommodation-budget-single"
                   className={styles.input}
                   readOnly
                   value={(
-                    accomodationBudget /
+                    accommodationBudget /
                     (currentTrip.members.length + 1)
                   ).toFixed(2)}
                   min="0"
@@ -355,15 +355,15 @@ export default function AddAccomodation() {
           <div className={styles.bottom}>
             <div style={{ minWidth: "21rem" }}>
               <div className={styles.leftSide}>
-                <label htmlFor="accomodation-location" className={styles.label}>
+                <label htmlFor="accommodation-location" className={styles.label}>
                   Localisation
                 </label>
                 <input
                   type="text"
-                  id="accomodation-location"
+                  id="accommodation-location"
                   className={styles.input}
-                  value={accomodationLocation}
-                  onChange={(e) => setAccomodationLocation(e.target.value)}
+                  value={accommodationLocation}
+                  onChange={(e) => setaccommodationLocation(e.target.value)}
                   placeholder="Il se situe où ce logement ?"
                 />
                 <Button
@@ -389,16 +389,16 @@ export default function AddAccomodation() {
             <div className={styles.rightSide}>
               <div className={styles.inputs}>
                 <label
-                  htmlFor="accomodation-description"
+                  htmlFor="accommodation-description"
                   className={styles.label}
                 >
                   Description du logement
                 </label>
                 <textarea
-                  id="accomodation-description"
+                  id="accommodation-description"
                   className={styles.textarea}
-                  value={accomodationDescription}
-                  onChange={(e) => setAccomodationDescription(e.target.value)}
+                  value={accommodationDescription}
+                  onChange={(e) => setaccommodationDescription(e.target.value)}
                   placeholder="Que dire d'autre ?"
                 />
               </div>

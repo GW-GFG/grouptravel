@@ -31,10 +31,10 @@ export default function DashboardInfo() {
           } else {             
             totalBudget && setBudgetPerPerson(totalBudget)
           }          
-          if (data.tripData.accomodations && data.tripData.accomodations.length > 0){
-          accoName = data.tripData.accomodations
-          .filter(accomodation => accomodation.isFixed === true)
-          .map(accomodation => accomodation.name);
+          if (data.tripData.accommodations && data.tripData.accommodations.length > 0){
+          accoName = data.tripData.accommodations
+          .filter(accommodation => accommodation.isFixed === true)
+          .map(accommodation => accommodation.name);
           setFixedAccommodation(accoName)
           }
         })

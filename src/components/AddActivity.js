@@ -124,7 +124,7 @@ const AddActivity = () => {
         return;
       }
     }
-    // checks passed, new accomodationData object to be added
+    // checks passed, new accommodationData object to be added
     const activityData = {
       name: activityName,
       picture: activityPicture,

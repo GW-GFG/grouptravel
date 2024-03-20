@@ -21,7 +21,7 @@ export default function MembersList() {
             .then(data => {
                 setMembersUsername(data.usernameData)
             })    
-      }, []);
+      }, [currentTripId]);
 
 
 

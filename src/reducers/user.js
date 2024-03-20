@@ -24,7 +24,7 @@ export const userSlice = createSlice({
 			state.value = initialState;
 		},
 		updateCurrentTripAccommodations: (state, action) => {
-			state.value.currentTrip.accomodations.push(action.payload)
+			state.value.currentTrip.accommodations.push(action.payload)
 		},
 		updateCurrentTripActivities: (state, action) => {
 			state.value.currentTrip.activities.push(action.payload)
@@ -35,17 +35,17 @@ export const userSlice = createSlice({
 			const userToken = state.value.token;
 	  
 			// Rechercher l'index de l'hébergement (si -1 c'est qu'il n'est pas trouvé)
-			const accommodationIndex = state.value.currentTrip.accomodations.findIndex(accommodation => accommodation._id.toString() === accommodationId);	  
+			const accommodationIndex = state.value.currentTrip.accommodations.findIndex(accommodation => accommodation._id.toString() === accommodationId);	  
 			if (accommodationIndex !== -1) {
 			  // Si l'utilisateur a déjà voté, mettre à jour son vote
 
-			//   const voteItem = state.value.currentTrip.accomodations[accommodationIndex].vote.find(voteItem => voteItem.userId === state.value._id);
-			 const voteItem = state.value.currentTrip.accomodations[accommodationIndex].vote.find(voteItem => voteItem.userToken === state.value.token)
+			//   const voteItem = state.value.currentTrip.accommodations[accommodationIndex].vote.find(voteItem => voteItem.userId === state.value._id);
+			 const voteItem = state.value.currentTrip.accommodations[accommodationIndex].vote.find(voteItem => voteItem.userToken === state.value.token)
 			  if (voteItem) {
 				voteItem.status = newStatus;
 			  } else {
 				// Sinon, ajouter un nouveau vote
-				state.value.currentTrip.accomodations[accommodationIndex].vote.push({
+				state.value.currentTrip.accommodations[accommodationIndex].vote.push({
 				  userId: state.value._id,
 				  status: newStatus,
 				  userToken: userToken
@@ -81,9 +81,9 @@ export const userSlice = createSlice({
 		  },
 
 		  updateFixStatusAccommodation: (state, action) => {
-			const accommodationIndex = state.value.currentTrip.accomodations.findIndex(accommodation => accommodation._id.toString() === action.payload.accommodationId);	  
+			const accommodationIndex = state.value.currentTrip.accommodations.findIndex(accommodation => accommodation._id.toString() === action.payload.accommodationId);	  
 			if (accommodationIndex!== -1) {
-			state.value.currentTrip.accomodations[accommodationIndex].isFixed = action.payload.isFixed;
+			state.value.currentTrip.accommodations[accommodationIndex].isFixed = action.payload.isFixed;
 		  	}
 		},
 

@@ -19,7 +19,7 @@ export default function Accommodation(props) {
     const currentTrip = useSelector((state) => state.user.value.currentTrip);
     const [isAdmin, setIsAdmin] = useState(false);
     //To keep vote updated
-    const accommodation = currentTrip.accomodations.find(accommodation => accommodation._id === _id);
+    const accommodation = currentTrip.accommodations.find(accommodation => accommodation._id === _id);
     const budgetPerPerson = (budget / (currentTrip.members.length + 1)).toFixed(2);
     const [userVoteStatus, setUserVoteStatus] = useState(getInitialVoteStatus());
 
@@ -36,7 +36,7 @@ export default function Accommodation(props) {
 
     const handleFix = (newStatus) => {
         console.log('isAdmin: ', isAdmin, 'accommodationId : ', _id , 'dates : ', currentTrip.dates, 'isFixed : ', newStatus )
-        fetch('http://localhost:5500/accomodations/fixOne', {
+        fetch('http://localhost:5500/accommodations/fixOne', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify( {isAdmin, accommodationId: _id , dates: currentTrip.dates, isFixed: newStatus} )
@@ -47,39 +47,39 @@ export default function Accommodation(props) {
         })
     }
 
-    const handleDo = (accomodationId) => {
+    const handleDo = (accommodationId) => {
         const voteData = {
             userToken,
-            accomodationId,
+            accommodationId,
             tripId: currentTrip._id,
             status: true,
         }
-        fetch('http://localhost:5500/accomodations/vote', {
+        fetch('http://localhost:5500/accommodations/vote', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(voteData)
         }).then(response => response.json())
             .then(voteRes => {
                 setUserVoteStatus(true);
-                dispatch(voteToAccommodation({ accommodationId: accomodationId, newStatus: voteRes.newStatus }));
+                dispatch(voteToAccommodation({ accommodationId: accommodationId, newStatus: voteRes.newStatus }));
             })
     }
 
-    const handleDont = (accomodationId) => {
+    const handleDont = (accommodationId) => {
         const voteData = {
             userToken,
-            accomodationId,
+            accommodationId,
             tripId: currentTrip._id,
             status: false,
         }
-        fetch('http://localhost:5500/accomodations/vote', {
+        fetch('http://localhost:5500/accommodations/vote', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(voteData)
         }).then(response => response.json())
             .then(voteRes => {
                 setUserVoteStatus(false);
-                dispatch(voteToAccommodation({ accommodationId: accomodationId, newStatus: voteRes.newStatus }));
+                dispatch(voteToAccommodation({ accommodationId: accommodationId, newStatus: voteRes.newStatus }));
             })
     }
 
@@ -99,7 +99,7 @@ export default function Accommodation(props) {
        isFixed? { fontSize: '1.75rem', color: 'var(--primary-black-color)' } : { fontSize: '1.75rem' };      
     
 
-    // count the number of users with a true status on each accomodation's vote
+    // count the number of users with a true status on each accommodation's vote
     const countVotes = () => {
         return vote.filter(v => v.status === true).length
     }
