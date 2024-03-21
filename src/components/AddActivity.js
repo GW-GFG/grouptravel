@@ -192,7 +192,8 @@ const AddActivity = () => {
       });
   }
 //send the click on the button to the hidden button
-  const handleClickPicture = () => {
+  const handleClickPicture = (e) => {
+    e.preventDefault();
     fileInputRef.current.click();
   };
 
@@ -248,7 +249,7 @@ const AddActivity = () => {
           </div>
           <div className={styles.middle}>
             <div className={styles.inputDate}>
-              <label htmlFor="activity-date" className={styles.label}>Sélectionnez la date: *</label>
+              <label htmlFor="activity-date" className={styles.label}>Sélectionne la date: *</label>
               <input
                 type="date"
                 id="activity-date"
@@ -263,7 +264,7 @@ const AddActivity = () => {
             >
               <div className={styles.inputsBudget}>
                 <label htmlFor="activity-budget" className={styles.label}>
-                  Budget:
+                  Budget total:
                 </label>
                 <input
                   type="number"
@@ -304,7 +305,7 @@ const AddActivity = () => {
                   className={styles.input}
                   value={activityLocation}
                   onChange={(e) => setActivityLocation(e.target.value)}
-                  placeholder='Elle se situe où cette activité ?'
+                  placeholder='On fait ça où ?'
                 />
                 <Button
                   classButton="secondary"

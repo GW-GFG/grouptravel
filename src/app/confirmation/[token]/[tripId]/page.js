@@ -59,7 +59,7 @@ export default function tokenwithTripsIdPage() {
       });
     //** Fetch BDD pour récepurer donnée Trips*//
     // console.log(params.tripId)
-    fetch("http://localhost:5500/trips/onetrip", {
+    fetch("http://localhost:5500/trips/oneTrip", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ tripId: params.tripId }),
@@ -81,7 +81,7 @@ export default function tokenwithTripsIdPage() {
   }, []);
 
   const handleAccept = () => {
-    fetch(`http://localhost:5500/trips/adduser/${tripId}`, {
+    fetch(`http://localhost:5500/trips/addUser/${tripId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token }),

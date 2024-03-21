@@ -13,8 +13,8 @@ export default function Invitation() {
     // console.log(currentTrip)
     const [emails, setEmails] = useState(['']);
     const [errorNbImput, setErrorNbImput] = useState(false)
-    const [confirmMsg, setConfirmMsg] = useState(false)
-    const [errorMsg, setErrorMsg] = useState('')
+    const [confirmmessage, setConfirmmessage] = useState(false)
+    const [errormessage, setErrormessage] = useState('')
     const [erroMail, setErrorMail] = useState(false)
     const [emptyField, setEmptyField] = useState(false)
 
@@ -48,7 +48,7 @@ export default function Invitation() {
 
     try {
         for (let email of validEmails) {
-            const response = await fetch(`http://localhost:5500/trips/addnewuser/${user.currentTrip._id}`, {
+            const response = await fetch(`http://localhost:5500/trips/invitUser/${user.currentTrip._id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email }), // Envoyer l'email valide au back pour chaque email valide
@@ -57,16 +57,16 @@ export default function Invitation() {
         const data = await response.json();
 
         if (data.error) {
-            setErrorMsg(data.error); // Afficher un message d'erreur si nécessaire
+            setErrormessage(data.error); // Afficher un message d'erreur si nécessaire
             return;
         }       
         }
-        setConfirmMsg(true); // Afficher le message de confirmation une fois les e-mails envoyés
+        setConfirmmessage(true); // Afficher le message de confirmation une fois les e-mails envoyés
         setEmails(['']); // Réinitialiser les e-mails après l'envoi réussi
         setEmptyField(false)
     } catch (error) {
         // console.error('Error sending emails:', error);
-        setErrorMsg('Error sending emails. Please try again later.');
+        setErrormessage('Error sending emails. Please try again later.');
     }
 };
 
@@ -93,8 +93,8 @@ export default function Invitation() {
             <div className={styles.ButtonContainer}>
                 <Button buttonClass="primary" text="Envoyer invitation(s)" onClick={() => handleSendEmail()} />
             </div>
-            {confirmMsg && emails.length === 1 && <div className={styles.text}> L'invitation a bien été envoyée</div>}
-            {confirmMsg && emails.length > 1 && <div className={styles.text}> Les invitations ont bien été envoyées</div>}
+            {confirmmessage && emails.length === 1 && <div className={styles.text}> L'invitation a bien été envoyée</div>}
+            {confirmmessage && emails.length > 1 && <div className={styles.text}> Les invitations ont bien été envoyées</div>}
         </div>
     )
 

@@ -56,7 +56,7 @@ export default function tokenPage({ params }) {
       return; // Empêcher le fetch du formulaire si des champs sont vides
     }
     setPasswordNotMatch(false);
-    fetch("http://localhost:5500/users/updatenewuser", {
+    fetch("http://localhost:5500/users/updateNewUser", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password, email }),
@@ -84,7 +84,7 @@ export default function tokenPage({ params }) {
   // console.log(tripId)
   const handleDecline = () => {
     // console.log('trip id', tripId )
-    fetch(`http://localhost:5500/decline/invitateduser/${tripId._id}`, {
+    fetch(`http://localhost:5500/decline/invitatedUser/${tripId._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token }),

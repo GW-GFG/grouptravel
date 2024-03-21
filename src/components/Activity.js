@@ -49,7 +49,6 @@ const Activity = (props, i) => {
         })
             .then(response => response.json())
             .then(data => {
-                // console.log('Vote réussi', JSON.stringify(data))
                     setUserParticipationStatus(true)
                     dispatch(participateToActivity({ activityId: activityId, newStatus: data.newStatus }))
             })
@@ -69,7 +68,6 @@ const Activity = (props, i) => {
         })
             .then(response => response.json())
             .then(data => {
-                // console.log('Vote réussi', JSON.stringify(data))
                     setUserParticipationStatus(false)
                     dispatch(participateToActivity({ activityId, newStatus: data.newStatus }))
             })
@@ -93,25 +91,6 @@ const Activity = (props, i) => {
         return participation.filter(participant => participant.status === true).length
     }
 
-
-
-    //if (currentTrip && currentTrip.activities.length > 0) {
-        /*
-            <Card
-                key={i}
-                className={styles.card}
-                cover={
-                    
-                    <Image
-                        src={`${picture || "next.svg"}`}
-                        alt={name}
-                        fill={true}
-                        width={300}
-                        height={200}
-                    />
-                }
-            >
-            */
 
     return (
         <div className={styles.card}>

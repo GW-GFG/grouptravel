@@ -225,7 +225,8 @@ export default function Addaccommodation() {
       });
   };
   //send the click on the button to the hidden button
-  const handleClickPicture = () => {
+  const handleClickPicture = (e) => {
+    e.preventDefault();
     fileInputRef.current.click();
   };
 

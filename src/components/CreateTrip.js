@@ -18,7 +18,7 @@ export default function CreateTrip() {
     const [location, setLocation] = useState('');
     const [departureDate, setDepartureDate] = useState('');
     const [returnDate, setReturnDate] = useState('');
-    const [errorMsg, setErrorMsg] = useState('')
+    const [errormessage, setErrormessage] = useState('')
 
     const token = user.token
 
@@ -55,10 +55,10 @@ export default function CreateTrip() {
                             // If data.error send error.msg to front
                             console.log('verif data avant if : ', data)
                             if (!data.result) {
-                                setErrorMsg(data.error)
+                                setErrormessage(data.error)
                                 notification.warning({
                                     message: 'Attention !',
-                                    description: errorMsg,
+                                    description: errormessage,
                                     placement: 'bottomRight'
                                 })
                             } else {
@@ -122,7 +122,7 @@ export default function CreateTrip() {
 
                 </div>
                 {/* only if error display error */}
-                {/* {errorMsg != '' && <h2 className={styles.error}>{errorMsg}</h2>} */}
+                {/* {errormessage != '' && <h2 className={styles.error}>{errormessage}</h2>} */}
                 <button className={styles.button} onClick={() => handleSubmit()}>Go!</button>
             </div>
         </div>

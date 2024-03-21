@@ -22,7 +22,7 @@ function GroupChat() {
     
     useEffect(() => {
       // Code pour charger les messages du groupe depuis la base de données ou le service de messagerie instantanée
-      fetch('http://localhost:5500/chat/recuperation', {
+      fetch('http://localhost:5500/chat/get', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( { token: user.token, idTrip: currentTrip._id, } )
@@ -43,7 +43,7 @@ function GroupChat() {
       // console.log('token',user.token, 'message', inputValue, 'idTrip', currentTrip._id)
       if (inputValue.trim() !== '') {
         // Code pour envoyer le message au backend et le diffuser à tous les membres du groupe
-        fetch('http://localhost:5500/chat/sendmsg', { 
+        fetch('http://localhost:5500/chat/send', { 
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify( { token: user.token, idTrip: currentTrip._id, message: inputValue } )
@@ -59,7 +59,7 @@ function GroupChat() {
 
     return (
       <div className={styles.mainContainer}> <h2>Messages :</h2>
-        <div className={styles.allMsgContainer}>
+        <div className={styles.allmessageContainer}>
           {messages.map((message, index) => (
           <div className={`${styles.messagesContainer} ${message.author === user.username ? styles.userMessagesContainer : styles.otherMessagesContainer}`} key={index}>
             <div className={`${styles.messagesRow} ${message.author === user.username ? styles.userMessage : styles.otherMessage}`} key={index}>
