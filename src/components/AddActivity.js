@@ -168,7 +168,7 @@ const AddActivity = () => {
   const handleClickLocation = (e) => {
     e.preventDefault();
     fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAtN3JpGGPLuZkaD7j2zoSB0vE3e_B-Jn8&address=${activityLocation}`
+      `https://maps.googleapis.com/maps/api/geocode/json?key=${NEXT_PUBLIC_GOOGLE_API}&address=${activityLocation}`
     )
       .then((response) => response.json())
       .then((data) => {

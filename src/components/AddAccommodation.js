@@ -201,7 +201,7 @@ export default function Addaccommodation() {
   const handleClickLocation = (e) => {
     e.preventDefault();
     fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyAtN3JpGGPLuZkaD7j2zoSB0vE3e_B-Jn8&address=${accommodationLocation}`
+      `https://maps.googleapis.com/maps/api/geocode/json?key=${NEXT_PUBLIC_GOOGLE_API}&address=${accommodationLocation}`
     )
       .then((response) => response.json())
       .then((data) => {
