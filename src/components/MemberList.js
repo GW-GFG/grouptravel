@@ -13,7 +13,7 @@ export default function MemberList() {
     const [membersUsername, setMembersUsername] = useState([])
 
     useEffect(() => { 
-        fetch('http://localhost:5500/users/allUsernameThisTrip',{
+        fetch('https://grouptravel-b-gwgfg.vercel.app/users/allUsernameThisTrip',{
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify( {tripId: currentTripId} )

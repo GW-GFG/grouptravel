@@ -29,7 +29,7 @@ export default function tokenwithTripsIdPage() {
   useEffect(() => {
     // console.log(token)
     //** Fetch BDD pour récepurer donnée user*//
-    fetch("http://localhost:5500/users/getUser", {
+    fetch("https://grouptravel-b-gwgfg.vercel.app/users/getUser", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: token }),
@@ -59,7 +59,7 @@ export default function tokenwithTripsIdPage() {
       });
     //** Fetch BDD pour récepurer donnée Trips*//
     // console.log(params.tripId)
-    fetch("http://localhost:5500/trips/oneTrip", {
+    fetch("https://grouptravel-b-gwgfg.vercel.app/trips/oneTrip", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ tripId: params.tripId }),
@@ -81,7 +81,7 @@ export default function tokenwithTripsIdPage() {
   }, []);
 
   const handleAccept = () => {
-    fetch(`http://localhost:5500/trips/addUser/${tripId}`, {
+    fetch(`https://grouptravel-b-gwgfg.vercel.app/trips/addUser/${tripId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token }),
@@ -102,7 +102,7 @@ export default function tokenwithTripsIdPage() {
 
   const handleDecline = () => {
     // console.log('click decline')
-    fetch(`http://localhost:5500/decline/invitation/${tripId}`, {
+    fetch(`https://grouptravel-b-gwgfg.vercel.app/decline/invitation/${tripId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token }),

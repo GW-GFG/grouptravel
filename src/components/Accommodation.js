@@ -24,7 +24,7 @@ export default function Accommodation(props) {
     const [userVoteStatus, setUserVoteStatus] = useState(getInitialVoteStatus());
 
     useEffect(() => {
-        fetch('http://localhost:5500/users/isAdmin', {
+        fetch('https://grouptravel-b-gwgfg.vercel.app/users/isAdmin', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify( {currentTripId: currentTrip._id, token: userToken} )
@@ -36,7 +36,7 @@ export default function Accommodation(props) {
 
     const handleFix = (newStatus) => {
         console.log('isAdmin: ', isAdmin, 'accommodationId : ', _id , 'dates : ', currentTrip.dates, 'isFixed : ', newStatus )
-        fetch('http://localhost:5500/accommodations/fixOne', {
+        fetch('https://grouptravel-b-gwgfg.vercel.app/accommodations/fixOne', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify( {isAdmin, accommodationId: _id , dates: currentTrip.dates, isFixed: newStatus} )
@@ -54,7 +54,7 @@ export default function Accommodation(props) {
             tripId: currentTrip._id,
             status: true,
         }
-        fetch('http://localhost:5500/accommodations/vote', {
+        fetch('https://grouptravel-b-gwgfg.vercel.app/accommodations/vote', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(voteData)
@@ -72,7 +72,7 @@ export default function Accommodation(props) {
             tripId: currentTrip._id,
             status: false,
         }
-        fetch('http://localhost:5500/accommodations/vote', {
+        fetch('https://grouptravel-b-gwgfg.vercel.app/accommodations/vote', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(voteData)

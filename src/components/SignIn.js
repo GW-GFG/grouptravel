@@ -31,7 +31,7 @@ export default function SignIn({ handleConnexion }) {
 //check if there is an email and password
         if (email !== '' && password !== ''){
             setEmptyField(false)
-            fetch('http://localhost:5500/users/signin', {
+            fetch('https://grouptravel-b-gwgfg.vercel.app/users/signin', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
 //The body request contains the useStates values

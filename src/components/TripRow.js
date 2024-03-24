@@ -12,7 +12,7 @@ export default function TripRow(props) {
     const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => { 
-      fetch('http://localhost:5500/users/isAdmin',{
+      fetch('https://grouptravel-b-gwgfg.vercel.app/users/isAdmin',{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify( {currentTripId: props._id, token: token} )

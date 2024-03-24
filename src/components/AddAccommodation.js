@@ -78,7 +78,7 @@ export default function Addaccommodation() {
 
   //handle fetch form
   const fetchPostNewAccommodation = (accommodationData) => {
-    fetch(`http://localhost:5500/accommodations/new`, {
+    fetch(`https://grouptravel-b-gwgfg.vercel.app/accommodations/new`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(accommodationData),
@@ -178,7 +178,7 @@ export default function Addaccommodation() {
     if (accommodationPicture) {
       const formData = new FormData();
       formData.append("image", accommodationPicture);
-      fetch("http://localhost:5500/upload", {
+      fetch("https://grouptravel-b-gwgfg.vercel.app/upload", {
         method: "POST",
         body: formData,
       })

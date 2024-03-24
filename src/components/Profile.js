@@ -22,7 +22,7 @@ export default function Profile() {
   const fileInputRef = useRef(null);
 
   useEffect(() => {
-    fetch('http://localhost:5500/users/getUser', {
+    fetch('https://grouptravel-b-gwgfg.vercel.app/users/getUser', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify( {token: user.token} ),
@@ -69,7 +69,7 @@ export default function Profile() {
       const formData = new FormData();
       formData.append("image", selectedPicture);
 
-      fetch("http://localhost:5500/upload", {
+      fetch("https://grouptravel-b-gwgfg.vercel.app/upload", {
         method: "POST",
         body: formData,
       })
@@ -81,7 +81,7 @@ export default function Profile() {
 
             const newProfilePictureUrl = pictureData.url;
 
-            return fetch("http://localhost:5500/users/updateOne", {
+            return fetch("https://grouptravel-b-gwgfg.vercel.app/users/updateOne", {
               method: "PUT",
               headers: { "Content-Type": "application/json"},
               body: JSON.stringify({

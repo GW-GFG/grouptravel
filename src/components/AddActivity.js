@@ -76,7 +76,7 @@ const AddActivity = () => {
 
   //to handle fetch activity after map and picture
   const fetchPostNewActivity = (activityData) => {
-    fetch("http://localhost:5500/activities/new", {
+    fetch("https://grouptravel-b-gwgfg.vercel.app/activities/new", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(activityData),
@@ -144,7 +144,7 @@ const AddActivity = () => {
     if (activityPicture) {
       const formData = new FormData();
       activityPicture && formData.append("image", activityPicture);
-      fetch("http://localhost:5500/upload", {
+      fetch("https://grouptravel-b-gwgfg.vercel.app/upload", {
         method: "POST",
         body: formData,
       })

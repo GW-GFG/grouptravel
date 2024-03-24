@@ -11,14 +11,14 @@ export default function DashboardInfo() {
   const [fixedAccommodation, setFixedAccommodation] = useState([]);
   let accoName = null;
   useMemo(() => { 
-    fetch('http://localhost:5500/trips/budgetOneTrip',{
+    fetch('https://grouptravel-b-gwgfg.vercel.app/trips/budgetOneTrip',{
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify( {tripId: currentTrip._id} )
     }).then(response => response.json())
     .then(data => {
       setTotalBudget(data.tripBudget.toFixed(2))
-     fetch('http://localhost:5500/trips/oneTrip',{
+     fetch('https://grouptravel-b-gwgfg.vercel.app/trips/oneTrip',{
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify( {tripId: currentTrip._id} )
