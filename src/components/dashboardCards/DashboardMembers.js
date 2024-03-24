@@ -2,7 +2,7 @@
 import styles from './dashboardMembers.module.css';
 import Button from "../utils/Button";
 import { useRouter } from 'next/navigation';
-import MembersList from '../MemberList';
+import MemberList from '../MemberList';
 
 
 export default function DashboardMembers() {
@@ -15,7 +15,7 @@ export default function DashboardMembers() {
 
     return(
     <div className={styles.container} >
-            <MembersList/>
+            <MemberList/>
             <Button text="+"  onClick={() => handleClick()} />
     </div>
 )}

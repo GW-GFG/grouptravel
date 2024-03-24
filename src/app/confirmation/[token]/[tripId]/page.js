@@ -3,7 +3,7 @@ import styles from "./page.module.css";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import InputLabel from "@/components/InputLabel";
+import InputLabel from "@/components/utils/InputLabel";
 import Button from "@/components/utils/Button";
 import {
   addUserToStore,

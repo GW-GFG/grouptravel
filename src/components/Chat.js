@@ -2,7 +2,7 @@
 import styles from './chat.module.css';
 import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import InputLabel from './InputLabel';
+import InputLabel from './utils/InputLabel';
 import Button from './utils/Button';
 import { usePathname, useRouter } from 'next/navigation';
 

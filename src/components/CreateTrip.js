@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { notification } from 'antd'
-import InputLabel from './InputLabel';
+import InputLabel from './utils/InputLabel';
 import styles from './creatTrip.module.css';
 import { updateCurrentTrip, updateMyTrips } from '@/reducers/user';
 // import fonts to use them for menu items

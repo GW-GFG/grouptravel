@@ -1,6 +1,6 @@
 'use client'
 import styles from './invitation.module.css';
-import InputLabel from './InputLabel';
+import InputLabel from './utils/InputLabel';
 import Button from './utils/Button';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';

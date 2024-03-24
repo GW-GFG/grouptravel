@@ -7,7 +7,7 @@ import MiniMemberRow from '@/components/dashboardCards/MiniMemberRow';
 import { useEffect, useState } from 'react';
 
 
-export default function MembersList() {
+export default function MemberList() {
     
     const currentTripId = useSelector((state) => state.user.value.currentTrip._id)
     const [membersUsername, setMembersUsername] = useState([])

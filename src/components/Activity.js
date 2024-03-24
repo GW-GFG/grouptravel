@@ -2,8 +2,7 @@
 import styles from './Activity.module.css';
 import { lexend } from '../app/fonts';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { Card } from 'antd';
+import { useState } from 'react';
 import Button from './utils/Button';
 import Link from 'next/link';
 import Image from 'next/image';

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './signup.module.css';
 import { addUserToStore } from '../reducers/user';
 import { lexend } from '../app/fonts';
-import InputLabel from './InputLabel';
+import InputLabel from './utils/InputLabel';
 
 export default function SignUp({ handleRegister }) {
     const dispatch = useDispatch();

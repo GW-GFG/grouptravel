@@ -5,7 +5,7 @@ import NotConnected from "@/components/missingInfos/NotConnected";
 import NoCurrentTrip from "@/components/missingInfos/NoCurrentTrip";
 import Chat from "@/components/Chat"
 import InWorking from "../../components/missingInfos/InWorking"
-import MembersList from "@/components/MemberList";
+import MemberList from "@/components/MemberList";
 
 export default function ChatPage() {
     const user = useSelector((state) => state.user.value);
@@ -18,7 +18,7 @@ export default function ChatPage() {
     } else {
         return ( <div className={styles.mainContainer}>
                     <div div className={styles.listContainer}> 
-                        <MembersList/>
+                        <MemberList/>
                     </div>
                     <div div className={styles.chatContainer}>
                         <Chat/>

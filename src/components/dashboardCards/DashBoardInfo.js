@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import styles from "./dashboardInfo.module.css";
 import { useSelector } from "react-redux";
 
@@ -10,7 +10,7 @@ export default function DashboardInfo() {
   const [budgetPerPerson, setBudgetPerPerson] = useState(0);
   const [fixedAccommodation, setFixedAccommodation] = useState([]);
   let accoName = null;
-  useEffect(() => { 
+  useMemo(() => { 
     fetch('http://localhost:5500/trips/budgetOneTrip',{
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

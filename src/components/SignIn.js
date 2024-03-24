@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './signin.module.css';
 import { addUserToStore } from '../reducers/user';
 import { lexend } from '../app/fonts';
-import InputLabel from './InputLabel';
+import InputLabel from './utils/InputLabel';
 
 export default function SignIn({ handleConnexion }) {
     const dispatch = useDispatch();
