@@ -1,5 +1,5 @@
 'use client'
-import Addaccommodation from "@/components/Addaccommodation"
+import Addaccommodation from "@/components/AddAccommodation"
 import { useSelector } from "react-redux";
 import NoCurrentTrip from "@/components/missingInfos/NoCurrentTrip";
 import NotConnected from "@/components/missingInfos/NotConnected";
