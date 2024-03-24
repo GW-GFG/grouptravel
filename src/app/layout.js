@@ -6,7 +6,7 @@ import "./globals.css";
 import Header from "../components/Header";
 // import Footer from "../components/Footer";
 
-import StoreProvider from '.\storeProvider.jsx'
+import StoreProvider from './storeProvider';
 
 export const metadata = {
   title: "Group Travel",
