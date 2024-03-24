@@ -1,5 +1,5 @@
 "use client";
-import styles from "./addaccommodation.module.css";
+import styles from "./addAccommodation.module.css";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "./utils/Button";
