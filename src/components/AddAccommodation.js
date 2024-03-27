@@ -17,6 +17,7 @@ import {
   MapCameraProps,
 } from "@vis.gl/react-google-maps";
 import GoogleMap from "./utils/GoogleMap";
+const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API;
 
 export default function Addaccommodation() {
   const currentTrip = useSelector((state) => state.user.value.currentTrip);
@@ -201,7 +202,7 @@ export default function Addaccommodation() {
   const handleClickLocation = (e) => {
     e.preventDefault();
     fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?key=${NEXT_PUBLIC_GOOGLE_API}&address=${accommodationLocation}`
+      `https://maps.googleapis.com/maps/api/geocode/json?key=${apiKey}&address=${accommodationLocation}`
     )
       .then((response) => response.json())
       .then((data) => {

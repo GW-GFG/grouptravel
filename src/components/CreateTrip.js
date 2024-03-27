@@ -8,6 +8,7 @@ import styles from './creatTrip.module.css';
 import { updateCurrentTrip, updateMyTrips } from '@/reducers/user';
 // import fonts to use them for menu items
 import { lexend } from '../app/fonts';
+const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API;
 
 export default function CreateTrip() {
     const user = useSelector((state) => state.user.value);
@@ -34,7 +35,7 @@ export default function CreateTrip() {
             return
         }
         // Google map input logic
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=${NEXT_PUBLIC_GOOGLE_API}&address=${location}`)
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?key=${apiKey}&address=${location}`)
             .then(response => response.json()).then(data => {
                 if (data && data.results[0]) {
                     const coordinates = data.results[0].geometry.location;
@@ -69,14 +70,7 @@ export default function CreateTrip() {
                                 // rerouting user to dashboard of new trip
                                 setTimeout(() => {
                                     router.push('/');
-                                  }, 0);
-                              
-                                // notification.success({
-                                //     message: 'Voyage créé !',
-                                //     description: 'Votre voyage a bien été créé !',
-                                //     placement: 'bottomRight'
-                                // })
-                                                               
+                                  }, 0);                                                 
                             }
                         });
                 } else {

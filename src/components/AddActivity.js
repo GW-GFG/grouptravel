@@ -17,6 +17,7 @@ import {
   MapCameraProps,
 } from "@vis.gl/react-google-maps";
 import GoogleMap from "./utils/GoogleMap";
+const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API;
 
 const AddActivity = () => {
   const currentTrip = useSelector((state) => state.user.value.currentTrip);
@@ -168,7 +169,7 @@ const AddActivity = () => {
   const handleClickLocation = (e) => {
     e.preventDefault();
     fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?key=${NEXT_PUBLIC_GOOGLE_API}&address=${activityLocation}`
+      `https://maps.googleapis.com/maps/api/geocode/json?key=${apiKey}&address=${activityLocation}`
     )
       .then((response) => response.json())
       .then((data) => {
