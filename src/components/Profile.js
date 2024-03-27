@@ -143,7 +143,7 @@ export default function Profile() {
             <div className={styles.addContainer}>
               <button
                 className={styles.addTravel}
-                onClick={() => handleClickAddTrip()}
+                onClick={(e) => handleClickAddTrip(e)}
               >
                 <span className={styles.plus}>
                   <FontAwesomeIcon
