@@ -1,7 +1,6 @@
 "use client";
-import { useSelector } from "react-redux";
+import { useSelector, connect } from "react-redux";
 import styles from "./dashboard.module.css";
-import { useRouter } from "next/navigation";
 import DashboardPlanning from "./dashboardCards/DashBoardPlanning";
 import DashboardInfo from "./dashboardCards/DashBoardInfo";
 import DashboardAccommodations from "./dashboardCards/DashboardAccommodations.js";

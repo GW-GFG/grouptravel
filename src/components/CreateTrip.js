@@ -23,7 +23,8 @@ export default function CreateTrip() {
     const token = user.token
 
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         if (!location || !groupName || !departureDate || !returnDate) {
             notification.warning({
                 message: 'Attention !',
@@ -66,7 +67,10 @@ export default function CreateTrip() {
                                 dispatch(updateMyTrips(data.newTrip));
                                 dispatch(updateCurrentTrip(data.newTrip));
                                 // rerouting user to dashboard of new trip
-                                router.push('/');                               
+                                setTimeout(() => {
+                                    router.push('/');
+                                  }, 0);
+                              
                                 // notification.success({
                                 //     message: 'Voyage créé !',
                                 //     description: 'Votre voyage a bien été créé !',
@@ -123,7 +127,7 @@ export default function CreateTrip() {
                 </div>
                 {/* only if error display error */}
                 {/* {errormessage != '' && <h2 className={styles.error}>{errormessage}</h2>} */}
-                <button className={styles.button} onClick={() => handleSubmit()}>Go!</button>
+                <button className={styles.button} onClick={() => handleSubmit(e)}>Go!</button>
             </div>
         </div>
 
