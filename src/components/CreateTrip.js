@@ -127,7 +127,7 @@ export default function CreateTrip() {
                 </div>
                 {/* only if error display error */}
                 {/* {errormessage != '' && <h2 className={styles.error}>{errormessage}</h2>} */}
-                <button className={styles.button} onClick={() => handleSubmit(e)}>Go!</button>
+                <button className={styles.button} onClick={(e) => handleSubmit(e)}>Go!</button>
             </div>
         </div>
 

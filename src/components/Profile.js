@@ -42,7 +42,8 @@ export default function Profile() {
       return <TripRow key={i} {...data} />;
     });
 
-  const handleClickAddTrip = () => {
+  const handleClickAddTrip = (e) => {
+    e.preventDefault();
     router.push("/addTrip");
   };
 
