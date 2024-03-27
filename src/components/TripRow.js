@@ -1,15 +1,23 @@
 'use client'
+import { connect } from 'react-redux';
 import styles from './triprow.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCurrentTrip, updateMyTrips } from '@/reducers/user';
+import { updateCurrentTrip } from '@/reducers/user';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export default function TripRow(props) {
-    const token = useSelector((state) => state.user.value.token);
-    const dispatch = useDispatch();
-    const router = useRouter();
-    const [isAdmin, setIsAdmin] = useState(false);
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+function TripRow(props) {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const token = useSelector((state) => state.user.value.token);
 
     useEffect(() => { 
       fetch('https://grouptravel-b-gwgfg.vercel.app/users/isAdmin',{
@@ -22,16 +30,21 @@ export default function TripRow(props) {
           })    
     }, []);
 
-    const handleGoToDash = (data) => {
+    const handleGoToDash = (e, data) => {
+      e.preventDefault();
       dispatch(updateCurrentTrip(data));
-      router.push('/');
+      setTimeout(() => {
+        router.push('/');
+      }, 0);
     }
 
     return (
       <div className={styles.row}>
           <span className={styles.tripName}>{props.name}</span>
           {isAdmin ? <span className={styles.adminBadge}>ADMIN</span> : <span className={styles.inviteBadge}>INVITÉ</span>}         
-          <button className={styles.goButton} onClick={() => handleGoToDash(props)}>Go</button>                   
+          <button className={styles.goButton} onClick={(e) => handleGoToDash(e, props)}>Go</button>                   
       </div>
     );
   }
+
+  export default connect(mapStateToProps, { updateCurrentTrip })(TripRow);
