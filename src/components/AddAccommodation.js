@@ -181,7 +181,6 @@ export default function Addaccommodation() {
       formData.append("image", accommodationPicture);
       fetch("https://grouptravel-b-gwgfg.vercel.app/upload", {
         method: "POST",
-        headers: { 'Content-Type': 'application/json' },
         body: formData,
       })
         .then((response) => response.json())
