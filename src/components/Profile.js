@@ -31,7 +31,7 @@ export default function Profile() {
       body: JSON.stringify( {token: user.token} ),
   }).then(response => response.json())
   .then(resUserData => {
-    setuserdata(resUserData)  
+    setuserData(resUserData)  
     dispatch(addUserToStore(resUserData))
     });
   } , [rerender]);
