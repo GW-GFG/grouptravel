@@ -22,6 +22,7 @@ export default function Profile() {
   const [rerender, setRerender] = useState(null);
   const [profilePicture, setProfilePicture] = useState(null);
   const fileInputRef = useRef(null);
+  const [userdata, setuserdata] = useState(null)
 
   useEffect(() => {
     fetch('https://grouptravel-b-gwgfg.vercel.app/users/getUser', {
@@ -29,16 +30,17 @@ export default function Profile() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify( {token: user.token} ),
   }).then(response => response.json())
-  .then(userData => {  
+  .then(userData => {
+    setuserdata(userData)  
     dispatch(addUserToStore(userData))
     });
   } , [rerender]);
 
   //Map on user.myTrips Only if != null
   const trips =
-    user.myTrips &&
-    user.myTrips.length > 0 &&
-    user.myTrips.map((data, i) => {
+    userData.myTrips &&
+    userData.myTrips.length > 0 &&
+    userData.myTrips.map((data, i) => {
       return <TripRow key={i} {...data} />;
     });
 
