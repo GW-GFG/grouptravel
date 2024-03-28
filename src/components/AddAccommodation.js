@@ -185,6 +185,7 @@ export default function Addaccommodation() {
       })
         .then((response) => response.json())
         .then((pictureData) => {
+          console.log("picture data", JSON.stringify(pictureData))
           if (!pictureData || !pictureData.url) {
             return console.log(" No picture ");
           } else {
