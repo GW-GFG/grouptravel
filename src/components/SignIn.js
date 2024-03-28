@@ -12,10 +12,7 @@ export default function SignIn({ handleConnexion }) {
 //import user data from reducer to verify if is connected
     const user = useSelector((state) => state.user.value);
     const router = useRouter();
-//if is connected rout => Profil
-    // if (user.token) {
-    //     router.push('/profile');
-    // }
+
     useEffect(() => { // Utilisation d'un useEffect pour gérer la redirection
         if (user.token) {
             router.push('/profile');

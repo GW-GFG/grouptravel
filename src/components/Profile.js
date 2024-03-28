@@ -22,7 +22,7 @@ export default function Profile() {
   const [rerender, setRerender] = useState(null);
   const [profilePicture, setProfilePicture] = useState(null);
   const fileInputRef = useRef(null);
-  const [userdata, setuserdata] = useState(null)
+  const [userData, setuserData] = useState(null)
 
   useEffect(() => {
     fetch('https://grouptravel-b-gwgfg.vercel.app/users/getUser', {
@@ -30,9 +30,9 @@ export default function Profile() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify( {token: user.token} ),
   }).then(response => response.json())
-  .then(userData => {
-    setuserdata(userData)  
-    dispatch(addUserToStore(userData))
+  .then(resUserData => {
+    setuserdata(resUserData)  
+    dispatch(addUserToStore(resUserData))
     });
   } , [rerender]);
 
