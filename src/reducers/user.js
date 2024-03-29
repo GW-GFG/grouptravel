@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { resolve } from "styled-jsx/css";
 
 const initialState = {
 	value: { token: null, username: '', userPicture: '', email: '', myTrips: [], currentTrip : null }, // Valeur initiale du reducer
@@ -18,7 +19,7 @@ export const userSlice = createSlice({
 		},
 		// Creation 
 		updateCurrentTrip : (state, action) => { 
-			state.value.currentTrip = action.payload;
+			state.value.currentTrip = action.payload;	
 		},
 		removeUserToStore: (state, action) => {
 			state.value = initialState;

@@ -32,11 +32,12 @@ function TripRow(props) {
 
     const handleGoToDash = (e, data) => {
       e.preventDefault();
-      dispatch(updateCurrentTrip(data));
+      dispatch(updateCurrentTrip(data))
       setTimeout(() => {
         router.push('/');
-      }, 500);
+      }, 1000);
     }
+    
 
     return (
       <div className={styles.row}>
