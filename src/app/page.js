@@ -1,4 +1,4 @@
-'use client'
+
 import Dashboard from "@/components/Dashboard";
 import { useSelector } from "react-redux";
 import HomeNotConnected from "@/components/missingInfos/HomeNotConnected";
