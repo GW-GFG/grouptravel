@@ -37,12 +37,15 @@ export default function Profile() {
   } , [rerender]);
 
   //Map on user.myTrips Only if != null
-  const trips =
-    userData.myTrips &&
-    userData.myTrips.length > 0 &&
-    userData.myTrips.map((data, i) => {
-      return <TripRow key={i} {...data} />;
-    });
+  const trips = () => {
+    if( userData && userData.myTrips && userData.myTrips.length > 0){
+      userData.myTrips.map((data, i) => {
+        return <TripRow key={i} {...data} />;
+      })
+    } else {
+      return <></>;
+    }
+  }
 
   const handleClickAddTrip = (e) => {
     e.preventDefault();

@@ -41,7 +41,7 @@ function TripRow(props) {
     return (
       <div className={styles.row}>
           <span className={styles.tripName}>{props.name}</span>
-          {isAdmin ? <span className={styles.adminBadge}>ADMIN</span> : <span className={styles.inviteBadge}>INVITÉ</span>}         
+          {isAdmin ? <span className={styles.adminBadge}>ADMIN</span> : <span className={styles.inviteBadge}>INVITÉ(E)</span>}         
           <button className={styles.goButton} onClick={(e) => handleGoToDash(e, props)}>Go</button>                   
       </div>
     );
