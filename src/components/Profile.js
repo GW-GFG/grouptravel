@@ -39,12 +39,9 @@ export default function Profile() {
   //Map on user.myTrips Only if != null
   const trips = () => {
     if( userData && userData.myTrips && userData.myTrips.length > 0){
-      userData.myTrips.map((data, i) => {
+      return userData.myTrips.map((data, i) => {
         return <TripRow key={i} {...data} />;
-      })
-    } else {
-      return <></>;
-    }
+      })}
   }
 
   const handleClickAddTrip = (e) => {
@@ -143,7 +140,7 @@ export default function Profile() {
           <div className={styles.tripsContainer}>
             <h2 className={`${styles.tripTitle} ${lexend.className}`}> Mes voyages : </h2>
             <div className={styles.tripsList}>
-              {trips}
+              {trips()}
             </div>
             <div className={styles.addContainer}>
               <button
