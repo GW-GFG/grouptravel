@@ -35,7 +35,7 @@ function TripRow(props) {
       dispatch(updateCurrentTrip(data));
       setTimeout(() => {
         router.push('/');
-      }, 0);
+      }, 500);
     }
 
     return (
