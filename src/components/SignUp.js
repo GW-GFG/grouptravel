@@ -14,9 +14,9 @@ export default function SignUp({ handleRegister }) {
     const router = useRouter();
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 //if is connected rout => Profil
-    if (user.token) {
-        router.push('/profile');
-    }
+    // if (user.token) {
+    //     router.push('/profile');
+    // }
 
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');

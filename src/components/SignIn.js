@@ -13,11 +13,11 @@ export default function SignIn({ handleConnexion }) {
     const user = useSelector((state) => state.user.value);
     const router = useRouter();
 
-    useEffect(() => { // Utilisation d'un useEffect pour gérer la redirection
-        if (user.token) {
-            router.push('/profile');
-        }
-    }, [user.token, router])
+    // useEffect(() => { // Utilisation d'un useEffect pour gérer la redirection
+    //     if (user.token) {
+    //         router.push('/profile');
+    //     }
+    // }, [user.token, router])
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

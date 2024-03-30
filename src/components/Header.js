@@ -63,10 +63,7 @@ export default function Header() {
         // Popover 
         // action to change currentTrips from popover
         const handleCurrentTrip = (data) => {
-            // console.log(data)
             dispatch(updateCurrentTrip(data));  // Dispatch in Redux
-            
-            // router.push('/dashboard') // refresh or routing to Dashboard
         }
         
         //map on all myTrip to put name in popover
@@ -111,10 +108,12 @@ export default function Header() {
 
       const handleConnexion = () => {
         setIsSignInModalOpen(false);
+        handleProfile();
       }
 
       const handleRegister = () => {
         setIsSignUpModalOpen(false);
+        handleProfile();
       }
 
 
