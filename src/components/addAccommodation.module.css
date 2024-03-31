@@ -1,16 +1,16 @@
-.newaccommodation {
+.newAccommodation {
     background-color: var(--primary-orange-color);
     padding: 2.5rem 0;
     width: 80%;
     border-radius: .625rem;
 }
 
-.newaccommodation *,
-.newaccommodation *::placeholder {
+.newAccommodation *,
+.newAccommodation *::placeholder {
     color: #ffffff;
 }
 
-.newaccommodation h1 {
+.newAccommodation h1 {
     text-align: center;
     padding-bottom: 2.5rem;
     font-weight: bold;
@@ -82,14 +82,14 @@
 
 /* Hiding arrows in "number" inputs */
 /* Chrome, Safari, Edge, Opera */
-.newaccommodation input::-webkit-outer-spin-button,
-.newaccommodation input::-webkit-inner-spin-button {
+.newAccommodation input::-webkit-outer-spin-button,
+.newAccommodation input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
 /* Firefox */
-.newaccommodation input[type="number"] {
+.newAccommodation input[type="number"] {
     appearance: textfield;
     -moz-appearance: textfield;
 }

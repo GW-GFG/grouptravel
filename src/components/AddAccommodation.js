@@ -96,8 +96,8 @@ export default function Addaccommodation() {
         }
         dispatch(
           updateCurrentTripAccommodations(
-            data.newaccommodation.accommodations[
-            data.newaccommodation.accommodations.length - 1
+            data.newAccommodation.accommodations[
+            data.newAccommodation.accommodations.length - 1
             ]
           )
         );
@@ -233,7 +233,7 @@ export default function Addaccommodation() {
   };
 
   return (
-    <div className={styles.newaccommodation}>
+    <div className={styles.newAccommodation}>
       <h1 className={lexend.className}>Un logement à proposer ? </h1>
       <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
         <div className={styles.layout}>
