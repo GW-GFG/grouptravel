@@ -41,7 +41,7 @@ const Activity = (props, i) => {
             activityId,
             status: true
         }
-        fetch('https://grouptravel-b-gwgfg.vercel.app/activities/vote', {
+        fetch(`${NEXT_PUBLIC_BACK}/activities/vote`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(participationData)
@@ -60,7 +60,7 @@ const Activity = (props, i) => {
             activityId,
             status: false
         }
-        fetch('https://grouptravel-b-gwgfg.vercel.app/activities/vote', {
+        fetch(`${NEXT_PUBLIC_BACK}/activities/vote`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(participationData)

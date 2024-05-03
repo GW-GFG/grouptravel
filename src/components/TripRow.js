@@ -20,7 +20,7 @@ function TripRow(props) {
   const token = useSelector((state) => state.user.value.token);
 
     useEffect(() => { 
-      fetch('https://grouptravel-b-gwgfg.vercel.app/users/isAdmin',{
+      fetch(`${NEXT_PUBLIC_BACK}/users/isAdmin`,{
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify( {currentTripId: props._id, token: token} )

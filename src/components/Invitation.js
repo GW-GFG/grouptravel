@@ -48,7 +48,7 @@ export default function Invitation() {
 
     try {
         for (let email of validEmails) {
-            const response = await fetch(`https://grouptravel-b-gwgfg.vercel.app/trips/invitUser/${user.currentTrip._id}`, {
+            const response = await fetch(`${NEXT_PUBLIC_BACK}/trips/invitUser/${user.currentTrip._id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email }), // Envoyer l'email valide au back pour chaque email valide

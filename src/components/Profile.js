@@ -25,7 +25,7 @@ export default function Profile() {
   const [userData, setuserData] = useState(null)
 
   useEffect(() => {
-    fetch('https://grouptravel-b-gwgfg.vercel.app/users/getUser', {
+    fetch(`${NEXT_PUBLIC_BACK}/users/getUser`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify( {token: user.token} ),

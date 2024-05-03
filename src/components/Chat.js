@@ -22,7 +22,7 @@ function GroupChat() {
     
     useEffect(() => {
       // Code pour charger les messages du groupe depuis la base de données ou le service de messagerie instantanée
-      fetch('https://grouptravel-b-gwgfg.vercel.app/chat/get', {
+      fetch(`${NEXT_PUBLIC_BACK}/chat/get`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( { token: user.token, idTrip: currentTrip._id, } )
@@ -43,7 +43,7 @@ function GroupChat() {
       // console.log('token',user.token, 'message', inputValue, 'idTrip', currentTrip._id)
       if (inputValue.trim() !== '') {
         // Code pour envoyer le message au backend et le diffuser à tous les membres du groupe
-        fetch('https://grouptravel-b-gwgfg.vercel.app/chat/send', { 
+        fetch(`${NEXT_PUBLIC_BACK}/chat/send`, { 
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify( { token: user.token, idTrip: currentTrip._id, message: inputValue } )

@@ -79,7 +79,7 @@ export default function Addaccommodation() {
 
   //handle fetch form
   const fetchPostNewAccommodation = (accommodationData) => {
-    fetch(`https://grouptravel-b-gwgfg.vercel.app/accommodations/new`, {
+    fetch(`${NEXT_PUBLIC_BACK}/accommodations/new`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(accommodationData),

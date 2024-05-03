@@ -81,7 +81,7 @@ export default function tokenwithTripsIdPage() {
   }, []);
 
   const handleAccept = () => {
-    fetch(`https://grouptravel-b-gwgfg.vercel.app/trips/addUser/${tripId}`, {
+    fetch(`${NEXT_PUBLIC_BACK}${tripId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token }),
@@ -102,7 +102,7 @@ export default function tokenwithTripsIdPage() {
 
   const handleDecline = () => {
     // console.log('click decline')
-    fetch(`https://grouptravel-b-gwgfg.vercel.app/decline/invitation/${tripId}`, {
+    fetch(`${NEXT_PUBLIC_BACK}${tripId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token }),
