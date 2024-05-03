@@ -17,7 +17,7 @@ export default function PlanningPage() {
     useEffect(() => {
       if (user.token && currentTrip && currentTrip._id) {
         
-        fetch("https://grouptravel-b-gwgfg.vercel.app/users/isAdmin", {
+        fetch(`${process.env.NEXT_PUBLIC_BACK}/users/isAdmin`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

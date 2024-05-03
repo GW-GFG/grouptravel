@@ -29,7 +29,7 @@ export default function tokenwithTripsIdPage() {
   useEffect(() => {
     // console.log(token)
     //** Fetch BDD pour récepurer donnée user*//
-    fetch("https://grouptravel-b-gwgfg.vercel.app/users/getUser", {
+    fetch(`${process.env.NEXT_PUBLIC_BACK}/users/getUser`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: token }),
@@ -59,7 +59,7 @@ export default function tokenwithTripsIdPage() {
       });
     //** Fetch BDD pour récepurer donnée Trips*//
     // console.log(params.tripId)
-    fetch("https://grouptravel-b-gwgfg.vercel.app/trips/oneTrip", {
+    fetch(`${process.env.NEXT_PUBLIC_BACK}/trips/oneTrip`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ tripId: params.tripId }),

@@ -22,7 +22,7 @@ export default function tokenPage({ params }) {
 
   useEffect(() => {
     // console.log(token)
-    fetch("https://grouptravel-b-gwgfg.vercel.app/users/getUser", {
+    fetch(`${process.env.NEXT_PUBLIC_BACK}/users/getUser`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: token }),
@@ -56,7 +56,7 @@ export default function tokenPage({ params }) {
       return; // Empêcher le fetch du formulaire si des champs sont vides
     }
     setPasswordNotMatch(false);
-    fetch("https://grouptravel-b-gwgfg.vercel.app/users/updateNewUser", {
+    fetch(`${process.env.NEXT_PUBLIC_BACK}/users/updateNewUser`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password, email }),
@@ -84,7 +84,7 @@ export default function tokenPage({ params }) {
   // console.log(tripId)
   const handleDecline = () => {
     // console.log('trip id', tripId )
-    fetch(`https://grouptravel-b-gwgfg.vercel.app/decline/invitatedUser/${tripId._id}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACK}/decline/invitatedUser/${tripId._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token }),

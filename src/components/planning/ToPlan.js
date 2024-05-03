@@ -16,7 +16,7 @@ export default function ToPlan(props) {
   useEffect(() => {
     if (user.token && currentTrip && currentTrip._id) {
       
-      fetch("https://grouptravel-b-gwgfg.vercel.app/planning/areNotFixed", {
+      fetch(`${process.env.NEXT_PUBLIC_BACK}/planning/areNotFixed`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -46,7 +46,7 @@ export default function ToPlan(props) {
         updatedActivity.date = newDate;
     }
 
-    fetch("https://grouptravel-b-gwgfg.vercel.app/planning/fixOne", {
+    fetch(`${process.env.NEXT_PUBLIC_BACK}/planning/fixOne`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedActivity),

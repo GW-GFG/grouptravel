@@ -179,7 +179,7 @@ export default function Addaccommodation() {
     if (accommodationPicture) {
       const formData = new FormData();
       formData.append("image", accommodationPicture);
-      fetch("https://grouptravel-b-gwgfg.vercel.app/upload", {
+      fetch(`${process.env.NEXT_PUBLIC_BACK}/upload`, {
         method: "POST",
         body: formData,
       })
