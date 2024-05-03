@@ -24,7 +24,7 @@ export default function Accommodation(props) {
     const [userVoteStatus, setUserVoteStatus] = useState(getInitialVoteStatus());
 
     useEffect(() => {
-        fetch(`${NEXT_PUBLIC_BACK}/users/isAdmin`, {
+        fetch(`${process.env.NEXT_PUBLIC_BACK}/users/isAdmin`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify( {currentTripId: currentTrip._id, token: userToken} )
@@ -36,7 +36,7 @@ export default function Accommodation(props) {
 
     const handleFix = (newStatus) => {
         console.log('isAdmin: ', isAdmin, 'accommodationId : ', _id , 'dates : ', currentTrip.dates, 'isFixed : ', newStatus )
-        fetch(`${NEXT_PUBLIC_BACK}/accommodations/fixOne`, {
+        fetch(`${process.env.NEXT_PUBLIC_BACK}/accommodations/fixOne`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify( {isAdmin, accommodationId: _id , dates: currentTrip.dates, isFixed: newStatus} )
@@ -54,7 +54,7 @@ export default function Accommodation(props) {
             tripId: currentTrip._id,
             status: true,
         }
-        fetch(`${NEXT_PUBLIC_BACK}/accommodations/vote`, {
+        fetch(`${process.env.NEXT_PUBLIC_BACK}/accommodations/vote`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(voteData)
@@ -72,7 +72,7 @@ export default function Accommodation(props) {
             tripId: currentTrip._id,
             status: false,
         }
-        fetch(`${NEXT_PUBLIC_BACK}/accommodations/vote`, {
+        fetch(`${process.env.NEXT_PUBLIC_BACK}/accommodations/vote`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(voteData)

@@ -79,7 +79,7 @@ export default function Addaccommodation() {
 
   //handle fetch form
   const fetchPostNewAccommodation = (accommodationData) => {
-    fetch(`${NEXT_PUBLIC_BACK}/accommodations/new`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACK}/accommodations/new`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(accommodationData),

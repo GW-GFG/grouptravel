@@ -13,7 +13,7 @@ export default function MemberList() {
     const [membersUsername, setMembersUsername] = useState([])
 
     useEffect(() => { 
-        fetch(`${NEXT_PUBLIC_BACK}/users/allUsernameThisTrip`,{
+        fetch(`${process.env.NEXT_PUBLIC_BACK}/users/allUsernameThisTrip`,{
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify( {tripId: currentTripId} )

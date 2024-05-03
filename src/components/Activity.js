@@ -41,7 +41,7 @@ const Activity = (props, i) => {
             activityId,
             status: true
         }
-        fetch(`${NEXT_PUBLIC_BACK}/activities/vote`, {
+        fetch(`${process.env.NEXT_PUBLIC_BACK}/activities/vote`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(participationData)
@@ -60,7 +60,7 @@ const Activity = (props, i) => {
             activityId,
             status: false
         }
-        fetch(`${NEXT_PUBLIC_BACK}/activities/vote`, {
+        fetch(`${process.env.NEXT_PUBLIC_BACK}/activities/vote`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(participationData)

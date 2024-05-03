@@ -48,7 +48,7 @@ export default function CreateTrip() {
                     console.log(locationToSend)
                     const nameToSend = groupName[0].toUpperCase() + groupName.slice(1).toLowerCase()
                     // fetch for add new trip in DDB
-                    fetch(`${NEXT_PUBLIC_BACK}/trips/new`, {
+                    fetch(`${process.env.NEXT_PUBLIC_BACK}/trips/new`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ name: nameToSend, location: locationToSend, departureDate, returnDate, token: token }),

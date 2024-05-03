@@ -81,7 +81,7 @@ export default function tokenwithTripsIdPage() {
   }, []);
 
   const handleAccept = () => {
-    fetch(`${NEXT_PUBLIC_BACK}${tripId}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACK}${tripId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token }),
@@ -102,7 +102,7 @@ export default function tokenwithTripsIdPage() {
 
   const handleDecline = () => {
     // console.log('click decline')
-    fetch(`${NEXT_PUBLIC_BACK}${tripId}`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACK}${tripId}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token }),

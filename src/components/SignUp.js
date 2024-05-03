@@ -33,7 +33,7 @@ export default function SignUp({ handleRegister }) {
 //step to verify that passwords are the same
             if (password === password2) {
                 setPasswordNotMatch(false);
-                fetch(`${NEXT_PUBLIC_BACK}/users/signup`, {
+                fetch(`${process.env.NEXT_PUBLIC_BACK}/users/signup`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
 //The body request contains the useStates values

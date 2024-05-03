@@ -11,14 +11,14 @@ export default function DashboardInfo() {
   const [fixedAccommodation, setFixedAccommodation] = useState([]);
   let accoName = null;
   useMemo(() => { 
-    fetch(`${NEXT_PUBLIC_BACK}/trips/budgetOneTrip`,{
+    fetch(`${process.env.NEXT_PUBLIC_BACK}/trips/budgetOneTrip`,{
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify( {tripId: currentTrip._id} )
     }).then(response => response.json())
     .then(data => {
       setTotalBudget(data.tripBudget.toFixed(2))
-     fetch(`${NEXT_PUBLIC_BACK}/trips/oneTrip`,{
+     fetch(`${process.env.NEXT_PUBLIC_BACK}/trips/oneTrip`,{
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify( {tripId: currentTrip._id} )
